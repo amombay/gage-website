@@ -1,0 +1,8 @@
+Native CAD model inspection — 30 seconds
+
+0–6 seconds: An actual SOLIDWORKS viewport shows the plate produced by a prepared specification. This clip does not film an AI chat or plan approval.
+6–14 seconds: The camera turns around the 100 × 60 × 5 mm plate. Four 8 mm through-holes are located at X ±35 mm and Y ±20 mm relative to its center.
+14–23 seconds: The view continues around the plate to show its opposite face and thickness. The animation uses 120 actual native viewport images over 30 seconds; playback repeats frames at 24 fps. Geometry is unchanged throughout.
+23–30 seconds: The camera completes the inspection. The build produced native SLDPRT and STEP artifacts. The footage demonstrates this bounded prepared-spec part, not general production or simulation qualification.
+
+Captured from SOLIDWORKS Design Premium for Students 2026 SP0.0, Academic Use Only. No physical material was assigned.

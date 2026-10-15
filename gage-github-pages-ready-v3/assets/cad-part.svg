@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="570" viewBox="0 0 720 570" role="img" aria-labelledby="t d">
+<title id="t">Concept engineering component</title><desc id="d">Isometric wireframe and shaded view of a machined fixture with a raised cylindrical boss, a center bore, and mounting holes, surrounded by CAD dimensions.</desc>
+<defs>
+  <linearGradient id="faceTop" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#206991" stop-opacity=".87"/><stop offset="1" stop-color="#0d304d" stop-opacity=".96"/></linearGradient>
+  <linearGradient id="faceSide" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#12476e"/><stop offset="1" stop-color="#071d36"/></linearGradient>
+  <linearGradient id="boss" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2d789d" stop-opacity=".94"/><stop offset="1" stop-color="#0a3657" stop-opacity=".99"/></linearGradient>
+  <radialGradient id="bore"><stop stop-color="#07182a"/><stop offset="1" stop-color="#0a2b46"/></radialGradient>
+  <filter id="glow"><feGaussianBlur stdDeviation="2.5"/></filter>
+</defs>
+<!-- coordinate scaffolding -->
+<g fill="none" stroke="#2D6B91" stroke-width="1" opacity=".44" stroke-dasharray="5 8">
+ <path d="M104 281H640M418 64V485M208 437l435-251M221 139l433 246"/>
+ <circle cx="418" cy="277" r="185"/><circle cx="418" cy="277" r="134"/><path d="M164 230l253 133 257-137"/>
+</g>
+<!-- dimensions: left -->
+<g stroke="#5CB6E1" stroke-width="1" opacity=".87" fill="none">
+ <path d="M235 286 176 313M235 340l-59 29M177 308v66M169 310h16M169 370h16"/>
+ <path d="M176 314l-3 9h6zM176 370l-3-9h6z" fill="#5CB6E1" stroke="none"/>
+ <path d="M263 394l-28 28M428 477l-28 28M235 425l165 85M234 418v14M399 503v14"/>
+ <path d="M243 430l-10-1 5-8zM390 500l11 1-5 8z" fill="#5CB6E1" stroke="none"/>
+ <path d="M551 264l57-29M551 321l57-30M611 236v60M604 235h14M604 293h14"/>
+</g>
+<g fill="#7cc7e7" font-family="Consolas,monospace" letter-spacing="1" font-size="13">
+ <text x="160" y="341" transform="rotate(-90 160 341)" text-anchor="middle">12.00</text>
+ <text x="308" y="476" transform="rotate(27 308 476)" text-anchor="middle">120.00</text>
+ <text x="620" y="267" transform="rotate(-90 620 267)" text-anchor="middle">12</text>
+ <text x="471" y="107">Ø 36.00</text>
+ <text x="88" y="174">TOP</text><text x="88" y="192">PLANE</text>
+ <text x="537" y="436">ISO 1:1</text>
+</g>
+<!-- subtle part shadow -->
+<path d="M236 353 412 456 607 354 412 253Z" fill="#051626" opacity=".42" filter="url(#glow)"/>
+<!-- extruded plate -->
+<path d="M246 283 420 378 586 281V331L420 428 246 331Z" fill="url(#faceSide)" stroke="#5CCAF4" stroke-width="2"/>
+<path d="M246 283 420 378V428L246 331Z" fill="#0c3455" opacity=".92" stroke="#5CCAF4" stroke-width="1.9"/>
+<path d="M420 378 586 281V331L420 428Z" fill="#0c2741" stroke="#5CCAF4" stroke-width="1.9"/>
+<!-- top bevel -->
+<path d="M246 282 418 183 586 281 420 378Z" fill="url(#faceTop)" stroke="#7de1ff" stroke-width="2.5" stroke-linejoin="round"/>
+<path d="M266 282 417 197 567 282 420 362Z" fill="none" stroke="#4DADD6" stroke-width="1.1" opacity=".8"/>
+<path d="M246 283 420 378 586 281" stroke="#b1efff" stroke-width=".9" opacity=".48" fill="none"/>
+<!-- top face layout sketch guides -->
+<g fill="none" stroke="#91dbfa" stroke-width="1" stroke-dasharray="5 6" opacity=".48"><path d="M302 284 420 216 525 283 421 346Z"/><path d="M418 195v163M272 282h288"/></g>
+<!-- mounting hole rear -->
+<g stroke="#a2edff"><ellipse cx="417" cy="219" rx="18" ry="9.5" fill="#071e34" stroke-width="1.6"/><ellipse cx="417" cy="219" rx="12" ry="6.5" fill="url(#bore)" stroke="#54acda" stroke-width="1"/><path d="M399 219v6c1 12 34 11 36 0v-6" fill="#0a253f" stroke-width="1.2"/></g>
+<!-- holes left and right -->
+<g stroke="#abedff" fill="none" stroke-width="1.8">
+ <ellipse cx="302" cy="282" rx="19" ry="10"/><ellipse cx="533" cy="282" rx="19" ry="10"/>
+</g>
+<ellipse cx="302" cy="282" rx="12.5" ry="6.7" fill="#062037" stroke="#58a8d2"/><ellipse cx="533" cy="282" rx="12.5" ry="6.7" fill="#062037" stroke="#58a8d2"/>
+<path d="M283 282v5c1 12 38 12 38 0v-5M514 282v5c2 12 37 12 38 0v-5" fill="#0b2b45" stroke="#65bde2" stroke-width="1.1"/>
+<!-- main raised boss: rear silhouette, lower ellipse, side -->
+<ellipse cx="420" cy="287" rx="67" ry="35" fill="#10476d" stroke="#78d5fb" stroke-width="1.6"/>
+<path d="M353 220v67c3 46 130 46 134 0v-67Z" fill="url(#boss)" stroke="#8ce5ff" stroke-width="2"/>
+<path d="M354 224v61c3 44 129 44 132 0v-61" stroke="#61b6df" fill="none" stroke-width="1.3"/>
+<path d="M420 185v146" stroke="#4aa0cd" stroke-width="1" stroke-dasharray="4 7" opacity=".55"/>
+<ellipse cx="420" cy="220" rx="67" ry="35" fill="#246e95" stroke="#9eeeff" stroke-width="2.3"/>
+<ellipse cx="420" cy="220" rx="51" ry="26" fill="#0d3657" stroke="#69c9f2" stroke-width="1.5"/>
+<!-- bore walls -->
+<path d="M383 221v16c1 25 74 25 75 0v-16Z" fill="#061b2e" stroke="#74cdef" stroke-width="1.5"/>
+<ellipse cx="420" cy="220" rx="37" ry="18" fill="#072238" stroke="#b0f4ff" stroke-width="2"/>
+<ellipse cx="420" cy="232" rx="28" ry="12" fill="#051a2c" stroke="#3c87b3" stroke-width="1"/>
+<!-- front mounting hole -->
+<ellipse cx="421" cy="348" rx="20" ry="10.5" fill="#0b3150" stroke="#b3f0ff" stroke-width="1.7"/>
+<ellipse cx="421" cy="348" rx="12" ry="6.4" fill="#061c31" stroke="#58afdb" stroke-width="1"/>
+<path d="M401 348v4c2 12 38 12 40 0v-4" fill="#0c2c48" stroke="#76cbeb" stroke-width="1.1"/>
+<!-- fine machined highlights -->
+<path d="M260 318 412 405M433 405l137-80" stroke="#69d5f9" stroke-width="1" opacity=".56"/>
+<path d="M360 253c8 11 20 20 35 22M459 296c10-4 18-10 24-19" fill="none" stroke="#80ddfc" stroke-width=".8" opacity=".45"/>
+<!-- callouts -->
+<g fill="none" stroke="#82d9f6" stroke-width="1.1" opacity=".91">
+ <path d="M450 193l33-54 92-1"/><circle cx="450" cy="193" r="3.3" fill="#73dbfc"/>
+ <path d="M350 335l-49 69-105 1"/><circle cx="350" cy="335" r="3.3" fill="#73dbfc"/>
+ <path d="M526 283l75 82h58"/><circle cx="526" cy="283" r="3.3" fill="#73dbfc"/>
+</g>
+<g fill="#8CDCF8" font-family="Consolas,monospace" font-size="11" letter-spacing=".8"><text x="498" y="131">BOSS_01</text><text x="146" y="398">BASE_PLATE</text><text x="602" y="359">Ø 8 THRU</text></g>
+<!-- reference axis -->
+<path d="M420 183v-42" stroke="#d9a17a" stroke-width="1.2"/><path d="M420 141l-4 9h8z" fill="#d9a17a"/><text x="430" y="154" fill="#d9a17a" font-size="12" font-family="monospace">Z</text>
+<!-- corner construction reference -->
+<g fill="none" stroke="#387EAA" stroke-width="1.2"><path d="M108 451h30m-15-15v30M641 117h30m-15-15v30"/></g>
+</svg>
