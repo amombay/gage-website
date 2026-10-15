@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Gage native CAD viewport turntable handoff",
+  "description": "Metadata only. Parent review and actual files are required. This schema does not enable the website video or certify a native workflow.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["reviewed", "kind", "title", "caption", "src", "poster", "captions", "transcript", "width", "height", "requestedDurationSeconds", "durationSeconds", "requestedGeometry", "verifiedGeometry", "provenance", "sha256"],
+  "properties": {
+    "reviewed": { "type": "boolean" },
+    "kind": { "const": "native-cad-viewport-turntable" },
+    "title": { "const": "Native CAD model inspection" },
+    "caption": { "const": "100×60×5 mm plate, four 8 mm holes. Camera animation captured from SolidWorks after prepared-spec build. No chat conversion filmed." },
+    "src": { "const": "assets/media/gage-demo.mp4" },
+    "poster": { "const": "assets/media/poster.jpg" },
+    "captions": { "const": "assets/media/gage-demo.en.vtt" },
+    "transcript": { "const": "assets/media/gage-demo-transcript.txt" },
+    "width": { "type": ["integer", "null"], "minimum": 1 },
+    "height": { "type": ["integer", "null"], "minimum": 1 },
+    "requestedDurationSeconds": { "const": 30 },
+    "durationSeconds": { "type": ["number", "null"], "exclusiveMinimum": 0 },
+    "requestedGeometry": { "$ref": "#/$defs/geometry" },
+    "verifiedGeometry": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/geometry" }] },
+    "provenance": {
+      "type": "object", "additionalProperties": false,
+      "required": ["captureMethod", "buildMethod", "chatConversionFilmed", "syntheticGeometry", "syntheticFrames", "uiAnimation", "educationalWatermarkPreserved", "parentApproved", "geometryEvidence", "captureDate"],
+      "properties": {
+        "captureMethod": { "const": "native-SaveBMP-sequence" },
+        "buildMethod": { "const": "prepared-spec" },
+        "chatConversionFilmed": { "const": false },
+        "syntheticGeometry": { "const": false },
+        "syntheticFrames": { "const": false },
+        "uiAnimation": { "const": false },
+        "educationalWatermarkPreserved": { "type": ["boolean", "null"] },
+        "parentApproved": { "type": "boolean" },
+        "geometryEvidence": { "type": ["string", "null"], "minLength": 1 },
+        "captureDate": { "type": ["string", "null"], "format": "date" }
+      }
+    },
+    "sha256": {
+      "type": "object", "additionalProperties": false,
+      "required": ["video", "poster", "captions", "transcript"],
+      "properties": {
+        "video": { "$ref": "#/$defs/pendingHash" },
+        "poster": { "$ref": "#/$defs/pendingHash" },
+        "captions": { "$ref": "#/$defs/pendingHash" },
+        "transcript": { "$ref": "#/$defs/pendingHash" }
+      }
+    }
+  },
+  "$defs": {
+    "geometry": {
+      "type": "object", "additionalProperties": false,
+      "required": ["units", "plateDimensions", "holeCount", "holeDiameter"],
+      "properties": {
+        "units": { "const": "mm" },
+        "plateDimensions": { "const": [100, 60, 5] },
+        "holeCount": { "const": 4 },
+        "holeDiameter": { "const": 8 }
+      }
+    },
+    "hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "pendingHash": { "anyOf": [{ "type": "null" }, { "$ref": "#/$defs/hash" }] }
+  },
+  "allOf": [{
+    "if": { "properties": { "reviewed": { "const": true } } },
+    "then": {
+      "properties": {
+        "width": { "type": "integer" },
+        "height": { "type": "integer" },
+        "durationSeconds": { "type": "number" },
+        "verifiedGeometry": { "$ref": "#/$defs/geometry" },
+        "provenance": {
+          "properties": {
+            "parentApproved": { "const": true },
+            "educationalWatermarkPreserved": { "const": true },
+            "geometryEvidence": { "type": "string", "minLength": 1 },
+            "captureDate": { "type": "string", "format": "date" }
+          }
+        },
+        "sha256": {
+          "properties": {
+            "video": { "$ref": "#/$defs/hash" },
+            "poster": { "$ref": "#/$defs/hash" },
+            "captions": { "$ref": "#/$defs/hash" },
+            "transcript": { "$ref": "#/$defs/hash" }
+          }
+        }
+      }
+    }
+  }]
+}

@@ -13,10 +13,11 @@
   const menu = document.querySelector('.menu-toggle');
   const mobileNav = document.getElementById('mobile-nav');
   if (menu && mobileNav) {
-    const closeNav = () => {
+    const closeNav = (restoreFocus = false) => {
       menu.setAttribute('aria-expanded', 'false');
       menu.setAttribute('aria-label', 'Open navigation');
       mobileNav.hidden = true;
+      if (restoreFocus) menu.focus();
     };
     menu.addEventListener('click', () => {
       const isOpen = menu.getAttribute('aria-expanded') === 'true';
@@ -24,13 +25,111 @@
       menu.setAttribute('aria-label', isOpen ? 'Open navigation' : 'Close navigation');
       mobileNav.hidden = isOpen;
     });
-    mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', closeNav));
+    mobileNav.querySelectorAll('a').forEach(link => link.addEventListener('click', () => closeNav()));
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeNav();
+      if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') closeNav(true);
     });
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 720) closeNav();
+      if (window.innerWidth > 1060) closeNav();
     });
+  }
+
+  // Authentic local media is opt-in. Empty config creates no requests or slots.
+  // Captions are supplied by the parent; illustration artwork is never evidence.
+  const media = config.media || {};
+  const mediaSection = document.getElementById('media-gallery');
+  const gallery = document.getElementById('gallery-grid');
+  const demoCard = document.getElementById('demo-card');
+  const mediaLinks = document.querySelectorAll('[data-media-link]');
+  let loadedImages = 0;
+  let loadedDemo = false;
+  const syncMedia = () => {
+    const visible = loadedImages > 0 || loadedDemo;
+    if (mediaSection) mediaSection.hidden = !visible;
+    if (gallery) gallery.hidden = loadedImages === 0;
+    mediaLinks.forEach(link => { link.hidden = !visible; });
+  };
+  const localAsset = (path, extensions) => typeof path === 'string'
+    && /^assets\/media\/[a-zA-Z0-9][a-zA-Z0-9/_\-.]*$/.test(path)
+    && !path.includes('..') && new RegExp(`\\.(${extensions})$`, 'i').test(path);
+  const text = value => typeof value === 'string' && value.trim().length > 0;
+  const described = item => item && item.reviewed === true && text(item.title) && text(item.caption)
+    && Number.isInteger(item.width) && item.width > 0 && Number.isInteger(item.height) && item.height > 0;
+  const element = (tag, className, content) => {
+    const node = document.createElement(tag);
+    if (className) node.className = className;
+    if (content) node.textContent = content;
+    return node;
+  };
+
+  if (mediaSection && gallery && Array.isArray(media.gallery)) {
+    media.gallery.slice(0, 6).forEach(item => {
+      if (!described(item) || !text(item.alt) || !localAsset(item.src, 'png|jpe?g|webp')) return;
+      const image = element('img');
+      image.alt = item.alt; image.width = item.width; image.height = item.height; image.decoding = 'async';
+      const figure = element('figure', 'media-card');
+      const link = element('a', 'media-image-link');
+      link.href = item.src; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      link.setAttribute('aria-label', `Open original image: ${item.title} (new tab)`);
+      const caption = element('figcaption', 'media-caption');
+      const fullSize = element('a', 'text-link media-fullsize', 'View full-size capture (new tab)');
+      fullSize.href = item.src; fullSize.target = '_blank'; fullSize.rel = 'noopener noreferrer';
+      caption.append(element('h3', '', item.title), element('p', '', item.caption), fullSize);
+      link.append(image); figure.append(link, caption);
+      let added = false;
+      image.addEventListener('load', () => {
+        if (added) return;
+        added = true; gallery.append(figure); loadedImages += 1; syncMedia();
+      });
+      // A missing image remains absent; no broken-image placeholder is shown.
+      image.addEventListener('error', () => {});
+      image.src = item.src;
+    });
+  }
+
+  const demo = media.demo;
+  if (mediaSection && demoCard && described(demo) && localAsset(demo.src, 'mp4|webm')
+      && localAsset(demo.poster, 'png|jpe?g|webp') && localAsset(demo.captions, 'vtt')
+      && localAsset(demo.transcript, 'txt')) {
+    const video = element('video', 'demo-video');
+    video.controls = true; video.muted = true; video.playsInline = true; video.preload = 'metadata';
+    video.width = demo.width; video.height = demo.height; video.poster = demo.poster;
+    video.setAttribute('aria-label', demo.title);
+    const track = element('track');
+    track.kind = 'captions'; track.srclang = 'en'; track.label = 'English captions';
+    track.default = true; track.src = demo.captions;
+    video.append(track, element('p', '', 'Use the recording link or read the transcript if video playback is unavailable.'));
+    const caption = element('figcaption', 'media-caption');
+    const transcript = element('a', 'text-link', 'Read the demo transcript');
+    transcript.href = demo.transcript;
+    const download = element('a', 'text-link', 'Open the recording');
+    download.href = demo.src;
+    const links = element('div', 'media-text-links'); links.append(transcript, download);
+    caption.append(element('h3', '', demo.title), element('p', '', demo.caption), links);
+    demoCard.append(video, caption);
+    const poster = element('img');
+    let metadataReady = false, posterReady = false, textReady = false, failed = false;
+    const reveal = () => {
+      loadedDemo = !failed && metadataReady && posterReady && textReady;
+      demoCard.hidden = !loadedDemo; syncMedia();
+    };
+    const fail = () => { failed = true; reveal(); };
+    video.addEventListener('loadedmetadata', () => { metadataReady = true; reveal(); });
+    video.addEventListener('error', fail);
+    poster.addEventListener('load', () => { posterReady = true; reveal(); });
+    poster.addEventListener('error', fail);
+    const fetchText = async path => {
+      const response = await fetch(path, { credentials: 'omit', cache: 'no-cache' });
+      if (!response.ok) throw new Error('Media text unavailable');
+      return response.text();
+    };
+    Promise.all([fetchText(demo.captions), fetchText(demo.transcript)]).then(([captions, transcriptText]) => {
+      if (!/^WEBVTT(?:\s|$)/.test(captions) || !captions.includes('-->') || !transcriptText.trim()) {
+        fail(); return;
+      }
+      textReady = true; reveal();
+    }).catch(fail);
+    poster.src = demo.poster; video.src = demo.src;
   }
 
   const examples = [
@@ -88,6 +187,7 @@
   };
 
   if (form && submitBtn && submitLabel && message) {
+    submitBtn.disabled = false;
     if (endpoint) {
       submitLabel.textContent = 'Request beta access';
       formMode.textContent = 'We’ll use your details only to review beta interest and contact you about Gage.';
