@@ -146,10 +146,10 @@
       path: 'COMPONENTS → MATES → REBUILD'
     },
     {
-      prompt: '“Run a static study on the bracket under a 500 N downward load.”',
-      operation: 'Configure and run a supported study',
-      detail: 'Define material, fixtures, loads, and mesh; run the solver and review results.',
-      path: 'SETUP → SOLVER → ENGINEER REVIEW'
+      prompt: '“Set up a static study on the bracket under a 500 N downward load.”',
+      operation: 'Explore study setup',
+      detail: 'Define material, loads and fixtures as part of a research-preview workflow.',
+      path: 'MATERIAL → LOADS → FIXTURES'
     }
   ];
 
@@ -188,13 +188,32 @@
 
   if (form && submitBtn && submitLabel && message) {
     submitBtn.disabled = false;
-    if (endpoint) {
-      submitLabel.textContent = 'Request beta access';
-      formMode.textContent = 'We’ll use your details only to review beta interest and contact you about Gage.';
-    } else {
-      submitLabel.textContent = 'Prepare beta request';
-      formMode.textContent = 'The form opens a prefilled email for you to review and send. Nothing is submitted automatically.';
-    }
+    const requestType = document.getElementById('request-type');
+    const requestDetails = () => {
+      const type = requestType?.value || 'early_access';
+      if (type === 'demo') return { label: 'demo request', subject: 'Gage — demo request',
+        intro: "I'd like to arrange a time for a Gage demo.",
+        received: 'Demo request received. We’ll email you to arrange a time. This is not a confirmed booking.' };
+      if (type === 'question') return { label: 'question', subject: 'Gage — project question',
+        intro: "I have a question about Gage.", received: 'Question received. We’ll reply by email.' };
+      return { label: 'early-access request', subject: 'Gage — early-access request',
+        intro: "I'd like to express interest in testing Gage.",
+        received: 'Early-access request received. We’ll reply if a testing opportunity opens up. Access is not guaranteed.' };
+    };
+    const syncRequest = () => {
+      submitLabel.textContent = `${endpoint ? 'Send' : 'Prepare'} ${requestDetails().label}`;
+      formMode.textContent = endpoint
+        ? 'Your details will be sent through Formspree to reply to this request. A demo request is not a confirmed booking.'
+        : 'Opens an email draft for you to review and send. Nothing is sent automatically; a demo request is not a confirmed booking.';
+    };
+    requestType?.addEventListener('change', syncRequest);
+    document.querySelectorAll('[data-demo-request]').forEach(link => link.addEventListener('click', () => {
+      if (!requestType) return;
+      requestType.value = 'demo';
+      syncRequest();
+      requestType.focus({ preventScroll: true });
+    }));
+    syncRequest();
 
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
@@ -211,7 +230,10 @@
       const data = new FormData(form);
       const name = String(data.get('name') || '').trim();
       const email = String(data.get('email') || '').trim();
+      const company = String(data.get('company') || '').trim();
       const role = String(data.get('role') || '').trim();
+      const industry = String(data.get('industry') || '').trim();
+      const request = requestDetails();
       const cadTool = String(data.get('cad_tool') || '').trim();
       const interest = String(data.get('primary_interest') || '').trim();
       const useCase = String(data.get('use_case') || '').trim();
@@ -220,20 +242,22 @@
         const body = [
           'Hello,',
           '',
-          "I'd like to express interest in the Gage private beta.",
+          request.intro,
           '',
           `Name: ${name}`,
           `Email: ${email}`,
+          `Company / employer: ${company || 'Not specified'}`,
           `Role: ${role || 'Not specified'}`,
+          `Industry: ${industry || 'Not specified'}`,
           `Primary CAD software: ${cadTool || 'Not specified'}`,
           `Primary interest: ${interest || 'Not specified'}`,
           `What I would use Gage for: ${useCase || 'Not specified'}`,
           '',
-          'I agree to be contacted about beta testing and Gage product updates.',
+          'I agree to be contacted about this request.',
           '',
           'Thank you!'
         ].join('\n');
-        const mailto = `mailto:${emailAddress}?subject=${encodeURIComponent('Gage — private beta interest')}&body=${encodeURIComponent(body)}`;
+        const mailto = `mailto:${emailAddress}?subject=${encodeURIComponent(request.subject)}&body=${encodeURIComponent(body)}`;
         showMessage('Your email app should open with a prepared request. Please send that email to complete your submission. If nothing opens, email us directly.');
         window.location.href = mailto;
         return;
@@ -244,7 +268,7 @@
       try {
         data.delete('consent');
         data.append('permission_to_contact', 'Yes');
-        data.append('_subject', 'Gage — new beta request');
+        data.append('_subject', request.subject);
         const response = await fetch(endpoint, {
           method: 'POST',
           body: data,
@@ -258,13 +282,13 @@
           } catch (_) { /* service returned non-JSON error */ }
           throw new Error(errorDetails || 'The form service could not accept your request.');
         }
-        showMessage('Request received! Thanks for your interest in Gage. We’ll be in touch if an opportunity to test opens up.');
+        showMessage(request.received);
         form.reset();
       } catch (err) {
         showMessage(`${err.message || 'Could not submit your request.'} Please try again or email ${emailAddress}.`, true);
       } finally {
         submitBtn.disabled = false;
-        submitLabel.textContent = 'Request beta access';
+        syncRequest();
       }
     });
   }

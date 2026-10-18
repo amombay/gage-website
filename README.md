@@ -1,10 +1,10 @@
 # Gage — Digital Blueprint website
 
-**Built by engineers, for engineers.** An AI-powered CAD project for part creation, complete assemblies, and simulation workflows. Includes a modern dark-blue blueprint landing page, About, Contact, interactive concept demo, roadmap, FAQs, early-access signup, and privacy notice.
+An open-source SOLIDWORKS agent in development. This website explains the current preview, shows reviewed native captures, introduces the founder, and accepts email-based demo and early-access requests.
 
 This package is optimized for **simple GitHub Pages deployment**. Unlike the original v2 ZIP, **`index.html` is at the repository root**. GitHub can now publish directly from your `main` branch even when a hidden workflow folder is missed during browser upload.
 
-> Preview scope: Gage is an MIT open-source, unsigned preview for a Codex-driven local SOLIDWORKS workflow. It consumes Codex usage; normal ChatGPT conversations do not provide unlimited CAD automation. Advanced native qualification remains pending. The parent-supplied software snapshot is 104 installed files verified, 3,755 Python tests and 458 panel tests; these are not engineering certification. Gage is independent of OpenAI and Dassault Systèmes/SOLIDWORKS.
+> Preview scope: Gage is an MIT open-source, unsigned preview for a Codex-driven local SOLIDWORKS workflow. It consumes Codex usage; normal ChatGPT conversations do not provide unlimited CAD automation. Advanced native qualification remains pending. The parent-supplied software snapshot is 7,149 Python tests passed (9 skipped) and 848 panel tests passed; these are not engineering certification. Gage is independent of OpenAI and Dassault Systèmes/SOLIDWORKS.
 
 Use copies of your designs for preview testing. Source-file preservation is still being validated.
 
@@ -112,3 +112,9 @@ python -m unittest discover -s tests -p "test_*.py" -v
 node --check script.js
 node --check config.js
 ```
+
+## October 18 website refresh
+
+The website now includes email-based demo requests, optional company/employer and role fields, and an optional industry dropdown. Demo buttons select the demo request type; visitors must review and send the prepared email. No calendar slot is reserved and no information is sent automatically.
+
+The founder section uses Andrew Mombay's supplied LinkedIn profile photo and profile-verified education and job titles. The site remains an unsigned development preview. Selected unit, drawing, nested-assembly and BOM grouping/mass checks have passed; general production qualification and simulation remain incomplete.

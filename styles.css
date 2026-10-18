@@ -407,3 +407,73 @@ main, .nav-wrap, .section-heading > div, .contact-action > span:first-child { mi
   .media-card, .capability-card, .provider-card, .preview-badges span { border: 1px solid CanvasText; }
   .consent input { appearance: auto; }
 }
+
+/* October 2026: quieter layout, explicit evidence and a practical contact flow. */
+:root { --grid: rgba(67, 130, 175, .055); }
+.hero-orbit { display: none; }
+.hero-layout { min-height: 620px; padding-block: 64px; }
+.hero h1 { font-size: clamp(44px, 4.1vw, 64px); white-space: normal; max-width: 570px; line-height: 1.08; }
+.hero-detail { margin-top: 30px; }
+.hero-visual { box-shadow: 0 22px 60px rgba(0,0,0,.24); }
+.hero-visual::before { display: none; }
+.preview-section { padding-block: 68px; }
+.preview-status-layout { gap: 40px; align-items: start; }
+.preview-scope { max-width: 560px; }
+.evidence-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 28px; margin-top: 38px; padding-top: 30px; border-top: 1px solid var(--line-strong); }
+.evidence-grid article { min-width: 0; }
+.evidence-label { font: 11px/1.6 var(--mono); color: var(--cyan); letter-spacing: .05em; }
+.evidence-grid h3 { font-size: 19px; line-height: 1.4; margin: 12px 0 10px; letter-spacing: -.02em; }
+.evidence-grid p { font-size: 14px; line-height: 1.75; color: #b1ccdf; margin: 0; }
+.evidence-blocker { border-left: 2px solid #e1b680; padding-left: 20px; }
+.evidence-blocker .evidence-label { color: #f1cb9b; }
+.approach { padding-block: 64px; background-image: none; }
+.approach .feature-graphic { display: none; }
+.approach .feature-grid { grid-template-columns: repeat(3,minmax(0,1fr)); }
+.approach .feature-card { min-height: 0; background: transparent; box-shadow: none; }
+.approach .feature-hero-card { grid-column: auto; }
+.approach .feature-copy { padding-top: 22px; }
+.capability-section, .workflow-section, .provider-section, .roadmap-section, .contact-section { padding-block: 80px; }
+.capability-card:hover { transform: none; }
+.beta-panel { border-radius: 10px; box-shadow: 0 14px 40px rgba(0,0,0,.12); }
+.beta-panel::before, .beta-panel::after { display: none; }
+.beta-left > p { max-width: 440px; }
+.field input, .field select, .field textarea { border-radius: 5px; }
+.form-intro { margin-top: 10px; }
+.form-fineprint { overflow-wrap: anywhere; }
+.founder-card { padding: 22px; border-radius: 10px; }
+.founder-photo { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 6px; margin-bottom: 22px; }
+.founder-credentials { list-style: none; margin: 22px 0; padding: 0; border-top: 1px solid var(--line-strong); }
+.founder-credentials li { padding: 13px 0; border-bottom: 1px solid var(--line); color: #d6e8f3; font-size: 13px; line-height: 1.65; }
+.founder-credentials span { display: block; color: #a8c9df; font: 10px/1.7 var(--mono); letter-spacing: .03em; margin-bottom: 3px; }
+.about-layout { gap: clamp(36px,6vw,90px); }
+.about-layout > div:first-child > .founder-independence { font-size: 13px; color: #9bb5c9; }
+@media (max-width: 1060px) {
+  .hero-layout { min-height: 0; }
+  .hero h1 { font-size: clamp(44px,7vw,64px); max-width: 700px; }
+}
+@media (max-width: 920px) {
+  .evidence-grid { grid-template-columns: 1fr; gap: 26px; }
+  .evidence-grid p { max-width: 720px; }
+  .approach .feature-grid { grid-template-columns: 1fr; }
+  .approach .feature-card { padding-block: 24px; }
+}
+@media (max-width: 720px) {
+  .hero-layout { padding-block: 44px 64px; }
+  .hero h1 { font-size: clamp(40px,8vw,55px); }
+  .preview-status-layout { grid-template-columns: 1fr; gap: 26px; }
+  .preview-section, .capability-section, .workflow-section, .provider-section, .roadmap-section, .contact-section, .approach { padding-block: 56px; }
+  .preview-metrics { gap: 10px; }
+  .preview-metrics dt { font-size: 11px; }
+  .preview-metrics dd { font-size: 30px; }
+  .founder-card { max-width: 420px; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-visual, .capability-card { transition: none; } }
+
+/* Keep the headline inside its grid track and the supplied portrait undistorted. */
+.hero-copy { min-width: 0; }
+.hero-copy #hero-heading { font-size: clamp(40px,3.4vw,56px); max-inline-size: 100%; white-space: normal; overflow-wrap: normal; }
+.hero-copy #hero-heading em { white-space: normal; }
+.about-layout { align-items: start; }
+.founder-card > img.founder-photo { display: block; inline-size: 100%; max-inline-size: 100%; block-size: auto; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
+@media (max-width: 1060px) { .hero-copy #hero-heading { font-size: clamp(40px,6.5vw,60px); } }
+@media (max-width: 520px) { .hero-copy #hero-heading { font-size: clamp(36px,8.6vw,44px); } }
