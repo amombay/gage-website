@@ -112,7 +112,7 @@ class StaticSiteTests(unittest.TestCase):
 
     def test_copy_preserves_preview_and_usage_boundaries(self):
         text = ' '.join(self.pages['index.html'].words).lower()
-        for phrase in ('codex usage', 'mit open source', 'unsigned', 'native qualification', '3,755', '458'):
+        for phrase in ('codex usage', 'mit open source', 'unsigned', 'native qualification', '7,149', '848', '9', 'simulation', 'crash'):
             self.assertIn(phrase, text)
         self.assertNotIn('unlimited cad automation for free', text)
         self.assertNotIn('not a live gage feature yet', text)
@@ -161,7 +161,7 @@ class StaticSiteTests(unittest.TestCase):
         self.assertEqual(declarations['object-position'], 'center')
         self.assertEqual(declarations['background'], '#04101f')
 
-    def test_local_assets_use_media2_release_urls(self):
+    def test_local_assets_use_current_release_urls(self):
         for name, expected in (('index.html', {'styles.css', 'config.js', 'script.js'}),
                                ('privacy.html', {'styles.css'})):
             found = set()
@@ -170,10 +170,41 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, 'v=20261015-media2')
+                        self.assertEqual(url.query, 'v=20261018-preview4')
                         found.add(url.path)
             self.assertEqual(found, expected)
 
 
+
+    def test_demo_and_optional_profile_fields_are_labelled_and_not_required(self):
+        page = self.pages['index.html']
+        for key, field_name in [('company', 'company'), ('role', 'role'), ('industry', 'industry')]:
+            tag, attrs = page.ids[key]
+            self.assertEqual(attrs['name'], field_name)
+            self.assertNotIn('required', attrs)
+            self.assertTrue(any(t == 'label' and a.get('for') == key for t, a in page.elements))
+        self.assertEqual(page.ids['industry'][0], 'select')
+        self.assertEqual(page.ids['request-type'][1]['name'], 'request_type')
+        self.assertIn('required', page.ids['consent'][1])
+        self.assertGreaterEqual(sum(t == 'a' and 'data-demo-request' in a for t, a in page.elements), 3)
+
+    def test_privacy_explains_optional_context_and_unconfirmed_demo(self):
+        text = ' '.join(self.pages['privacy.html'].words).lower()
+        for term in ['company / employer', 'industry', 'role', 'email draft', 'formspree', 'does not confirm a booking', 'not automatic newsletter']:
+            self.assertIn(term, text)
+        self.assertIn('not production-ready', ' '.join(self.pages['index.html'].words).lower())
+
+    def test_founder_education_current_roles_and_real_portrait_are_explicit(self):
+        page = self.pages['index.html']; text = ' '.join(page.words)
+        for fact in ['Mechanical Engineering (B.Sc.)', 'Business Economics (B.A.)', 'Brown University',
+                     'Associate of Arts and Sciences', 'Carroll Community College',
+                     'Industrial Digital Strategist Intern', 'Siemens Digital Industries Software', 'Co-Founder & CEO', 'Vastro']:
+            self.assertIn(fact, text)
+        images = [a for t, a in page.elements if t == 'img' and a.get('class') == 'founder-photo']
+        self.assertEqual(len(images), 1)
+        self.assertEqual(images[0]['src'], 'assets/andrew-mombay.jpg')
+        self.assertEqual((images[0]['width'], images[0]['height']), ('800', '800'))
+        self.assertEqual(images[0]['loading'], 'lazy')
+        self.assertIn('do not imply endorsement', text)
 if __name__ == '__main__':
     unittest.main()
