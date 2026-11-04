@@ -14,7 +14,7 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=20261018-preview4" />
+  <link rel="stylesheet" href="styles.css?v=20261104-preview5" />
   <script src="config.js?v=20261018-preview4" defer></script>
   <script src="script.js?v=20261018-preview4" defer></script>
   <title>Gage — Engineer-led CAD workflows</title>
@@ -40,26 +40,16 @@
       <div class="container hero-layout">
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-dash"></span> OPEN-SOURCE SOLIDWORKS AGENT <span class="eyebrow-index">/ PREVIEW</span></div>
-          <h1 id="hero-heading">Build in CAD.<br /><em>Check every result<span class="headline-dot">.</span></em></h1>
-          <p class="hero-lede">Describe a part or a rigid assembly. <strong>Gage works through Codex in local SOLIDWORKS</strong>, with editable files and results you can inspect. Currently an unsigned development preview.</p>
+          <h1 id="hero-heading">From a prompt to<br /><em>editable CAD<span class="headline-dot">.</span></em></h1>
+          <p class="hero-lede">Describe a part or a rigid assembly, review the plan, and build it in your local SOLIDWORKS session. Gage uses Codex and saves editable native files.</p>
           <div class="hero-buttons"><a class="btn btn-primary" href="#beta" data-demo-request>Schedule a demo <span class="btn-arrow">↗</span></a><a class="btn btn-ghost" href="#preview-status">What’s been checked <span aria-hidden="true">↘</span></a></div>
-          <div class="hero-detail"><span class="hero-detail-symbol" aria-hidden="true">✳</span><p><strong>Start with a real task.</strong><br />Demo requests are arranged by email. No booking is confirmed here.</p></div><div class="hero-provider-hint"><span class="led" aria-hidden="true"></span> CODEX USAGE + LOCAL SOLIDWORKS <span class="provider-hint-status">// UNSIGNED PREVIEW</span></div>
+          <div class="hero-detail"><span class="hero-detail-symbol" aria-hidden="true">✳</span><p><strong>Bring a part you want to build.</strong><br />Request a live walkthrough by email.</p></div><div class="hero-provider-hint"><span class="led" aria-hidden="true"></span> CODEX USAGE + LOCAL SOLIDWORKS <span class="provider-hint-status">// UNSIGNED PREVIEW</span></div>
         </div>
-        <div class="hero-visual" aria-label="Conceptual CAD interface showing an isometric engineering part">
-          <div class="visual-top"><div class="visual-title"><span class="toolbar-square"></span><span>GAGE / MODEL SPACE</span></div><span class="visual-toolbar-end"><span class="toolbar-dot"></span> PREVIEW ENVIRONMENT <span class="visual-x">⌗</span></span></div>
-          <div class="model-space">
-            <div class="model-crosshair model-crosshair-top" aria-hidden="true"></div>
-            <div class="model-crosshair model-crosshair-bottom" aria-hidden="true"></div>
-            <div class="visual-left-rail" aria-hidden="true"><span class="rail-highlight">⌗</span><span>⊞</span><span>◱</span><span>◎</span><span>◇</span></div>
-            <div class="model-ribbon"><span>PART_001 / DESIGN STUDY</span><strong>ISOMETRIC VIEW</strong></div>
-            <img class="cad-art" src="assets/cad-part.svg" alt="Technical isometric blueprint drawing of a machined mounting component with dimension lines" width="720" height="570" />
-            <div class="model-callout"><span class="callout-node"></span><span>PARAMETRIC<br /><strong>GEOMETRY</strong></span></div>
-            <div class="axis-widget" aria-hidden="true"><span class="axis-y">Y</span><span class="axis-x">X</span><span class="axis-z">Z</span></div>
-            <div class="model-footer"><span>UNITS: MM</span><span>GRID: 10.00</span><span>VIEW: ISO</span></div>
-          </div>
-          <div class="visual-command"><span class="terminal-symbol">›_</span><div><span class="command-label">DESIGN INTENT <span>// EXAMPLE PROMPT</span></span><p>“Create a mounting bracket with four bolt holes.”<span class="command-caret" aria-hidden="true"></span></p></div><div class="command-graphic" aria-hidden="true">↗</div></div>
-          <div class="visual-caption"><span>FIG. 01 / CONCEPT VISUALIZATION</span><span>NOT A LIVE CAD ENGINE</span></div>
-        </div>
+        <figure class="hero-visual native-preview">
+          <div class="visual-top"><span class="visual-title"><span class="toolbar-square" aria-hidden="true"></span> SOLIDWORKS VIEWPORT</span><span class="visual-toolbar-end">NATIVE CAPTURE</span></div>
+          <img class="native-preview-image" src="assets/media/gage-native-plate.png" alt="SolidWorks viewport showing a rectangular plate with four through-holes" width="1280" height="960" fetchpriority="high" />
+          <figcaption><strong>Mounting plate</strong><span>100 × 60 × 5 mm · four Ø8 mm holes</span></figcaption>
+        </figure>
       </div>
       <div class="container hero-bottom-rule"><div><span class="plus-icon">+</span> PARTS / RIGID ASSEMBLIES</div><span>SCROLL TO EXPLORE <span class="scroll-arrow">↓</span></span></div>
     </section>
@@ -69,7 +59,7 @@
     <section class="preview-section" id="preview-status" aria-labelledby="preview-title">
       <div class="container">
         <div class="preview-status-layout">
-          <div><div class="eyebrow"><span class="eyebrow-dash"></span> VERIFIED WORK / NOVEMBER 4, 2026</div><h2 id="preview-title">Progress you can inspect.<br /><span>Limits you should know.</span></h2><div class="preview-badges"><span>MIT OPEN SOURCE</span><span>UNSIGNED PREVIEW</span></div></div>
+          <div><div class="eyebrow"><span class="eyebrow-dash"></span> VERIFIED WORK / NOVEMBER 4, 2026</div><h2 id="preview-title">What you can test</h2><div class="preview-badges"><span>MIT OPEN SOURCE</span><span>UNSIGNED PREVIEW</span></div></div>
           <div><dl class="preview-metrics"><div><dt>SOLIDWORKS tested</dt><dd>2026</dd></div><div><dt>Nested revisions reopened</dt><dd>2</dd></div><div><dt>Preview access</dt><dd>Invite</dd></div></dl><p class="preview-scope">Use disposable copies for preview testing. Recovery was tested on copied files after simulated interruptions; a crash during a native save remains unverified.</p></div>
         </div>
         <div class="evidence-grid">
@@ -99,7 +89,7 @@
             <div class="capability-copy"><div class="capability-number">02 — ASSEMBLE</div><h3>Assemblies, within scope.</h3><p>The preview covers tested rigid assembly workflows, including a nested assembly build and a child depth edit. Use copies of any files you want to test.</p><div class="capability-chips"><span>COMPONENTS</span><span>MATES</span><span>STRUCTURE</span></div></div>
           </article>
           <article class="capability-card">
-            <div class="capability-top"><span>CAPABILITY / 03</span><span class="capability-status">IN DEVELOPMENT</span></div>
+            <div class="capability-top"><span>DEVELOPMENT / 03</span><span class="capability-status">IN DEVELOPMENT</span></div>
             <div class="capability-art" aria-hidden="true">
               <svg viewBox="0 0 340 200" fill="none" role="presentation"><defs><linearGradient id="gage-stress" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#297EE9"/><stop offset=".43" stop-color="#60D6FF"/><stop offset=".72" stop-color="#FAD169"/><stop offset="1" stop-color="#EF735E"/></linearGradient></defs><path d="M55 65h22v82H55z" stroke="#69B8E1" stroke-width="1.4"/><path d="M77 82h185l21 17-21 18H77z" fill="url(#gage-stress)" fill-opacity=".88" stroke="#BFEFFF" stroke-width="1.4"/><g stroke="#E8F6FF" stroke-opacity=".32" stroke-width=".6"><path d="M98 82v35m18-35v35m18-35v35m18-35v35m18-35v35m18-35v35m18-35v35m18-35v35m18-35v35M77 99h206"/></g><path d="M264 42v35m-8-9 8 9 8-9M90 142h189" stroke="#D4EEFF" stroke-width="1.3"/><text x="219" y="32" font-size="10" fill="#A1C8DF" font-family="monospace">LOAD 500 N</text><path d="M119 173h153" stroke="url(#gage-stress)" stroke-width="9"/><text x="119" y="195" font-size="9" fill="#A1C8DF" font-family="monospace">LOW</text><text x="254" y="195" font-size="9" fill="#A1C8DF" font-family="monospace">HIGH</text><text x="44" y="28" font-size="10" fill="#7DB5D5" font-family="monospace">FEA / CONCEPT</text></svg>
             </div>

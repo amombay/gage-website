@@ -477,3 +477,27 @@ main, .nav-wrap, .section-heading > div, .contact-action > span:first-child { mi
 .founder-card > img.founder-photo { display: block; inline-size: 100%; max-inline-size: 100%; block-size: auto; height: auto; aspect-ratio: 1 / 1; object-fit: cover; }
 @media (max-width: 1060px) { .hero-copy #hero-heading { font-size: clamp(40px,6.5vw,60px); } }
 @media (max-width: 520px) { .hero-copy #hero-heading { font-size: clamp(36px,8.6vw,44px); } }
+
+
+/* Native product evidence and preview scope. */
+.native-preview { margin: 0; min-width: 0; overflow: hidden; border-radius: 14px; }
+.native-preview-image { display: block; width: 100%; height: auto; background: #e6e9ee; }
+.native-preview figcaption {
+  display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between;
+  gap: 6px 18px; padding: 16px 20px; color: #b9d0e1;
+  border-top: 1px solid var(--line-strong); font-size: 13px;
+}
+.native-preview figcaption strong { color: #f1f7fc; font-size: 15px; }
+.evidence-grid { gap: 16px; border-top: 0; padding-top: 0; }
+.evidence-grid article {
+  padding: 22px; border: 1px solid var(--line-strong); border-radius: 10px;
+  background: rgba(16, 34, 54, .72);
+}
+.evidence-grid .evidence-blocker { border-color: #94774f; }
+@media (max-width: 920px) {
+  .evidence-grid { gap: 12px; }
+  .native-preview { max-width: 680px; }
+}
+@media (forced-colors: active) {
+  .evidence-grid article, .native-preview figcaption { border-color: CanvasText; }
+}
