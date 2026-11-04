@@ -4,10 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="theme-color" content="#061426" />
-  <meta name="description" content="Gage is an open-source SOLIDWORKS agent preview. Explore editable CAD, reviewed drawing exports, and the current testing limits. Request a demo by email." />
+  <meta name="description" content="Gage is an open-source SOLIDWORKS agent preview. Explore editable parts and rigid assemblies, and see the limits of the preview. Request a demo by email." />
   <meta property="og:type" content="website" />
   <meta property="og:title" content="Gage — Engineer-led CAD workflows" />
-  <meta property="og:description" content="An open-source SOLIDWORKS agent preview. Editable CAD, tested drawing workflows, and clear limits. Request a demo by email." />
+  <meta property="og:description" content="An open-source SOLIDWORKS agent preview. Editable parts and rigid assemblies, with clear preview limits. Request a demo by email." />
   <meta property="og:image" content="assets/social-preview.png" />
   <meta property="og:image:alt" content="Gage blueprint branding and a concept engineering illustration." />
   <meta name="color-scheme" content="dark" />
@@ -41,7 +41,7 @@
         <div class="hero-copy">
           <div class="eyebrow"><span class="eyebrow-dash"></span> OPEN-SOURCE SOLIDWORKS AGENT <span class="eyebrow-index">/ PREVIEW</span></div>
           <h1 id="hero-heading">Build in CAD.<br /><em>Check every result<span class="headline-dot">.</span></em></h1>
-          <p class="hero-lede">Describe a part or a drawing task. <strong>Gage works through Codex in local SOLIDWORKS</strong>, with editable files and results you can inspect. Currently an unsigned development preview.</p>
+          <p class="hero-lede">Describe a part or a rigid assembly. <strong>Gage works through Codex in local SOLIDWORKS</strong>, with editable files and results you can inspect. Currently an unsigned development preview.</p>
           <div class="hero-buttons"><a class="btn btn-primary" href="#beta" data-demo-request>Schedule a demo <span class="btn-arrow">↗</span></a><a class="btn btn-ghost" href="#preview-status">What’s been checked <span aria-hidden="true">↘</span></a></div>
           <div class="hero-detail"><span class="hero-detail-symbol" aria-hidden="true">✳</span><p><strong>Start with a real task.</strong><br />Demo requests are arranged by email. No booking is confirmed here.</p></div><div class="hero-provider-hint"><span class="led" aria-hidden="true"></span> CODEX USAGE + LOCAL SOLIDWORKS <span class="provider-hint-status">// UNSIGNED PREVIEW</span></div>
         </div>
@@ -61,7 +61,7 @@
           <div class="visual-caption"><span>FIG. 01 / CONCEPT VISUALIZATION</span><span>NOT A LIVE CAD ENGINE</span></div>
         </div>
       </div>
-      <div class="container hero-bottom-rule"><div><span class="plus-icon">+</span> PARTS / DRAWINGS / BOUNDED ASSEMBLY TESTS</div><span>SCROLL TO EXPLORE <span class="scroll-arrow">↓</span></span></div>
+      <div class="container hero-bottom-rule"><div><span class="plus-icon">+</span> PARTS / RIGID ASSEMBLIES</div><span>SCROLL TO EXPLORE <span class="scroll-arrow">↓</span></span></div>
     </section>
 
 
@@ -69,13 +69,13 @@
     <section class="preview-section" id="preview-status" aria-labelledby="preview-title">
       <div class="container">
         <div class="preview-status-layout">
-          <div><div class="eyebrow"><span class="eyebrow-dash"></span> VERIFIED WORK / OCTOBER 18, 2026</div><h2 id="preview-title">Progress you can inspect.<br /><span>Limits you should know.</span></h2><div class="preview-badges"><span>MIT OPEN SOURCE</span><span>UNSIGNED PREVIEW</span></div></div>
-          <div><dl class="preview-metrics"><div><dt>Python tests passed</dt><dd>7,149</dd></div><div><dt>Panel tests passed</dt><dd>848</dd></div><div><dt>Python tests skipped</dt><dd>9</dd></div></dl><p class="preview-scope">These are software test results for this development snapshot, not engineering certification or a production-readiness claim.</p></div>
+          <div><div class="eyebrow"><span class="eyebrow-dash"></span> VERIFIED WORK / NOVEMBER 4, 2026</div><h2 id="preview-title">Progress you can inspect.<br /><span>Limits you should know.</span></h2><div class="preview-badges"><span>MIT OPEN SOURCE</span><span>UNSIGNED PREVIEW</span></div></div>
+          <div><dl class="preview-metrics"><div><dt>SOLIDWORKS tested</dt><dd>2026</dd></div><div><dt>Nested revisions reopened</dt><dd>2</dd></div><div><dt>Preview access</dt><dd>Invite</dd></div></dl><p class="preview-scope">Use disposable copies for preview testing. Recovery was tested on copied files after simulated interruptions; a crash during a native save remains unverified.</p></div>
         </div>
         <div class="evidence-grid">
-          <article><span class="evidence-label">NATIVE CHECKS</span><h3>Units and drawing exports</h3><p>Equivalent geometry was verified across the tested native unit settings. A4 and A3 drawing cases passed fitted-title, saved/reopened, PDF and DXF review.</p></article>
-          <article><span class="evidence-label">BOUNDED COVERAGE</span><h3>Detail views, assemblies and BOMs</h3><p>Detail-view labels and positions, plus selected nested-assembly paths, have bounded test coverage. Native checks cover shared-part BOM grouping and mass checks, not general assembly qualification.</p></article>
-          <article class="evidence-blocker"><span class="evidence-label">IN DEVELOPMENT</span><h3>Simulation</h3><p>Simulation is not yet qualified or available while a native crash is being resolved. Gage is not production-ready software; broader native validation remains in progress.</p></article>
+          <article><span class="evidence-label">NATIVE CHECKS</span><h3>Parts and rigid assemblies</h3><p>The installed panel built a rigid nested assembly and edited one child in place. Part creation and edits also passed earlier panel tests. Both saved assembly revisions reopened with the expected hierarchy, dimensions and placement.</p></article>
+          <article><span class="evidence-label">BOUNDED COVERAGE</span><h3>Drawings and bills of materials</h3><p>Selected drawing and BOM cases have passed development checks. Both workflows are experimental and outside the supported preview scope.</p></article>
+          <article class="evidence-blocker"><span class="evidence-label">IN DEVELOPMENT</span><h3>Simulation</h3><p>Simulation, moving mechanisms and advanced features are outside the supported preview scope. Gage is not production-ready. Review every result in SOLIDWORKS.</p></article>
         </div>
       </div>
     </section>
@@ -96,7 +96,7 @@
             <div class="capability-art" aria-hidden="true">
               <svg viewBox="0 0 340 200" fill="none" role="presentation"><g stroke="#73D9FF" stroke-width="1.8" stroke-linejoin="round"><path d="m103 48 64-30 69 36-65 30Z" fill="#14527C" fill-opacity=".45"/><path d="M103 48v14l68 34V84M236 54v14l-65 28"/><path d="m103 91 68-29 65 35-67 32Z" fill="#14527C" fill-opacity=".2"/><path d="M103 91v18l66 34v-14M236 97v18l-67 28"/><path d="m103 145 67-30 66 36-67 31Z" fill="#14527C" fill-opacity=".23"/><path d="M103 145v12l66 34v-9M236 151v12l-67 28"/></g><path d="M170 0v199M65 110h212" stroke="#2E678A" stroke-dasharray="5 7"/><g stroke="#9DE7FF" stroke-dasharray="3 5"><path d="m104 63-13 21m146-15 11 17M104 111 94 135m142-20 12 21"/></g><text x="244" y="40" font-size="10" fill="#88B9D4" font-family="monospace">MATE_01</text><text x="22" y="178" font-size="10" fill="#88B9D4" font-family="monospace">EXPLODED VIEW</text></svg>
             </div>
-            <div class="capability-copy"><div class="capability-number">02 — ASSEMBLE</div><h3>Assemblies, within scope.</h3><p>Selected nested-assembly paths have test coverage. Native checks cover shared-part BOM grouping and mass; each design still needs review in SOLIDWORKS.</p><div class="capability-chips"><span>COMPONENTS</span><span>MATES</span><span>STRUCTURE</span></div></div>
+            <div class="capability-copy"><div class="capability-number">02 — ASSEMBLE</div><h3>Assemblies, within scope.</h3><p>The preview covers tested rigid assembly workflows, including a nested assembly build and a child depth edit. Use copies of any files you want to test.</p><div class="capability-chips"><span>COMPONENTS</span><span>MATES</span><span>STRUCTURE</span></div></div>
           </article>
           <article class="capability-card">
             <div class="capability-top"><span>CAPABILITY / 03</span><span class="capability-status">IN DEVELOPMENT</span></div>
@@ -147,7 +147,7 @@
     </section>
 
     <section class="section roadmap-section section-grid" id="roadmap" aria-labelledby="roadmap-title">
-      <div class="container"><div class="section-heading roadmap-head"><div><div class="eyebrow"><span class="eyebrow-dash"></span> WHAT'S NEXT <span class="eyebrow-index">/ 004</span></div><h2 id="roadmap-title">Work in progress.<br /><span>By design.</span></h2></div><p>The next steps are specific: resolve blockers, repeat native checks, and test a small number of real workflows. No launch date is promised.</p></div><div class="roadmap-list"><div class="roadmap-row"><div class="roadmap-num">01</div><div class="roadmap-main"><h3>Prototype development</h3><p>The current snapshot passes 7,149 Python tests (9 skipped) and 848 panel tests. Native checks cover specific unit and drawing cases.</p></div><span class="roadmap-status status-progress"><span class="led"></span> IN PROGRESS</span></div><div class="roadmap-row"><div class="roadmap-num">02</div><div class="roadmap-main"><h3>Private testing</h3><p>Preparing focused testing with engineers, students, and technical designers. Share the workflow you would like to evaluate.</p></div><span class="roadmap-status">PLANNED</span></div><div class="roadmap-row"><div class="roadmap-num">03</div><div class="roadmap-main"><h3>Refine and expand</h3><p>Complete native study validation, expand source-preservation checks, and test more real workflows before widening access.</p></div><span class="roadmap-status">EXPLORATORY</span></div></div></div>
+      <div class="container"><div class="section-heading roadmap-head"><div><div class="eyebrow"><span class="eyebrow-dash"></span> WHAT'S NEXT <span class="eyebrow-index">/ 004</span></div><h2 id="roadmap-title">Work in progress.<br /><span>By design.</span></h2></div><p>The next steps are specific: resolve blockers, repeat native checks, and test a small number of real workflows. No launch date is promised.</p></div><div class="roadmap-list"><div class="roadmap-row"><div class="roadmap-num">01</div><div class="roadmap-main"><h3>Prototype development</h3><p>The installed SOLIDWORKS 2026 panel passed the rigid nested assembly build, child edit, and reopen checks.</p></div><span class="roadmap-status status-progress"><span class="led"></span> IN PROGRESS</span></div><div class="roadmap-row"><div class="roadmap-num">02</div><div class="roadmap-main"><h3>Private testing</h3><p>Preparing focused testing with engineers, students, and technical designers. Share the workflow you would like to evaluate.</p></div><span class="roadmap-status">PLANNED</span></div><div class="roadmap-row"><div class="roadmap-num">03</div><div class="roadmap-main"><h3>Refine and expand</h3><p>Complete native study validation, expand source-preservation checks, and test more real workflows before widening access.</p></div><span class="roadmap-status">EXPLORATORY</span></div></div></div>
     </section>
 
     <section class="section beta-section" id="beta" aria-labelledby="beta-title">
@@ -188,7 +188,7 @@
       <details><summary>Can it build full assemblies?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Assembly creation is a target workflow: bringing components together, placing them, applying compatible mates or constraints, and iterating on an assembled design. It is not being advertised as a generally available public feature yet.</p></details>
       <details><summary>Can Gage run simulations?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Simulation is in development and is not currently offered as a qualified workflow. See the current status above for availability. Existing benchmark captures show specific development cases.</p></details>
       <details><summary>How does Codex usage work?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Gage uses <strong>Codex usage</strong>. Your normal ChatGPT conversations do not provide unlimited CAD automation. Access and usage limits follow your configured Codex workflow. This website has no account sign-in and does not collect AI credentials.</p></details>
-      <details><summary>What does the preview status mean?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Gage is <strong>MIT open source</strong> and the current preview is <strong>unsigned</strong>. The October 18 snapshot reports 7,149 Python tests passed (9 skipped) and 848 panel tests passed. These checks are not engineering certification. Specific native unit, A4/A3 drawing and export cases passed; broader native qualification remains pending. Use copies of your designs for preview testing. Source-file preservation is still being validated.</p></details>
+      <details><summary>What does the preview status mean?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Gage is <strong>MIT open source</strong> and the current preview is <strong>unsigned</strong>. The invited preview covers tested part and rigid assembly workflows in SOLIDWORKS 2026. Drawings, BOMs and simulation remain experimental. Use disposable copies: startup recovery was tested on copied files after simulated interruptions, but native save crash recovery is not yet verified.</p></details>
       <details><summary>Which CAD platforms will be supported?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Gage is being developed with SOLIDWORKS-oriented workflows first. Broader CAD support is a possible future direction, but no additional compatibility has been announced.</p></details>
       <details><summary>Is Gage replacing the engineer?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>No. The goal is to offload repetitive modeling and study-setup tasks while keeping engineering decisions, reviews, and verification with a human. Generated geometry and simulation outputs must be checked before use.</p></details>
       <details><summary>How do I become a beta tester?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Complete the <a href="#beta">early access request</a> and share the CAD tools or workflows you're interested in. Gage is still in development; interest does not guarantee selection or a launch date.</p></details>

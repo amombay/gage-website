@@ -112,7 +112,7 @@ class StaticSiteTests(unittest.TestCase):
 
     def test_copy_preserves_preview_and_usage_boundaries(self):
         text = ' '.join(self.pages['index.html'].words).lower()
-        for phrase in ('codex usage', 'mit open source', 'unsigned', 'native qualification', '7,149', '848', '9', 'simulation', 'crash'):
+        for phrase in ('codex usage', 'mit open source', 'unsigned', 'nested revisions reopened', 'disposable copies', 'experimental', 'simulation', 'crash'):
             self.assertIn(phrase, text)
         self.assertNotIn('unlimited cad automation for free', text)
         self.assertNotIn('not a live gage feature yet', text)
