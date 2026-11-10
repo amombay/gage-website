@@ -16,6 +16,15 @@ window.GAGE_CONFIG = {
     gallery: [
       {
         reviewed: true,
+        src: 'assets/media/gage-roller-cassette.png',
+        title: 'Roller conveyor cassette',
+        alt: 'Five silver rollers seated in a blue conveyor frame, with exposed axle journals and rail mounting bores.',
+        caption: 'A 440 mm factory transfer module with five machined rollers, integral axle journals, and a bored mounting frame. SolidWorks reported zero interference in the saved pose.',
+        width: 1600,
+        height: 1200
+      },
+      {
+        reviewed: true,
         src: 'assets/media/gage-pallet-inspection-nest.png',
         title: 'Pallet inspection nest',
         alt: 'Blue SolidWorks fixture plate with three round seating pads, two locating shoulders, and four mounting bores.',

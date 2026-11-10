@@ -57,6 +57,18 @@
       "watermarks_and_full_frame_preserved": true,
       "scope": "Native SolidWorks capture of a newly built pallet inspection nest.",
       "review_authority": "Visual inspection of native capture"
+    },
+    {
+      "file": "gage-roller-cassette.png",
+      "width": 1600,
+      "height": 1200,
+      "sha256": "7c8e8b1a2b1d4215ef8b80367b8b7c66dd654bf0ad82532804078450369d72c2",
+      "source_artifact": "Gage_Conveyor_Roller_Cassette-framed.bmp",
+      "source_sha256": "2ba501b33ae912ce83e2e3fc43c3b1dc4aa35c241b68cd040d0b03c79efd2b5b",
+      "source_pixels_unchanged": true,
+      "watermarks_and_full_frame_preserved": true,
+      "scope": "Native SolidWorks capture of a five-roller conveyor cassette in a rigid display assembly.",
+      "review_authority": "Visual inspection of native capture"
     }
   ],
   "fresh_panel_capture": "pending",
