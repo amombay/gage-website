@@ -170,7 +170,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, {'styles.css': 'v=20261104-preview5', 'config.js': 'v=20261110-robot-arm', 'script.js': 'v=20261018-preview4'}[url.path])
+                        self.assertEqual(url.query, {'styles.css': 'v=20261110-factory', 'config.js': 'v=20261110-robot-arm', 'script.js': 'v=20261110-factory'}[url.path])
                         found.add(url.path)
             self.assertEqual(found, expected)
 

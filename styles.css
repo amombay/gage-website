@@ -501,3 +501,29 @@ main, .nav-wrap, .section-heading > div, .contact-action > span:first-child { mi
 @media (forced-colors: active) {
   .evidence-grid article, .native-preview figcaption { border-color: CanvasText; }
 }
+
+.factory-section { padding-block: clamp(54px, 8vw, 100px); background: #091b2d; border-block: 1px solid var(--line); }
+.factory-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr); align-items: start; gap: 24px; }
+.factory-map, .factory-control { margin: 0; border: 1px solid var(--line-strong); border-radius: 12px; background: #10263b; overflow: hidden; }
+.factory-map figcaption { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 4px 16px; padding: 16px 18px; }
+.factory-map figcaption span, .factory-kicker { font: 11px/1.6 var(--mono); color: #a7c8db; letter-spacing: .06em; }
+.factory-map svg { display: block; width: 100%; height: auto; }
+.factory-map text { font: 700 14px var(--mono); fill: #d2e8f6; }
+.factory-control { padding: clamp(16px, 2.6vw, 26px); }
+.factory-kicker { margin: 0 0 13px; }
+.factory-steps { display: none; gap: 8px; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.factory-interactive .factory-steps { display: grid; }
+.factory-steps button { min-height: 44px; padding: 8px; border: 1px solid #54738b; border-radius: 5px; background: #0b1e31; color: #e5f3fc; text-align: left; font: inherit; font-size: 14px; cursor: pointer; }
+.factory-steps button[aria-pressed="true"] { border-color: #7ce0f4; background: #78dbef; color: #07192b; font-weight: 700; }
+.factory-panels { margin: 20px 0; }
+.factory-panels article + article { margin-top: 20px; }
+.factory-panels h3 { margin: 0 0 8px; font-size: 22px; }
+.factory-panels p, .factory-panels li { color: #c4d9e7; font-size: 14px; line-height: 1.65; }
+.factory-panels p { margin: 0; }
+.factory-panels ul { margin: 12px 0 0; padding-left: 18px; }
+.factory-interactive .factory-zone:not(.factory-zone-active) { opacity: .59; }
+.factory-zone-active { filter: drop-shadow(0 0 7px #4cc9ed55); }
+@media (max-width: 880px) { .factory-layout { grid-template-columns: 1fr; } }
+@media (forced-colors: active) {
+  .factory-steps button[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -3px; }
+}

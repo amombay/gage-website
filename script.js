@@ -293,6 +293,29 @@
     });
   }
 
+  const factory = document.getElementById('factory');
+  if (factory) {
+    const steps = [...factory.querySelectorAll('[data-factory-step]')];
+    const panels = [...factory.querySelectorAll('[data-factory-panel]')];
+    const zones = [...factory.querySelectorAll('[data-factory-zone]')];
+    const selectStage = stage => {
+      for (const step of steps) {
+        step.setAttribute('aria-pressed', String(step.dataset.factoryStep === stage));
+      }
+      for (const panel of panels) panel.hidden = panel.dataset.factoryPanel !== stage;
+      for (const zone of zones) {
+        zone.classList.toggle('factory-zone-active', zone.dataset.factoryZone === stage);
+      }
+    };
+    for (const step of steps) {
+      step.addEventListener('click', () => selectStage(step.dataset.factoryStep));
+    }
+    if (steps.length && panels.length) {
+      selectStage(steps[0].dataset.factoryStep);
+      factory.classList.add('factory-interactive');
+    }
+  }
+
   const currentYear = document.getElementById('current-year');
   if (currentYear) currentYear.textContent = String(new Date().getFullYear());
 })();
