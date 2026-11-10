@@ -11,9 +11,18 @@ window.GAGE_CONFIG = {
   formEndpoint: '',
   contactEmail: 'andrew_mombay@brown.edu',
   // Parent-reviewed authentic captures only. See MEDIA-HANDOFF.md.
-  // V2 file review passed; enabled locally for parent browser QA. Three gallery images unchanged.
+  // Reviewed SolidWorks captures and a native viewport recording.
   media: {
     gallery: [
+      {
+        reviewed: true,
+        src: 'assets/media/gage-industrial-robot-arm.png',
+        title: 'Industrial robotic arm',
+        alt: 'Isometric SolidWorks view of a blue and graphite robot arm with stepped joint covers and a silver two-finger gripper.',
+        caption: 'Five-part robot arm in a fixed display pose, with shaped links, stepped joint covers and a tapered gripper. Captured in SolidWorks.',
+        width: 1600,
+        height: 1200
+      },
       {
         reviewed: true,
         src: 'assets/media/thermal-development-benchmark.png',

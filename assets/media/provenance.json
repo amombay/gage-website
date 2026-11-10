@@ -33,6 +33,18 @@
       "watermarks_and_full_frame_preserved": true,
       "scope": "Full native viewport plate capture, unaltered delivered file. Academic software context supplied in demo transcript; no visible watermark added.",
       "review_authority": "parent visual review in this chat"
+    },
+    {
+      "file": "gage-industrial-robot-arm.png",
+      "width": 1600,
+      "height": 1200,
+      "sha256": "cddc2653d4ecfe04dce542e38e4e5101fad6d81eb91ed455dde312e1599a6c1a",
+      "source_artifact": "gage-robot-arm-gallery.bmp",
+      "source_sha256": "d185ae821428b0ab0424c1f03b3e76f83fcf1c11aadf3f5431c1ba2edf0e04c6",
+      "source_pixels_unchanged": true,
+      "watermarks_and_full_frame_preserved": true,
+      "scope": "Native SolidWorks capture of a five-part robotic arm in a fixed display pose.",
+      "review_authority": "Visual inspection of the native capture"
     }
   ],
   "fresh_panel_capture": "pending",

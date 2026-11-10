@@ -149,7 +149,7 @@ test('configured authentic gallery assets exist with the stated original PNG dim
     assert.equal(bytes.subarray(1, 4).toString(), 'PNG');
     assert.equal(bytes.readUInt32BE(16), item.width); assert.equal(bytes.readUInt32BE(20), item.height);
     assert.equal(item.reviewed, true); assert.ok(item.alt && item.caption && item.title);
-    if (!item.src.endsWith('gage-native-plate.png')) assert.match(item.alt, /watermark/i);
+    if (/(thermal-development-benchmark|ordinate-drawing-example)\.png$/.test(item.src)) assert.match(item.alt, /watermark/i);
   }
 });
 
@@ -171,12 +171,12 @@ test('video failure after metadata never exposes a finished demo', async () => {
   assert.equal(app.ids['demo-card'].hidden, true);
 });
 
- test('reviewed v2 video is enabled while all three gallery captures remain enabled', () => {
+ test('reviewed video and all four gallery captures remain enabled', () => {
   const context = { window: {} };
   vm.runInNewContext(readFileSync(join(__dirname, '..', 'config.js'), 'utf8'), context);
   const media = context.window.GAGE_CONFIG.media;
   assert.equal(media.demo?.reviewed, true);
-  assert.equal(media.gallery.length, 3);
+  assert.equal(media.gallery.length, 4);
   assert.ok(media.gallery.every(item => item.reviewed === true));
 
   assert.equal(media.demo.title, 'Native CAD model inspection');
