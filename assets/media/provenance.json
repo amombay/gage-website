@@ -45,6 +45,18 @@
       "watermarks_and_full_frame_preserved": true,
       "scope": "Native SolidWorks capture of a five-part robotic arm in a fixed display pose.",
       "review_authority": "Visual inspection of the native capture"
+    },
+    {
+      "file": "gage-pallet-inspection-nest.png",
+      "width": 1600,
+      "height": 1200,
+      "sha256": "d35043385107a8a6901e107e1c812b4f3c5ca3ccf108d4ae40515f5f1f5f1bde",
+      "source_artifact": "inspection_nest-framed.bmp",
+      "source_sha256": "aeb4d9e0bcd1dfaefb2501f9f8a7ef77837edc390dc9c286f87ac63d32bd790d",
+      "source_pixels_unchanged": true,
+      "watermarks_and_full_frame_preserved": true,
+      "scope": "Native SolidWorks capture of a newly built pallet inspection nest.",
+      "review_authority": "Visual inspection of native capture"
     }
   ],
   "fresh_panel_capture": "pending",

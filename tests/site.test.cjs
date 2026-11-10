@@ -171,12 +171,12 @@ test('video failure after metadata never exposes a finished demo', async () => {
   assert.equal(app.ids['demo-card'].hidden, true);
 });
 
- test('reviewed video and all four gallery captures remain enabled', () => {
+ test('reviewed video and all five gallery captures remain enabled', () => {
   const context = { window: {} };
   vm.runInNewContext(readFileSync(join(__dirname, '..', 'config.js'), 'utf8'), context);
   const media = context.window.GAGE_CONFIG.media;
   assert.equal(media.demo?.reviewed, true);
-  assert.equal(media.gallery.length, 4);
+  assert.equal(media.gallery.length, 5);
   assert.ok(media.gallery.every(item => item.reviewed === true));
 
   assert.equal(media.demo.title, 'Native CAD model inspection');

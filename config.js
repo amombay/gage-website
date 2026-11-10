@@ -16,6 +16,15 @@ window.GAGE_CONFIG = {
     gallery: [
       {
         reviewed: true,
+        src: 'assets/media/gage-pallet-inspection-nest.png',
+        title: 'Pallet inspection nest',
+        alt: 'Blue SolidWorks fixture plate with three round seating pads, two locating shoulders, and four mounting bores.',
+        caption: 'Factory tooling for a 160 × 140 mm pallet. Three raised pads establish the seating plane and two shoulders locate the pallet edges. Captured in SolidWorks.',
+        width: 1600,
+        height: 1200
+      },
+      {
+        reviewed: true,
         src: 'assets/media/gage-industrial-robot-arm.png',
         title: 'Industrial robotic arm',
         alt: 'Isometric SolidWorks view of a blue and graphite robot arm with stepped joint covers and a silver two-finger gripper.',
