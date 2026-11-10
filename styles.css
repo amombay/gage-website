@@ -527,3 +527,11 @@ main, .nav-wrap, .section-heading > div, .contact-action > span:first-child { mi
 @media (forced-colors: active) {
   .factory-steps button[aria-pressed="true"] { outline: 2px solid Highlight; outline-offset: -3px; }
 }
+
+.factory-operation { padding: 17px 18px 20px; border-top: 1px solid var(--line-strong); }
+.factory-operation h3 { font-size: 17px; margin: 0 0 12px; }
+.factory-operation ol { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; padding-left: 20px; margin: 0; }
+.factory-operation li { padding-right: 6px; color: #c4d9e7; font-size: 13px; line-height: 1.55; }
+.factory-operation li::marker { color: #7ce0f4; font-weight: 700; }
+.factory-operation strong { display: block; color: #edf8ff; margin-bottom: 3px; }
+@media (max-width: 560px) { .factory-operation ol { grid-template-columns: 1fr; } }

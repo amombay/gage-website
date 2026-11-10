@@ -14,9 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=20261110-factory" />
+  <link rel="stylesheet" href="styles.css?v=20261110-factory-operations" />
   <script src="config.js?v=20261110-robot-arm" defer></script>
-  <script src="script.js?v=20261110-factory" defer></script>
+  <script src="script.js?v=20261110-factory-operations" defer></script>
   <title>Gage — Engineer-led CAD workflows</title>
 </head>
 <body>
@@ -120,8 +120,8 @@
     <section class="section factory-section" id="factory" aria-labelledby="factory-title">
       <div class="container">
         <div class="section-heading">
-          <div><div class="eyebrow"><span class="eyebrow-dash"></span> INTERACTIVE CONCEPT / FACTORY CELL 01</div><h2 id="factory-title">Design a robot cell.<br /><span>Check every handoff.</span></h2></div>
-          <p>Follow a palletized inspection cell from component design to engineering review. This mockup illustrates the proposed workflow. Current preview support is listed separately.</p>
+          <div><div class="eyebrow"><span class="eyebrow-dash"></span> INTERACTIVE CONCEPT / FACTORY CELL 01</div><h2 id="factory-title">Design a factory line<br /><span>operated by robots.</span></h2></div>
+          <p>Gage designs and checks the line in CAD. In the proposed factory, robots handle production tasks at the stations below.</p>
         </div>
         <div class="factory-layout">
           <figure class="factory-map">
@@ -173,18 +173,26 @@
               </g>
               <path d="M283 267h24m164 0h25" stroke="#6addf6" stroke-width="2" marker-end="url(#cell-arrow)"/>
             </svg>
+            <div class="factory-operation">
+              <h3>How the line runs</h3>
+              <ol>
+                <li><strong>Infeed</strong><span>A conveyor indexes a loaded pallet at the pickup stop.</span></li>
+                <li><strong>Robot transfer</strong><span>The robot picks the part and seats it in the inspection nest.</span></li>
+                <li><strong>Inspect and sort</strong><span>The inspection station returns a result. The robot sends the part to outfeed or the reject buffer.</span></li>
+              </ol>
+            </div>
           </figure>
           <div class="factory-control">
-            <p class="factory-kicker">CELL DEVELOPMENT SEQUENCE</p>
-            <div class="factory-steps" role="group" aria-label="Factory concept stages">
-              <button type="button" data-factory-step="build" aria-pressed="true">01 Build</button>
-              <button type="button" data-factory-step="assemble" aria-pressed="false">02 Assemble</button>
-              <button type="button" data-factory-step="test" aria-pressed="false">03 Test</button>
+            <p class="factory-kicker">GAGE / CAD DESIGN WORKFLOW</p>
+            <div class="factory-steps" role="group" aria-label="Gage CAD workflow stages">
+              <button type="button" data-factory-step="build" aria-pressed="true">01 Design parts</button>
+              <button type="button" data-factory-step="assemble" aria-pressed="false">02 Lay out cell</button>
+              <button type="button" data-factory-step="test" aria-pressed="false">03 Check design</button>
               <button type="button" data-factory-step="review" aria-pressed="false">04 Review</button>
             </div>
             <div class="factory-panels" aria-live="polite">
-              <article data-factory-panel="build"><h3>Build the tooling</h3><p>Size the conveyor frame, locating pallet, inspection nest, and robot tool adapter from the workpiece envelope.</p><ul><li>Editable parts and mounting interfaces</li><li>Dimensions tied to the workpiece and tooling</li></ul></article>
-              <article data-factory-panel="assemble"><h3>Assemble the cell</h3><p>Place the conveyors, robot, nest, guarding, and reject buffer. Define the datum interfaces and the pallet handoff positions.</p><ul><li>Assembly mates and a layout drawing</li><li>Component list and service access zones</li></ul></article>
+              <article data-factory-panel="build"><h3>Design the tooling</h3><p>Size the conveyor frame, locating pallet, inspection nest, and robot tool adapter from the workpiece envelope.</p><ul><li>Editable parts and mounting interfaces</li><li>Dimensions tied to the workpiece and tooling</li></ul></article>
+              <article data-factory-panel="assemble"><h3>Lay out the production cell in CAD</h3><p>Place the conveyors, robot, nest, guarding, and reject buffer. Define the datum interfaces and the pallet handoff positions.</p><ul><li>Assembly mates and a layout drawing</li><li>Component list and service access zones</li></ul></article>
               <article data-factory-panel="test"><h3>Check the handoffs</h3><p>Evaluate pickup, inspection, and placement poses, including the reject route. Review tool clearance, access at the gate, and fixture load cases.</p><ul><li>Interference and reach checks for defined poses</li><li>Fixture stress study with documented loads</li></ul></article>
               <article data-factory-panel="review"><h3>Package the evidence</h3><p>Collect the CAD, drawings, BOM, and test reports. Route failed checks back to the affected part or station for revision before engineering review.</p><ul><li>Revision record and open issues</li><li>Engineering sign-off before commissioning</li></ul></article>
             </div>
