@@ -128,6 +128,18 @@
       "source_pixels_unchanged": false,
       "scope": "Formatted BOM based on verified SolidWorks counts",
       "review_authority": "Native tree and flat inventory reconciliation plus visual PDF inspection"
+    },
+    {
+      "file": "gage-factory-assembly-exploded.png",
+      "width": 2600,
+      "height": 3060,
+      "sha256": "893199fa6570af6c171ee1434df857d27188ddea3e0f607f2c9c209e52340eb1",
+      "source_artifact": "exploded-native-geometry.json",
+      "source_sha256": "71c6df34929f56f20b318c336802d90fe123f09c27f9d39eae18857142164e72",
+      "bom_sha256": "24b8bc185f4d40685f840aad58758ecbef3058ea14f74960d49e2d2e19b42c0e",
+      "source_pixels_unchanged": false,
+      "scope": "Illustration rendered from saved SolidWorks part tessellation and occurrence transforms",
+      "review_authority": "Matched all 44 callouts against the verified parts-only BOM and visually inspected the rendered illustration"
     }
   ],
   "fresh_panel_capture": "pending",
