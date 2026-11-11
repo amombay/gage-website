@@ -117,6 +117,17 @@
       "watermarks_and_full_frame_preserved": true,
       "scope": "Linear static AISI 1020 jaw study with a fixed mounting face and a 100 N distributed load. Peak stress was about 1.21 MPa on the 3 mm mesh.",
       "review_authority": "Native verification and visual inspection"
+    },
+    {
+      "file": "gage-factory-assembly-bom.png",
+      "width": 2400,
+      "height": 1697,
+      "sha256": "44b982b4c0b45358dd31eabf5c1aa44f12229b545f7dd7afd5b2e61fae8cdec5",
+      "source_artifact": "quantity-verification.json",
+      "source_sha256": "3ef4f0fa1a227d46cbd8bdbe6192a418053cc232847d33d70d44d0b20309e114",
+      "source_pixels_unchanged": false,
+      "scope": "Formatted BOM based on verified SolidWorks counts",
+      "review_authority": "Native tree and flat inventory reconciliation plus visual PDF inspection"
     }
   ],
   "fresh_panel_capture": "pending",
