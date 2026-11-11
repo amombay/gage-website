@@ -16,6 +16,15 @@ window.GAGE_CONFIG = {
     gallery: [
       {
         reviewed: true,
+        src: 'assets/media/gage-factory-inspection-line.png',
+        title: 'Robotic pallet inspection cell',
+        alt: 'SolidWorks assembly with a yellow robot, parallel gripper, twin roller stations, inspection fixture, and partial guarding.',
+        caption: 'A fixed-pose factory layout with two roller stations, a pallet fixture, and a new robot and gripper. Station placement persisted on reopen, with zero solid interferences in the saved pose.',
+        width: 1920,
+        height: 1440
+      },
+      {
+        reviewed: true,
         src: 'assets/media/gage-roller-cassette.png',
         title: 'Roller conveyor cassette',
         alt: 'Five silver rollers seated in a blue conveyor frame, with exposed axle journals and rail mounting bores.',

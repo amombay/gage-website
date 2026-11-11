@@ -69,6 +69,18 @@
       "watermarks_and_full_frame_preserved": true,
       "scope": "Native SolidWorks capture of a five-roller conveyor cassette in a rigid display assembly.",
       "review_authority": "Visual inspection of native capture"
+    },
+    {
+      "file": "gage-factory-inspection-line.png",
+      "width": 1920,
+      "height": 1440,
+      "sha256": "51120accefceead48a46e9b16799379e09d052ef203d18ac7a59152c69694c2f",
+      "source_artifact": "Gage_Factory_Inspection_Line.bmp",
+      "source_sha256": "01b3b3d0e058e354d1b7670977f750399ab83ce27721e16f7464381884c29efa",
+      "source_pixels_unchanged": true,
+      "watermarks_and_full_frame_preserved": true,
+      "scope": "Native capture of static factory inspection cell, verified on reopen with zero solid interferences.",
+      "review_authority": "Visual inspection of the native capture"
     }
   ],
   "fresh_panel_capture": "pending",
