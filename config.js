@@ -23,6 +23,9 @@ window.GAGE_CONFIG = {
         width: 1920,
         height: 1440
       },
+      {"reviewed": true, "src": "assets/media/gage-inspection-cell-drawing.png", "title": "Inspection cell layout drawing", "alt": "A3 drawing with front, top, and isometric views of the factory inspection cell.", "caption": "SolidWorks A3 layout drawing at 1:50. The saved drawing passed its reopen check.", "width": 1786, "height": 1263},
+      {"reviewed": true, "src": "assets/media/gage-gripper-jaw-drawing.png", "title": "Gripper jaw drawing", "alt": "A4 drawing with front, top, right, and isometric views of the left jaw.", "caption": "SolidWorks A4 reference drawing for the left gripper jaw at 1:2. The saved drawing passed its reopen check.", "width": 893, "height": 1263},
+      {"reviewed": true, "src": "assets/media/gage-gripper-jaw-stress.png", "title": "100 N gripper jaw study", "alt": "SolidWorks von Mises stress plot showing a distributed load and fixed mount on the gripper jaw.", "caption": "Linear static AISI 1020 jaw study with a fixed mounting face and a 100 N distributed load. Peak stress was about 1.21 MPa on the 3 mm mesh.", "width": 1600, "height": 1000},
       {
         reviewed: true,
         src: 'assets/media/gage-roller-cassette.png',

@@ -63,7 +63,7 @@
   };
 
   if (mediaSection && gallery && Array.isArray(media.gallery)) {
-    media.gallery.slice(0, 6).forEach(item => {
+    media.gallery.slice(0, 9).forEach(item => {
       if (!described(item) || !text(item.alt) || !localAsset(item.src, 'png|jpe?g|webp')) return;
       const image = element('img');
       image.alt = item.alt; image.width = item.width; image.height = item.height; image.decoding = 'async';

@@ -81,6 +81,42 @@
       "watermarks_and_full_frame_preserved": true,
       "scope": "Native capture of static factory inspection cell, verified on reopen with zero solid interferences.",
       "review_authority": "Visual inspection of the native capture"
+    },
+    {
+      "file": "gage-inspection-cell-drawing.png",
+      "width": 1786,
+      "height": 1263,
+      "sha256": "fec456455308bfa46679620335063e67b0a3856c7a9bf61313decba4c6ea9781",
+      "source_artifact": "drawing-f15c6922f88d4b85938b6634b8acf35c.pdf",
+      "source_sha256": "933361a53949a0d667838e4f19a593a1d2ae62989cfe8945e2b6d9cc6d84e16a",
+      "source_pixels_unchanged": false,
+      "watermarks_and_full_frame_preserved": true,
+      "scope": "SolidWorks A3 layout drawing at 1:50. The saved drawing passed its reopen check.",
+      "review_authority": "Native verification and visual inspection"
+    },
+    {
+      "file": "gage-gripper-jaw-drawing.png",
+      "width": 893,
+      "height": 1263,
+      "sha256": "aebb8807539fc58a2510260a786ec061269a0a73664e709bb82764a7c489e4fa",
+      "source_artifact": "drawing-558a3664b3454225a175779d4ab4bd88.pdf",
+      "source_sha256": "67ae846db44b602fa4bd680c0ceda754d5d13470dfec9168dd04427487f5233e",
+      "source_pixels_unchanged": false,
+      "watermarks_and_full_frame_preserved": true,
+      "scope": "SolidWorks A4 reference drawing for the left gripper jaw at 1:2. The saved drawing passed its reopen check.",
+      "review_authority": "Native verification and visual inspection"
+    },
+    {
+      "file": "gage-gripper-jaw-stress.png",
+      "width": 1600,
+      "height": 1000,
+      "sha256": "460d082d620d261edd3579cc3125dc97da0ae019aface3b71b11240648707bd6",
+      "source_artifact": "SWAI_native_dfc18d9e0d4b492492b35d560ea57170.bmp",
+      "source_sha256": "bcec317b51c942eb3422407da1d23782e40c5d6fa78577f3c799b884d6f8f892",
+      "source_pixels_unchanged": true,
+      "watermarks_and_full_frame_preserved": true,
+      "scope": "Linear static AISI 1020 jaw study with a fixed mounting face and a 100 N distributed load. Peak stress was about 1.21 MPa on the 3 mm mesh.",
+      "review_authority": "Native verification and visual inspection"
     }
   ],
   "fresh_panel_capture": "pending",
