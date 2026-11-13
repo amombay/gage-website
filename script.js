@@ -63,7 +63,8 @@
   };
 
   if (mediaSection && gallery && Array.isArray(media.gallery)) {
-    media.gallery.forEach(item => {
+    const visibleCards = [];
+    media.gallery.forEach((item, index) => {
       if (!described(item) || !text(item.alt) || !localAsset(item.src, 'png|jpe?g|webp')) return;
       const image = element('img');
       image.alt = item.alt; image.width = item.width; image.height = item.height; image.decoding = 'async';
@@ -89,7 +90,17 @@
       let added = false;
       image.addEventListener('load', () => {
         if (added) return;
-        added = true; gallery.append(figure); loadedImages += 1; syncMedia();
+        added = true;
+        const position = visibleCards.findIndex(card => card.index > index);
+        if (position === -1) {
+          gallery.append(figure);
+          visibleCards.push({ index, figure });
+        } else {
+          gallery.insertBefore(figure, visibleCards[position].figure);
+          visibleCards.splice(position, 0, { index, figure });
+        }
+        loadedImages += 1;
+        syncMedia();
       });
       // A missing image remains absent; no broken-image placeholder is shown.
       image.addEventListener('error', () => {});

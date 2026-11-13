@@ -17,6 +17,11 @@ class Element {
   fire(name, extra = {}) { return Promise.all((this.events[name] || []).map(fn => fn(extra))); }
   append(...children) { this.children.push(...children); }
   appendChild(child) { this.append(child); return child; }
+  insertBefore(child, reference) {
+    const index = reference ? this.children.indexOf(reference) : this.children.length;
+    assert.ok(index >= 0);
+    this.children.splice(index, 0, child);
+  }
   querySelectorAll() { return []; }
   focus() { this.focused = true; }
 }
@@ -92,6 +97,16 @@ test('missing image is not promoted to a finished gallery item', () => {
   const app = boot({ media: { gallery: [screenshot] } });
   app.created.find(el => el.tagName === 'img').fire('error');
   assert.equal(app.ids['media-gallery'].hidden, true); assert.equal(app.mediaLink.hidden, true);
+});
+
+test('gallery keeps its configured order when images load out of order', () => {
+  const later = { ...screenshot, src: 'assets/media/faster.webp', title: 'Second example' };
+  const app = boot({ media: { gallery: [screenshot, later] } });
+  const images = app.created.filter(el => el.tagName === 'img');
+  images[1].fire('load');
+  images[0].fire('load');
+  assert.deepEqual(app.ids['gallery-grid'].children.map(figure => figure.children[0].href),
+    [screenshot.src, later.src]);
 });
 
 test('unreviewed, incomplete and remote media never create gallery entries', () => {

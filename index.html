@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#061426" />
+  <meta name="theme-color" content="#0b1520" />
   <meta name="description" content="Gage is an open-source SOLIDWORKS agent preview. Explore editable parts and rigid assemblies, and see the limits of the preview. Request a demo by email." />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Gage — Engineer-led CAD workflows" />
+  <meta property="og:title" content="Gage — Editable CAD for SOLIDWORKS" />
   <meta property="og:description" content="An open-source SOLIDWORKS agent preview. Editable parts and rigid assemblies, with clear preview limits. Request a demo by email." />
   <meta property="og:image" content="assets/social-preview.png" />
   <meta property="og:image:alt" content="Gage blueprint branding and a concept engineering illustration." />
@@ -14,52 +14,63 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=20261111-factory-bom" />
+  <link rel="stylesheet" href="styles.css?v=20261113-site-refresh" />
   <script src="config.js?v=20261113-factory-cycle" defer></script>
-  <script src="script.js?v=20261113-factory-motion" defer></script>
-  <title>Gage — Engineer-led CAD workflows</title>
+  <script src="script.js?v=20261113-site-refresh" defer></script>
+  <title>Gage — Editable CAD for SOLIDWORKS</title>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
-  <div class="topline"><div class="container topline-inner"><span><span class="pulse-indicator" aria-hidden="true"></span> SYSTEM STATUS: UNSIGNED PREVIEW</span><span>LOCAL SOLIDWORKS · ENGINEER REVIEW <span class="topline-code">// GAGE 001</span></span></div></div>
 
   <header class="site-header" id="top">
     <div class="container nav-wrap">
       <a class="brand" href="#top" aria-label="Gage — back to top"><span class="brand-emblem" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M30.5 11.3 24 7.5H16L8.1 12v16L16 32.5h8l8-4.5V20H20.4v5.2h5.9v.3L23 27h-6l-3.5-2V15.1L17 13h5.9l3.9 2.3" stroke="currentColor" stroke-width="2.9" stroke-linecap="square" stroke-linejoin="miter"/><path d="M8.1 12 4 9.6M32 28l4 2.4" stroke="currentColor" stroke-width="1.5"/></svg></span><span class="brand-name">gage<span class="brand-period">.</span></span></a>
-      <nav class="desktop-nav" aria-label="Main navigation"><a href="#capabilities">Capabilities</a><a href="#workflow">How it works</a><a href="#factory">Factory concept</a><a href="#media-gallery" data-media-link hidden>Gallery &amp; demo</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav>
-      <a class="nav-cta" href="#beta" data-demo-request>Schedule a demo <span aria-hidden="true">↗</span></a>
+      <nav class="desktop-nav" aria-label="Main navigation"><a href="#media-gallery" data-media-link hidden>CAD gallery</a><a href="#workflow">How it works</a><a href="#preview-status">Preview scope</a><a href="#about">About</a></nav>
+      <a class="nav-cta" href="#beta" data-demo-request>Request a demo <span aria-hidden="true">↗</span></a>
       <button class="menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="mobile-nav"><span></span><span></span><span></span></button>
     </div>
-    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#capabilities">Capabilities</a><a href="#workflow">How it works</a><a href="#factory">Factory concept</a><a href="#media-gallery" data-media-link hidden>Gallery &amp; demo</a><a href="#preview-status">Current status</a><a href="#roadmap">Roadmap</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="#beta" data-demo-request>Schedule a demo ↗</a></nav>
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Mobile navigation" hidden><a href="#media-gallery" data-media-link hidden>CAD gallery</a><a href="#workflow">How it works</a><a href="#preview-status">Preview scope</a><a href="#about">About</a><a href="#faq">FAQ</a><a href="#beta" data-demo-request>Request a demo</a></nav>
   </header>
 
   <noscript><nav class="no-script-nav container" aria-label="Navigation without JavaScript"><a href="#capabilities">Capabilities</a><a href="#workflow">Workflow</a><a href="#faq">FAQ</a><a href="#contact">Contact</a></nav></noscript>
   <main id="main" tabindex="-1">
     <section class="hero section-grid" aria-labelledby="hero-heading">
-      <div class="hero-orbit orbit-one" aria-hidden="true"></div><div class="hero-orbit orbit-two" aria-hidden="true"></div>
       <div class="container hero-layout">
         <div class="hero-copy">
-          <div class="eyebrow"><span class="eyebrow-dash"></span> OPEN-SOURCE SOLIDWORKS AGENT <span class="eyebrow-index">/ PREVIEW</span></div>
-          <h1 id="hero-heading">From a prompt to<br /><em>editable CAD<span class="headline-dot">.</span></em></h1>
-          <p class="hero-lede">Describe a part or a rigid assembly, review the plan, and build it in your local SOLIDWORKS session. Gage uses Codex and saves editable native files.</p>
-          <div class="hero-buttons"><a class="btn btn-primary" href="#beta" data-demo-request>Schedule a demo <span class="btn-arrow">↗</span></a><a class="btn btn-ghost" href="#preview-status">What’s been checked <span aria-hidden="true">↘</span></a></div>
-          <div class="hero-detail"><span class="hero-detail-symbol" aria-hidden="true">✳</span><p><strong>Bring a part you want to build.</strong><br />Request a live walkthrough by email.</p></div><div class="hero-provider-hint"><span class="led" aria-hidden="true"></span> CODEX USAGE + LOCAL SOLIDWORKS <span class="provider-hint-status">// UNSIGNED PREVIEW</span></div>
+          <a class="hero-preview-link" href="#preview-status"><span class="led" aria-hidden="true"></span> Open-source preview</a>
+          <h1 id="hero-heading">Describe it.<br />Build it in <em>SOLIDWORKS.</em></h1>
+          <p class="hero-lede">Describe a part or rigid assembly, review the plan, and save editable CAD files in your local SOLIDWORKS session.</p>
+          <div class="hero-buttons">
+            <a class="btn btn-primary" href="#beta" data-demo-request>Request a demo <span class="btn-arrow" aria-hidden="true">↗</span></a>
+            <a class="btn btn-ghost" href="#media-gallery" data-media-link hidden>Explore CAD examples <span aria-hidden="true">↓</span></a>
+          </div>
+          <p class="hero-setup">Requires Codex access and a local SOLIDWORKS installation.</p>
         </div>
-        <figure class="hero-visual native-preview">
-          <div class="visual-top"><span class="visual-title"><span class="toolbar-square" aria-hidden="true"></span> SOLIDWORKS VIEWPORT</span><span class="visual-toolbar-end">NATIVE CAPTURE</span></div>
-          <img class="native-preview-image" src="assets/media/gage-native-plate.png" alt="SolidWorks viewport showing a rectangular plate with four through-holes" width="1280" height="960" fetchpriority="high" />
-          <figcaption><strong>Mounting plate</strong><span>100 × 60 × 5 mm · four Ø8 mm holes</span></figcaption>
+        <figure class="hero-visual">
+          <img class="hero-image" src="assets/media/gage-factory-motion-studio-poster.png" alt="Robot and gripper inspecting a workpiece between two roller conveyors" width="1600" height="900" fetchpriority="high" />
+          <figcaption>
+            <div><strong>Robotic inspection cell</strong><br />Development example · CAD motion replay</div>
+            <a class="hero-film" href="assets/media/gage-factory-cycle-with-conveyors.mp4" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">▶</span> Watch the factory cycle <span class="sr-only">(new tab)</span></a>
+          </figcaption>
         </figure>
       </div>
-      <div class="container hero-bottom-rule"><div><span class="plus-icon">+</span> PARTS / RIGID ASSEMBLIES</div><span>SCROLL TO EXPLORE <span class="scroll-arrow">↓</span></span></div>
     </section>
 
-
+    <section class="section media-section" id="media-gallery" aria-labelledby="media-title" hidden>
+      <div class="container">
+        <div class="section-heading">
+          <div><h2 id="media-title">CAD gallery</h2></div>
+          <p>Explore models, drawings, and analysis from development builds. <a class="text-link" href="#preview-status">See what the preview supports <span aria-hidden="true">↗</span></a></p>
+        </div>
+        <div class="media-grid" id="gallery-grid" hidden></div>
+        <figure class="media-card demo-card" id="demo-card" hidden></figure>
+      </div>
+    </section>
 
     <section class="preview-section" id="preview-status" aria-labelledby="preview-title">
       <div class="container">
         <div class="preview-status-layout">
-          <div><div class="eyebrow"><span class="eyebrow-dash"></span> VERIFIED WORK / NOVEMBER 4, 2026</div><h2 id="preview-title">What you can test</h2><div class="preview-badges"><span>MIT OPEN SOURCE</span><span>UNSIGNED PREVIEW</span></div></div>
+          <div><div class="eyebrow"><span class="eyebrow-dash"></span> SOLIDWORKS 2026 verification</div><h2 id="preview-title">What the preview supports</h2><div class="preview-badges"><span>MIT OPEN SOURCE</span><span>UNSIGNED PREVIEW</span></div></div>
           <div><dl class="preview-metrics"><div><dt>SOLIDWORKS tested</dt><dd>2026</dd></div><div><dt>Nested revisions reopened</dt><dd>2</dd></div><div><dt>Preview access</dt><dd>Invite</dd></div></dl><p class="preview-scope">Use disposable copies for preview testing. Recovery was tested on copied files after simulated interruptions; a crash during a native save remains unverified.</p></div>
         </div>
         <div class="evidence-grid">
@@ -72,28 +83,25 @@
 
     <section class="section capability-section section-grid" id="capabilities" aria-labelledby="capabilities-title">
       <div class="container">
-        <div class="section-heading capability-heading"><div><div class="eyebrow"><span class="eyebrow-dash"></span> THE ENGINEERING WORKSPACE <span class="eyebrow-index">/ 002</span></div><h2 id="capabilities-title">Less repetition.<br /><span>More engineering.</span></h2></div><p>Start with a small CAD task. Review the geometry, saved files and exports before using the result.</p></div>
+        <div class="section-heading capability-heading"><div><div class="eyebrow"><span class="eyebrow-dash"></span> Capabilities</div><h2 id="capabilities-title">Parts, assemblies, and analysis</h2></div><p>Start with a small CAD task. Review the geometry, saved files and exports before using the result.</p></div>
         <div class="capability-grid">
           <article class="capability-card">
-            <div class="capability-top"><span>CAPABILITY / 01</span><span class="capability-status">PREVIEW WORKFLOW</span></div>
             <div class="capability-art" aria-hidden="true">
               <svg viewBox="0 0 340 200" fill="none" role="presentation"><defs><linearGradient id="gage-part" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1A5C87" stop-opacity=".65"/><stop offset="1" stop-color="#071C34" stop-opacity=".1"/></linearGradient></defs><path d="M88 89 165 46 254 91 177 136Z" fill="url(#gage-part)" stroke="#71DFFF" stroke-width="2"/><path d="M88 89v39l89 46v-38M254 91v39l-77 44" stroke="#4DC4F9" stroke-width="2"/><path d="M165 46v35M177 136v38M55 112h242M170 18v170" stroke="#2B688E" stroke-dasharray="3 8"/><ellipse cx="171" cy="91" rx="24" ry="12" stroke="#A3EBFF" stroke-width="2"/><ellipse cx="171" cy="91" rx="11" ry="5" stroke="#70CFFF"/><path d="m233 77 39-25m-5-2 10 6" stroke="#72A9CA"/><text x="278" y="51" font-size="10" fill="#83B7D6" font-family="monospace">Ø 12</text></svg>
             </div>
-            <div class="capability-copy"><div class="capability-number">01 — MODEL</div><h3>Parts you can edit.</h3><p>Describe a component, then inspect its sketches, dimensions and features in SOLIDWORKS. The model stays editable.</p><div class="capability-chips"><span>SKETCHES</span><span>FEATURES</span><span>PARAMETRIC</span></div></div>
+            <div class="capability-copy"><h3>Editable parts</h3><p>Describe a component, then inspect its sketches, dimensions and features in SOLIDWORKS. The model stays editable.</p></div>
           </article>
           <article class="capability-card">
-            <div class="capability-top"><span>CAPABILITY / 02</span><span class="capability-status">BOUNDED TEST COVERAGE</span></div>
             <div class="capability-art" aria-hidden="true">
               <svg viewBox="0 0 340 200" fill="none" role="presentation"><g stroke="#73D9FF" stroke-width="1.8" stroke-linejoin="round"><path d="m103 48 64-30 69 36-65 30Z" fill="#14527C" fill-opacity=".45"/><path d="M103 48v14l68 34V84M236 54v14l-65 28"/><path d="m103 91 68-29 65 35-67 32Z" fill="#14527C" fill-opacity=".2"/><path d="M103 91v18l66 34v-14M236 97v18l-67 28"/><path d="m103 145 67-30 66 36-67 31Z" fill="#14527C" fill-opacity=".23"/><path d="M103 145v12l66 34v-9M236 151v12l-67 28"/></g><path d="M170 0v199M65 110h212" stroke="#2E678A" stroke-dasharray="5 7"/><g stroke="#9DE7FF" stroke-dasharray="3 5"><path d="m104 63-13 21m146-15 11 17M104 111 94 135m142-20 12 21"/></g><text x="244" y="40" font-size="10" fill="#88B9D4" font-family="monospace">MATE_01</text><text x="22" y="178" font-size="10" fill="#88B9D4" font-family="monospace">EXPLODED VIEW</text></svg>
             </div>
-            <div class="capability-copy"><div class="capability-number">02 — ASSEMBLE</div><h3>Assemblies, within scope.</h3><p>The preview covers tested rigid assembly workflows, including a nested assembly build and a child depth edit. Use copies of any files you want to test.</p><div class="capability-chips"><span>COMPONENTS</span><span>MATES</span><span>STRUCTURE</span></div></div>
+            <div class="capability-copy"><h3>Rigid assemblies</h3><p>The preview covers tested rigid assembly workflows, including a nested assembly build and a child depth edit. Use copies of any files you want to test.</p></div>
           </article>
           <article class="capability-card">
-            <div class="capability-top"><span>DEVELOPMENT / 03</span><span class="capability-status">IN DEVELOPMENT</span></div>
             <div class="capability-art" aria-hidden="true">
               <svg viewBox="0 0 340 200" fill="none" role="presentation"><defs><linearGradient id="gage-stress" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#297EE9"/><stop offset=".43" stop-color="#60D6FF"/><stop offset=".72" stop-color="#FAD169"/><stop offset="1" stop-color="#EF735E"/></linearGradient></defs><path d="M55 65h22v82H55z" stroke="#69B8E1" stroke-width="1.4"/><path d="M77 82h185l21 17-21 18H77z" fill="url(#gage-stress)" fill-opacity=".88" stroke="#BFEFFF" stroke-width="1.4"/><g stroke="#E8F6FF" stroke-opacity=".32" stroke-width=".6"><path d="M98 82v35m18-35v35m18-35v35m18-35v35m18-35v35m18-35v35m18-35v35m18-35v35m18-35v35M77 99h206"/></g><path d="M264 42v35m-8-9 8 9 8-9M90 142h189" stroke="#D4EEFF" stroke-width="1.3"/><text x="219" y="32" font-size="10" fill="#A1C8DF" font-family="monospace">LOAD 500 N</text><path d="M119 173h153" stroke="url(#gage-stress)" stroke-width="9"/><text x="119" y="195" font-size="9" fill="#A1C8DF" font-family="monospace">LOW</text><text x="254" y="195" font-size="9" fill="#A1C8DF" font-family="monospace">HIGH</text><text x="44" y="28" font-size="10" fill="#7DB5D5" font-family="monospace">FEA / CONCEPT</text></svg>
             </div>
-            <div class="capability-copy"><div class="capability-number">03 — ANALYZE</div><h3>Simulation in development.</h3><p>Study setup and result review are areas of ongoing work. The visual shows the intended workflow.</p><div class="capability-chips"><span>LOAD CASES</span><span>STUDIES</span><span>RESULTS</span></div></div>
+            <div class="capability-copy"><h3>Simulation in development</h3><p>Study setup and result review are areas of ongoing work. The visual shows the intended workflow.</p></div>
           </article>
         </div>
         <p class="footnote"><span>ⓘ</span> CAD and simulation operations require compatible local software and licenses. Review the proposed operation and its result in your CAD environment.</p>
@@ -103,7 +111,7 @@
 
     <section class="section workflow-section" id="workflow" aria-labelledby="workflow-title">
       <div class="container">
-        <div class="workflow-head"><div><div class="eyebrow"><span class="eyebrow-dash"></span> THE EXPERIENCE <span class="eyebrow-index">/ 003</span></div><h2 id="workflow-title">A task.<br />A proposed <span>workflow.</span></h2></div><p>Explore the intended steps for a few common tasks. These are interactive illustrations, not live CAD commands.</p></div>
+        <div class="workflow-head"><div><div class="eyebrow"><span class="eyebrow-dash"></span> Workflow</div><h2 id="workflow-title">How Gage works</h2></div><p>Explore the intended steps for a few common tasks. These are interactive illustrations, not live CAD commands.</p></div>
         <div class="workflow-shell">
           <div class="workflow-options" role="group" aria-label="Illustrative CAD workflow examples">
             <button class="workflow-option is-selected" type="button" data-example="0" aria-controls="workflow-preview" aria-pressed="true"><span class="option-no">01</span><span class="option-body"><strong>Create a CAD part</strong><small>Sketches, extrudes, features</small></span><span class="option-arrow">↗</span></button>
@@ -120,8 +128,8 @@
     <section class="section factory-section" id="factory" aria-labelledby="factory-title">
       <div class="container">
         <div class="section-heading">
-          <div><div class="eyebrow"><span class="eyebrow-dash"></span> INTERACTIVE CONCEPT / FACTORY CELL 01</div><h2 id="factory-title">Design a factory line<br /><span>operated by robots.</span></h2></div>
-          <p>Gage designs and checks the line in CAD. In the proposed factory, robots handle production tasks at the stations below.</p>
+          <div><div class="eyebrow"><span class="eyebrow-dash"></span> Interactive schematic</div><h2 id="factory-title">Inside the inspection cell</h2></div>
+          <p>Follow the workpiece from the infeed conveyor, through robotic inspection, to the outfeed.</p>
         </div>
         <div class="factory-layout">
           <figure class="factory-map">
@@ -202,35 +210,27 @@
       </div>
     </section>
 
-    <section class="section media-section section-grid" id="media-gallery" aria-labelledby="media-title" hidden>
-      <div class="container">
-        <div class="section-heading"><div><div class="eyebrow"><span class="eyebrow-dash"></span> FROM THE PREVIEW <span class="eyebrow-index">/ CAPTURES</span></div><h2 id="media-title">See the work.<br /><span>Know the scope.</span></h2></div><p>A closer look at the development build. Select a capture to open the complete, original-size image.</p></div>
-        <div class="media-grid" id="gallery-grid" hidden></div>
-        <figure class="media-card demo-card" id="demo-card" hidden></figure>
-      </div>
-    </section>
-
     <section class="section provider-section section-grid" id="integrations" aria-labelledby="integrations-title">
       <div class="container provider-layout">
-        <div class="provider-copy"><div class="eyebrow"><span class="eyebrow-dash"></span> AI WORKFLOW <span class="eyebrow-index">/ CONNECT</span></div><h2 id="integrations-title">Your assistant.<br /><span>Your workflow.</span></h2><p>Gage brings a Codex-driven workflow to a local SOLIDWORKS setup. Inspect models in SOLIDWORKS and review the scope of each operation before relying on the result.</p><a class="text-link" href="#faq">How does usage work? <span>↗</span></a></div>
+        <div class="provider-copy"><div class="eyebrow"><span class="eyebrow-dash"></span> Integrations</div><h2 id="integrations-title">What you need to run Gage</h2><p>Gage brings a Codex-driven workflow to a local SOLIDWORKS setup. Inspect models in SOLIDWORKS and review the scope of each operation before relying on the result.</p><a class="text-link" href="#faq">How does usage work? <span>↗</span></a></div>
         <div class="provider-cards">
           <article class="provider-card"><div class="provider-card-top"><div class="provider-monogram">C<span aria-hidden="true">↗</span></div><span class="provider-label">AI WORKFLOW</span></div><h3>Powered through Codex</h3><p>Gage uses Codex usage. A normal ChatGPT conversation does not provide unlimited CAD automation.</p><div class="provider-card-foot">CODEX ACCESS &amp; USAGE <span>YOUR CONFIGURED WORKFLOW</span></div></article>
           <article class="provider-card"><div class="provider-card-top"><div class="provider-monogram provider-monogram-claude">S<span aria-hidden="true">↗</span></div><span class="provider-label">CAD ENVIRONMENT</span></div><h3>Your local SOLIDWORKS</h3><p>Work with an existing compatible installation and the licenses required by the workflow. Inspect generated models in your CAD environment.</p><div class="provider-card-foot">LOCAL CAD WORKFLOW <span>ENGINEER REVIEW</span></div></article>
-          <p class="provider-caveat"><strong>Your workflow.</strong> Account sign-in belongs in the supported Codex flow. This website does not collect AI credentials or execute CAD commands.</p>
+          <p class="provider-caveat">Sign in through the supported Codex flow. This website does not collect AI credentials or execute CAD commands.</p>
         </div>
       </div>
     </section>
 
     <section class="section roadmap-section section-grid" id="roadmap" aria-labelledby="roadmap-title">
-      <div class="container"><div class="section-heading roadmap-head"><div><div class="eyebrow"><span class="eyebrow-dash"></span> WHAT'S NEXT <span class="eyebrow-index">/ 004</span></div><h2 id="roadmap-title">Work in progress.<br /><span>By design.</span></h2></div><p>The next steps are specific: resolve blockers, repeat native checks, and test a small number of real workflows. No launch date is promised.</p></div><div class="roadmap-list"><div class="roadmap-row"><div class="roadmap-num">01</div><div class="roadmap-main"><h3>Prototype development</h3><p>The installed SOLIDWORKS 2026 panel passed the rigid nested assembly build, child edit, and reopen checks.</p></div><span class="roadmap-status status-progress"><span class="led"></span> IN PROGRESS</span></div><div class="roadmap-row"><div class="roadmap-num">02</div><div class="roadmap-main"><h3>Private testing</h3><p>Preparing focused testing with engineers, students, and technical designers. Share the workflow you would like to evaluate.</p></div><span class="roadmap-status">PLANNED</span></div><div class="roadmap-row"><div class="roadmap-num">03</div><div class="roadmap-main"><h3>Refine and expand</h3><p>Complete native study validation, expand source-preservation checks, and test more real workflows before widening access.</p></div><span class="roadmap-status">EXPLORATORY</span></div></div></div>
+      <div class="container"><div class="section-heading roadmap-head"><div><div class="eyebrow"><span class="eyebrow-dash"></span> Development</div><h2 id="roadmap-title">Roadmap</h2></div><p>The next steps are specific: resolve blockers, repeat native checks, and test a small number of real workflows. No launch date is promised.</p></div><div class="roadmap-list"><div class="roadmap-row"><div class="roadmap-num">01</div><div class="roadmap-main"><h3>Prototype development</h3><p>The installed SOLIDWORKS 2026 panel passed the rigid nested assembly build, child edit, and reopen checks.</p></div><span class="roadmap-status status-progress"><span class="led"></span> IN PROGRESS</span></div><div class="roadmap-row"><div class="roadmap-num">02</div><div class="roadmap-main"><h3>Private testing</h3><p>Preparing focused testing with engineers, students, and technical designers. Share the workflow you would like to evaluate.</p></div><span class="roadmap-status">PLANNED</span></div><div class="roadmap-row"><div class="roadmap-num">03</div><div class="roadmap-main"><h3>Refine and expand</h3><p>Complete native study validation, expand source-preservation checks, and test more real workflows before widening access.</p></div><span class="roadmap-status">EXPLORATORY</span></div></div></div>
     </section>
 
     <section class="section beta-section" id="beta" aria-labelledby="beta-title">
       <div class="container beta-layout">
-        <div class="beta-left"><div class="eyebrow"><span class="eyebrow-dash"></span> DEMOS &amp; EARLY ACCESS</div><h2 id="beta-title">Bring a task.<br /><span>Let’s talk it through.</span></h2><p>Request a walkthrough or tell us what you would like to test. A few details help us prepare something relevant to your work.</p><div class="beta-notes"><div><span class="note-plus">+</span> Demo times are arranged by email</div><div><span class="note-plus">+</span> No booking or beta access is guaranteed</div><div><span class="note-plus">+</span> Please leave confidential design details out</div></div></div>
+        <div class="beta-left"><div class="eyebrow"><span class="eyebrow-dash"></span> DEMOS &amp; EARLY ACCESS</div><h2 id="beta-title">Request a demo</h2><p>Bring a part or assembly you’d like to build in SOLIDWORKS. Share your time zone and a few times that work for you.</p><div class="beta-notes"><div><span class="note-plus">+</span> Demo times are arranged by email</div><div><span class="note-plus">+</span> No booking or beta access is guaranteed</div><div><span class="note-plus">+</span> Please leave confidential design details out</div></div></div>
         <div class="beta-panel">
-          <div class="form-heading"><div><span class="form-index">GET IN TOUCH</span><h3>Start a conversation<span class="form-title-dot">.</span></h3></div><span class="form-mark" aria-hidden="true">↗</span></div>
-          <p class="form-intro">Schedule a demo by requesting a time over email. This form does not reserve a calendar slot.</p>
+          <div class="form-heading"><div><h3>Tell us about your request</h3></div></div>
+
           <form id="beta-form" method="post" aria-describedby="form-mode" novalidate>
             <div class="field"><label for="request-type">I’d like to <span>*</span></label><div class="select-wrap"><select id="request-type" name="request_type" required><option value="early_access">Request early access</option><option value="demo">Schedule a demo — email request</option><option value="question">Ask a question</option></select></div></div>
             <div class="field-row"><div class="field"><label for="full-name">Your name <span>*</span></label><input id="full-name" name="name" type="text" placeholder="Alex Morgan" autocomplete="name" minlength="2" maxlength="120" required /></div><div class="field"><label for="email">Email address <span>*</span></label><input id="email" name="email" type="email" placeholder="alex@example.com" autocomplete="email" maxlength="254" required /></div></div>
@@ -251,13 +251,13 @@
 
     <section class="section about-section section-grid" id="about" aria-labelledby="about-title">
       <div class="container about-layout">
-        <div><div class="eyebrow"><span class="eyebrow-dash"></span> BEHIND GAGE</div><h2 id="about-title">Built from<br /><span>hands-on work.</span></h2><p>I’m Andrew Mombay, the founder and developer of Gage. I study Mechanical Engineering (B.Sc.) and Business Economics (B.A.) at Brown University, and hold an Associate of Arts and Sciences from Carroll Community College.</p><p>I’m an Industrial Digital Strategist Intern at Siemens Digital Industries Software and Co-Founder &amp; CEO of Vastro, where I work on VR-controlled robotics. Gage brings those interests in mechanical design, software, and product development into a tool I use and test in SOLIDWORKS.</p><p class="founder-independence">Gage is an independent project. These education and employment details do not imply endorsement by Brown University, Siemens or Carroll Community College.</p><a class="text-link" href="https://www.linkedin.com/in/andrew-mombay" target="_blank" rel="noopener noreferrer">View Andrew’s LinkedIn profile <span aria-hidden="true">↗</span></a></div>
+        <div><div class="eyebrow"><span class="eyebrow-dash"></span> BEHIND GAGE</div><h2 id="about-title">Meet Andrew Mombay</h2><p>I’m Andrew Mombay, the founder and developer of Gage. I study Mechanical Engineering (B.Sc.) and Business Economics (B.A.) at Brown University, and hold an Associate of Arts and Sciences from Carroll Community College.</p><p>I’m an Industrial Digital Strategist Intern at Siemens Digital Industries Software and Co-Founder &amp; CEO of Vastro, where I work on VR-controlled robotics. Gage brings those interests in mechanical design, software, and product development into a tool I use and test in SOLIDWORKS.</p><p class="founder-independence">Gage is an independent project. These education and employment details do not imply endorsement by Brown University, Siemens or Carroll Community College.</p><a class="text-link" href="https://www.linkedin.com/in/andrew-mombay" target="_blank" rel="noopener noreferrer">View Andrew’s LinkedIn profile <span aria-hidden="true">↗</span></a></div>
         <div class="founder-card"><img class="founder-photo" src="assets/andrew-mombay.jpg" width="800" height="800" alt="Andrew Mombay in a Brown University engineering workshop" loading="lazy" /><h3>Andrew Mombay</h3><p>Founder &amp; developer, Gage</p><ul class="founder-credentials"><li><span>STUDYING AT BROWN</span>Mechanical Engineering, B.Sc.<br />Business Economics, B.A.</li><li><span>SIEMENS DIGITAL INDUSTRIES SOFTWARE</span>Industrial Digital Strategist Intern</li><li><span>VASTRO</span>Co-Founder &amp; CEO</li></ul><a href="mailto:andrew_mombay@brown.edu">andrew_mombay@brown.edu <span aria-hidden="true">↗</span></a></div>
       </div>
     </section>
 
 
-    <section class="faq-section" id="faq" aria-labelledby="faq-title"><div class="container faq-layout"><div><div class="eyebrow"><span class="eyebrow-dash"></span> FREQUENTLY ASKED QUESTIONS <span class="eyebrow-index">/ 008</span></div><h2 id="faq-title">Good questions.<br /><span>Clear answers.</span></h2><p class="faq-intro">The practical details behind Gage, its capabilities, and our approach to AI integration.</p></div><div class="faq-list">
+    <section class="faq-section" id="faq" aria-labelledby="faq-title"><div class="container faq-layout"><div><div class="eyebrow"><span class="eyebrow-dash"></span> Support</div><h2 id="faq-title">Frequently asked questions</h2></div><div class="faq-list">
       <details><summary>What exactly is Gage?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Gage is an independent AI CAD agent project built by engineers for engineers. Its aim is to translate natural-language design intent into real CAD operations—from parts and assemblies to supported simulation workflows.</p></details>
       <details><summary>Can Gage create CAD parts for me?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Part creation and editing are core development priorities. The goal is for the agent to create sketches and parametric features, change dimensions, and build editable parts inside the connected CAD application. Exact commands and availability depend on the version being tested.</p></details>
       <details><summary>Can it build full assemblies?<span class="faq-symbol" aria-hidden="true">+</span></summary><p>Assembly creation is a target workflow: bringing components together, placing them, applying compatible mates or constraints, and iterating on an assembled design. It is not being advertised as a generally available public feature yet.</p></details>
@@ -271,12 +271,11 @@
     </div></div></section>
 
     <section class="section contact-section section-grid" id="contact" aria-labelledby="contact-title">
-      <div class="container contact-layout"><div class="contact-copy"><div class="eyebrow"><span class="eyebrow-dash"></span> CONTACT <span class="eyebrow-index">/ SAY HELLO</span></div><h2 id="contact-title">Have a task<br /><span>in mind?</span></h2><p>Ask for a walkthrough, share a workflow to test, or send a question. Demo times are agreed by email.</p><div class="contact-pill"><span class="led" aria-hidden="true"></span> OPEN TO BETA FEEDBACK, COLLABORATION &amp; QUESTIONS</div></div><div class="contact-actions"><a class="contact-action" href="mailto:andrew_mombay@brown.edu?subject=Gage%20project%20inquiry"><span><small>EMAIL THE FOUNDER</small><strong>andrew_mombay@brown.edu</strong></span><span aria-hidden="true">↗</span></a><a class="contact-action" href="https://www.linkedin.com/in/andrew-mombay" target="_blank" rel="noopener noreferrer"><span><small>PROFESSIONAL PROFILE</small><strong>Connect on LinkedIn</strong></span><span aria-hidden="true">↗</span></a><a class="contact-action" href="#beta" data-demo-request><span><small>EMAIL DEMO REQUEST</small><strong>Schedule a demo</strong></span><span aria-hidden="true">↗</span></a></div></div>
+      <div class="container contact-layout"><div class="contact-copy"><div class="eyebrow"><span class="eyebrow-dash"></span> Contact</div><h2 id="contact-title">Get in touch</h2><p>Ask for a walkthrough, share a workflow to test, or send a question. Demo times are agreed by email.</p><div class="contact-pill"><span class="led" aria-hidden="true"></span> OPEN TO BETA FEEDBACK, COLLABORATION &amp; QUESTIONS</div></div><div class="contact-actions"><a class="contact-action" href="mailto:andrew_mombay@brown.edu?subject=Gage%20project%20inquiry"><span><small>EMAIL THE FOUNDER</small><strong>andrew_mombay@brown.edu</strong></span><span aria-hidden="true">↗</span></a><a class="contact-action" href="https://www.linkedin.com/in/andrew-mombay" target="_blank" rel="noopener noreferrer"><span><small>PROFESSIONAL PROFILE</small><strong>Connect on LinkedIn</strong></span><span aria-hidden="true">↗</span></a><a class="contact-action" href="#beta" data-demo-request><span><small>EMAIL DEMO REQUEST</small><strong>Schedule a demo</strong></span><span aria-hidden="true">↗</span></a></div></div>
     </section>
 
-    <section class="bottom-cta"><div class="container bottom-cta-inner"><div><span class="eyebrow"><span class="eyebrow-dash"></span> BUILT BY ENGINEERS, FOR ENGINEERS</span><h2>A useful task. <em>A closer look.</em></h2></div><a class="btn btn-primary" href="#beta" data-demo-request>Request a demo <span class="btn-arrow">↗</span></a></div></section>
   </main>
 
-  <footer class="site-footer"><div class="container"><div class="footer-main"><div><a class="brand" href="#top" aria-label="Gage — back to top"><span class="brand-emblem" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M30.5 11.3 24 7.5H16L8.1 12v16L16 32.5h8l8-4.5V20H20.4v5.2h5.9v.3L23 27h-6l-3.5-2V15.1L17 13h5.9l3.9 2.3" stroke="currentColor" stroke-width="2.9"/><path d="M8.1 12 4 9.6M32 28l4 2.4" stroke="currentColor" stroke-width="1.5"/></svg></span><span class="brand-name">gage<span class="brand-period">.</span></span></a><p>Built by engineers, for engineers.<br />Engineer-led CAD workflows.</p></div><div class="footer-links"><div><span>EXPLORE</span><a href="#capabilities">Capabilities</a><a href="#workflow">How it works</a><a href="#factory">Factory concept</a><a href="#roadmap">Roadmap</a><a href="#about">About</a></div><div><span>CONNECT</span><a href="#beta">Beta access</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="privacy.html">Privacy</a></div></div></div><div class="footer-bottom"><span>© <span id="current-year">2026</span> GAGE. INDEPENDENT PROJECT.</span><span>BUILT BY ENGINEERS, FOR ENGINEERS <span class="footer-end-symbol">✳</span></span></div></div></footer>
+  <footer class="site-footer"><div class="container"><div class="footer-main"><div><a class="brand" href="#top" aria-label="Gage — back to top"><span class="brand-emblem" aria-hidden="true"><svg viewBox="0 0 40 40" fill="none"><path d="M30.5 11.3 24 7.5H16L8.1 12v16L16 32.5h8l8-4.5V20H20.4v5.2h5.9v.3L23 27h-6l-3.5-2V15.1L17 13h5.9l3.9 2.3" stroke="currentColor" stroke-width="2.9"/><path d="M8.1 12 4 9.6M32 28l4 2.4" stroke="currentColor" stroke-width="1.5"/></svg></span><span class="brand-name">gage<span class="brand-period">.</span></span></a><p>An open-source SOLIDWORKS agent.</p></div><div class="footer-links"><div><span>EXPLORE</span><a href="#capabilities">Capabilities</a><a href="#workflow">How it works</a><a href="#factory">Factory concept</a><a href="#roadmap">Roadmap</a><a href="#about">About</a></div><div><span>CONNECT</span><a href="#beta">Beta access</a><a href="#faq">FAQ</a><a href="#contact">Contact</a><a href="privacy.html">Privacy</a></div></div></div><div class="footer-bottom"><span>© <span id="current-year">2026</span> GAGE. INDEPENDENT PROJECT.</span><a href="#top">Back to top <span aria-hidden="true">↑</span></a></div></div></footer>
 </body>
 </html>

@@ -121,11 +121,23 @@ class StaticSiteTests(unittest.TestCase):
         directory = ROOT / 'assets' / 'media'
         manifest = json.loads((directory / 'provenance.json').read_text(encoding='utf-8'))
         self.assertGreaterEqual(len(manifest['assets']), 2)
+        derived = {
+            'gage-inspection-cell-drawing.png': 'pdf',
+            'gage-gripper-jaw-drawing.png': 'pdf',
+            'gage-factory-assembly-bom.png': 'json',
+            'gage-factory-assembly-exploded.png': 'json',
+        }
         for item in manifest['assets']:
-            path = directory / item['file']
-            self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), item['sha256'])
-            self.assertIs(item['source_pixels_unchanged'], True)
-            self.assertIs(item['watermarks_and_full_frame_preserved'], True)
+            with self.subTest(asset=item['file']):
+                path = directory / item['file']
+                self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), item['sha256'])
+                source_type = derived.get(path.name)
+                self.assertIs(item['source_pixels_unchanged'], source_type is None)
+                if source_type:
+                    self.assertTrue(item['source_artifact'].endswith('.' + source_type))
+                    self.assertRegex(item['source_sha256'], r'^[0-9a-f]{64}$')
+                if source_type in (None, 'pdf'):
+                    self.assertIs(item['watermarks_and_full_frame_preserved'], True)
 
     def test_delivered_native_package_hashes_and_review_metadata(self):
         directory = ROOT / 'assets' / 'media'
@@ -170,7 +182,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, {'styles.css': 'v=20261110-factory-operations', 'config.js': 'v=20261110-factory-cassette', 'script.js': 'v=20261110-factory-operations'}[url.path])
+                        self.assertEqual(url.query, {'styles.css': 'v=20261113-site-refresh', 'config.js': 'v=20261113-factory-cycle', 'script.js': 'v=20261113-site-refresh'}[url.path])
                         found.add(url.path)
             self.assertEqual(found, expected)
 
