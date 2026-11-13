@@ -153,5 +153,21 @@
     "native_sample_count": 281,
     "verification_sha256": "54f22413a749ead43a953617a0de6dc98e0c32fccbb88d81679ec48afce9115b",
     "between_pose_sweep_verified": false
+  },
+  "factory_motion_clear_replay": {
+    "clip": "gage-factory-pick-inspect-place-clear.mp4",
+    "sha256": "02f1530fb6e647308a830911f7f0cd5cba30d3f19391bec535f458149af402fb",
+    "poster": "gage-factory-motion-clear-poster.png",
+    "poster_sha256": "9e174ad1ce1cfaafcc40444c447b304a4abfc220a38b36072d5a3e068b3968c2",
+    "render_type": "CAD replay from SolidWorks tessellation and checked poses",
+    "presentation_hidden": [
+      "guard panels",
+      "guard posts",
+      "controls cabinet"
+    ],
+    "native_assembly_sha256": "60fb01b1027c05f27e13cf010515d82e918957bf6191e0a8d0904678155028e9",
+    "checked_pose_count": 281,
+    "verification_sha256": "54f22413a749ead43a953617a0de6dc98e0c32fccbb88d81679ec48afce9115b",
+    "between_pose_sweep_verified": false
   }
 }
