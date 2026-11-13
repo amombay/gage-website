@@ -14,6 +14,7 @@ window.GAGE_CONFIG = {
   // Reviewed SolidWorks captures and a native viewport recording.
   media: {
     gallery: [
+      {"reviewed": true, "src": "assets/media/gage-factory-motion-poster.png", "video": "assets/media/gage-factory-pick-inspect-place.mp4", "title": "Robot pick, inspect and place", "alt": "SolidWorks isometric view of the six-axis robot and two conveyor stations.", "caption": "The robot picks up the workpiece, presents it at the inspection nest and places it on the outfeed. SolidWorks checked interference at 281 sampled positions, including jaw travel.", "width": 1600, "height": 1000},
       {
         reviewed: true,
         src: 'assets/media/gage-factory-inspection-line.png',

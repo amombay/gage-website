@@ -144,5 +144,14 @@
   ],
   "fresh_panel_capture": "pending",
   "fresh_video": "parent_browser_review_passed; v2 enabled locally; no publication",
-  "video_provenance": "native-demo-provenance.json"
+  "video_provenance": "native-demo-provenance.json",
+  "factory_motion": {
+    "clip": "gage-factory-pick-inspect-place.mp4",
+    "sha256": "657a35e90b642a1e7d537d1a51929fc90cc10b2032fd43531d07e53862cfc322",
+    "poster": "gage-factory-motion-poster.png",
+    "poster_sha256": "3afa82d727590fa353f0a3244760a1b1c850bc6ff9d457610b76db5cc5444124",
+    "native_sample_count": 281,
+    "verification_sha256": "54f22413a749ead43a953617a0de6dc98e0c32fccbb88d81679ec48afce9115b",
+    "between_pose_sweep_verified": false
+  }
 }

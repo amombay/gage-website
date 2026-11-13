@@ -75,6 +75,11 @@
       const fullSize = element('a', 'text-link media-fullsize', 'View full-size capture (new tab)');
       fullSize.href = item.src; fullSize.target = '_blank'; fullSize.rel = 'noopener noreferrer';
       caption.append(element('h3', '', item.title), element('p', '', item.caption), fullSize);
+      if (localAsset(item.video, 'mp4|webm')) {
+        const motion = element('a', 'text-link media-fullsize', 'Watch motion study (new tab)');
+        motion.href = item.video; motion.target = '_blank'; motion.rel = 'noopener noreferrer';
+        caption.append(motion);
+      }
       if (localAsset(item.pdf, 'pdf')) {
         const pdf = element('a', 'text-link media-fullsize', 'Open printable PDF (new tab)');
         pdf.href = item.pdf; pdf.target = '_blank'; pdf.rel = 'noopener noreferrer';
