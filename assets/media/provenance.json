@@ -169,5 +169,26 @@
     "checked_pose_count": 281,
     "verification_sha256": "54f22413a749ead43a953617a0de6dc98e0c32fccbb88d81679ec48afce9115b",
     "between_pose_sweep_verified": false
+  },
+  "factory_motion_studio": {
+    "clip": "gage-factory-pick-inspect-place-studio.mp4",
+    "sha256": "f9cb33d292fff23b66dfc7490ca16bbd4d04b11a41c065c9c85be9196b37fa43",
+    "poster": "gage-factory-motion-studio-poster.png",
+    "poster_sha256": "40b19bc98e537207e69270e6e3061d5fb7c1d99d2f7dae038b0944bd9bff9474",
+    "render_type": "Material and shadow render from SolidWorks tessellation and checked transforms",
+    "presentation_hidden": [
+      "guard panels",
+      "guard posts",
+      "controls cabinet"
+    ],
+    "added_visual_elements": [
+      "floor",
+      "floor boundary marking"
+    ],
+    "native_pose_count": 281,
+    "encoded_fps": 30,
+    "between_pose_sweep_verified": false,
+    "source_sha256": "c0dd4b4de868327783b62ad7475bfded9ed4caca447a4ee852622011491383c4",
+    "verification_sha256": "54f22413a749ead43a953617a0de6dc98e0c32fccbb88d81679ec48afce9115b"
   }
 }

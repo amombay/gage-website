@@ -14,7 +14,7 @@ window.GAGE_CONFIG = {
   // Reviewed SolidWorks captures and a native viewport recording.
   media: {
     gallery: [
-      {"reviewed": true, "src": "assets/media/gage-factory-motion-clear-poster.png", "video": "assets/media/gage-factory-pick-inspect-place-clear.mp4", "title": "Robot pick, inspect and place", "alt": "CAD replay showing a yellow robot holding the teal workpiece above the inspection nest between two conveyors.", "caption": "Follow the workpiece from pickup through inspection and placement. This CAD replay hides the guards and cabinet for visibility and uses the 281 poses checked in SolidWorks, including jaw travel.", "width": 1600, "height": 900},
+      {"reviewed": true, "src": "assets/media/gage-factory-motion-studio-poster.png", "video": "assets/media/gage-factory-pick-inspect-place-studio.mp4", "title": "Robot pick, inspect and place", "alt": "Rendered CAD view of the yellow robot holding a green workpiece over the inspection nest between two conveyors.", "caption": "Follow the workpiece through pickup, inspection and placement. This CAD replay uses all 281 poses checked in SolidWorks and hides the guards and cabinet for visibility.", "width": 1600, "height": 900},
       {
         reviewed: true,
         src: 'assets/media/gage-factory-inspection-line.png',
