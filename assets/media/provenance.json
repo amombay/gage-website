@@ -190,5 +190,21 @@
     "between_pose_sweep_verified": false,
     "source_sha256": "c0dd4b4de868327783b62ad7475bfded9ed4caca447a4ee852622011491383c4",
     "verification_sha256": "54f22413a749ead43a953617a0de6dc98e0c32fccbb88d81679ec48afce9115b"
+  },
+  "conveyor_motion": {
+    "clip": "gage-roller-conveyor-transfer.mp4",
+    "sha256": "0de9507cc64a7902cd9b812dd09ef6bf1f2488553416ee6b689de0b6910e6693",
+    "poster": "gage-roller-conveyor-transfer-poster.png",
+    "poster_sha256": "8f3d9865c630952863c4c4f5be170afd7de1d0388e1fb160a33e3695c1d28e0f",
+    "render_type": "Kinematic animation from saved SolidWorks cassette and stock geometry",
+    "encoded_fps": 30,
+    "frame_count": 240,
+    "travel_mm_per_shot": 270,
+    "roller_diameter_mm": 46,
+    "added_visual_elements": [
+      "presentation background",
+      "roller witness marks"
+    ],
+    "source_sha256": "c0dd4b4de868327783b62ad7475bfded9ed4caca447a4ee852622011491383c4"
   }
 }
