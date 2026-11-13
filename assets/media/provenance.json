@@ -206,5 +206,20 @@
       "roller witness marks"
     ],
     "source_sha256": "c0dd4b4de868327783b62ad7475bfded9ed4caca447a4ee852622011491383c4"
+  },
+  "factory_cycle_with_conveyors": {
+    "clip": "gage-factory-cycle-with-conveyors.mp4",
+    "sha256": "5ace4e145569d5e5bb70e9a4fdd690f1bfe0d94327dd9347ed3c13ec190bb77c",
+    "frame_count": 566,
+    "encoded_fps": 30,
+    "sources": {
+      "gage-roller-conveyor-transfer.mp4": "0de9507cc64a7902cd9b812dd09ef6bf1f2488553416ee6b689de0b6910e6693",
+      "gage-factory-pick-inspect-place-studio.mp4": "f9cb33d292fff23b66dfc7490ca16bbd4d04b11a41c065c9c85be9196b37fa43"
+    },
+    "sequence": [
+      "infeed conveyor kinematic detail",
+      "robot replay from checked SolidWorks poses",
+      "outfeed conveyor kinematic detail"
+    ]
   }
 }
