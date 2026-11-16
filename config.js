@@ -10,8 +10,7 @@
 window.GAGE_CONFIG = {
   formEndpoint: '',
   contactEmail: 'andrew_mombay@brown.edu',
-  // Parent-reviewed authentic captures only. See MEDIA-HANDOFF.md.
-  // Reviewed SolidWorks captures and a native viewport recording.
+  // Public gallery: reviewed assets from the factory project.
   media: {
     gallery: [
       {"reviewed": true, "src": "assets/media/gage-factory-motion-studio-poster.png", "video": "assets/media/gage-factory-cycle-with-conveyors.mp4", "title": "Factory cycle: convey, pick, inspect and place", "alt": "Rendered CAD view of the yellow robot holding a green workpiece over the inspection nest between two conveyors.", "caption": "The main factory video opens with an infeed roller close-up, follows the robot through pickup, inspection and placement, then closes with the outfeed rollers. The conveyor shots illustrate roller and carrier motion. The robot replay uses 281 poses checked in SolidWorks.", "width": 1600, "height": 900},
@@ -56,45 +55,8 @@ window.GAGE_CONFIG = {
         caption: 'Five-part robot arm in a fixed display pose, with shaped links, stepped joint covers and a tapered gripper. Captured in SolidWorks.',
         width: 1600,
         height: 1200
-      },
-      {
-        reviewed: true,
-        src: 'assets/media/thermal-development-benchmark.png',
-        title: 'Thermal plate development benchmark',
-        alt: 'Actual SOLIDWORKS thermal plate plot with a blue-to-red Kelvin legend and the Educational Product watermark.',
-        caption: 'Native thermal plate benchmark, 293.15–373.15 K. Captured from our SOLIDWORKS development build.',
-        width: 1214,
-        height: 643
-      },
-      {
-        reviewed: true,
-        src: 'assets/media/ordinate-drawing-example.png',
-        title: 'A4 ordinate drawing example',
-        alt: 'Actual exported A4 plate drawing with ordinate dimensions from zero to 200 mm, title block, and Educational Product watermark.',
-        caption: 'A4 plate export with a 200 mm ordinate dimension.',
-        width: 993,
-        height: 1404
-      },
-      {
-        "reviewed": true,
-        "src": "assets/media/gage-native-plate.png",
-        "title": "Native plate inspection",
-        "alt": "Actual SOLIDWORKS viewport capture showing the full rectangular plate, its thickness and four through-holes.",
-        "caption": "100×60×5 mm plate with four 8 mm through-holes, captured from the native SOLIDWORKS viewport.",
-        "width": 1280,
-        "height": 960
       }
     ],
-    demo: {
-      "reviewed": true,
-      "src": "assets/media/gage-demo.mp4",
-      "poster": "assets/media/poster.jpg",
-      "captions": "assets/media/gage-demo.en.vtt",
-      "transcript": "assets/media/gage-demo-transcript.txt",
-      "title": "Native CAD model inspection",
-      "caption": "100×60×5 mm plate, four 8 mm holes. Camera animation captured from SolidWorks after prepared-spec build. No chat conversion filmed.",
-      "width": 1280,
-      "height": 960
-    }
+    demo: null
   }
 };

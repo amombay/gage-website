@@ -1,5 +1,9 @@
 # Authentic media handoff
 
+This record describes the earlier standalone media package. The public site now
+shows the factory gallery. The standalone plate recording and the plate, thermal,
+and ordinate drawing captures remain in the repository as historical evidence.
+
 ## Final status: parent_browser_review_passed
 
 Parent completed desktop full playback, visible English captions and Space

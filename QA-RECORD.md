@@ -1,5 +1,20 @@
 # Local website QA record
 
+## Factory gallery and preview scope — local checks
+
+Edge loaded all 11 factory cards and both motion videos' metadata. All gallery
+asset links resolved; the page did not link to or request the retired captures.
+The three workflow options and four schematic steps all worked. At 320, 390,
+and 850 px, all six mobile navigation links worked and Escape restored focus.
+Layout checks covered seven widths from 320 to 1440 px.
+
+Keyboard pause and resume stopped and restarted the typing. The accessibility
+tree exposed each sample once. Reduced motion and JavaScript disabled each
+showed a static list of all three prompts.
+
+The entries below describe the earlier standalone media package, which remains
+in the repository but is inactive in the public configuration.
+
 ## Final V2 parent browser QA — passed
 
 Parent confirmed the cache-busted desktop player at 1280×720: computed max-height

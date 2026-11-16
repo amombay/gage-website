@@ -7,8 +7,9 @@ This package is optimized for **simple GitHub Pages deployment**. Unlike the ori
 Gage is an independent MIT open-source project. The unsigned SOLIDWORKS 2026 preview is for invited testing and uses Codex usage. Use disposable design copies and review the results in SOLIDWORKS.
 
 - The installed combined preview passed selected native drawing save and reopen, PDF and DXF export, BOM and shared-child replacement and recovery checks. Selected static and nonlinear part benchmarks passed on the test installation.
-- The wide-BOM drawing passed on A3 in the installed preview. The A4 correction passed native testing and package verification; installed-panel verification is pending.
-- One assembly fixture with an explicit local bond passed solve, save and reopen in a source build. Nonlinear contact and modal time history remain unqualified.
+- The wide-BOM drawing passed on A3 in the installed preview. The release candidate passed the A4 title-block check in SOLIDWORKS, including native save and reopen and independent PDF and DXF checks.
+- The installed SOLIDWORKS panel passed automated nonlinear local bonded contact on a two-body part across two meshes, including save and reopen. It also passed modal time history on a part across four refinements; the saved study reopened with 40 modes and 40 time steps.
+- One assembly fixture with an explicit local bond passed solve, save and reopen in a source build. Broader nonlinear assembly contact and public simulation result readback remain outside the verified scope.
 - There is no public installer or production release. Code signing and acceptance testing on an independent clean Windows machine are pending.
 
 Use copies of your designs for preview testing. Source-file preservation is still being validated.
@@ -21,7 +22,7 @@ privacy.html                 <- Privacy statement
 styles.css                   <- Layout and theme
 script.js                    <- Accessible navigation, concept examples, authentic media, beta form
 config.js                    <- Public contact/form settings and reviewed local media configuration
-assets/                      <- Concept artwork, branding, and two authentic parent-reviewed example images
+assets/                      <- Branding, reviewed factory media, and retained historical captures
 MEDIA-HANDOFF.md              <- Capture specs, provenance, enabling screenshots/demo, and local checks
 tests/                       <- Dependency-free offline behavior and structure checks
 .nojekyll                    <- Serve directly (may be hidden on some PCs)
@@ -94,7 +95,7 @@ Then open http://localhost:8000/ . All assets use relative paths so they work in
 - [ ] Contact and links are accurate, privacy text reviewed.
 - [ ] Trademark and domain checks completed if launching Gage as a commercial brand.
 
-Branding artwork is conceptual. Three authentic gallery images remain enabled. The replacement V2 native viewport video passed parent file/framing review and is enabled locally and passed parent browser playback, caption, keyboard and mobile checks. The earlier clip failed framing and was superseded. Full frames are preserved. This prepared-spec inspection does not film chat conversion. Fresh panel captures remain pending. See MEDIA-HANDOFF.md for provenance and remaining browser playback QA.
+The public gallery contains reviewed factory models, motion replays, drawings, the assembly BOM, and a 100 N linear static gripper jaw study. The hero prompts are illustrative requests. Earlier standalone plate, drawing and thermal captures are retained for provenance and excluded from the public media configuration. See MEDIA-HANDOFF.md for the historical capture record.
 
 
 ## Local refresh handoff

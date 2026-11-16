@@ -214,11 +214,8 @@ h2 span {color:var(--cyan);}
 .capability-card:hover { transform:translateY(-4px);border-color:rgba(92,213,255,.65); }
 .capability-top { display:flex;align-items:center;justify-content:space-between;gap:6px;padding:19px 20px 0;font:9px/1.4 var(--mono);letter-spacing:.55px;color:#81b2d1; }
 .capability-status { color:#5bd5ff;font-size:8px;white-space:nowrap; }
-.capability-art { position:relative;height:215px;margin:15px 12px 0;display:grid;place-items:center;overflow:hidden;background-color:#0a243d;background-image:linear-gradient(rgba(85,155,196,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(85,155,196,.12) 1px,transparent 1px);background-size:22px 22px; }
-.capability-art::before,.capability-art::after {content:'';position:absolute;width:15px;height:15px;border-color:#56b9e8;opacity:.55;}
-.capability-art::before {left:9px;top:9px;border-top:1px solid;border-left:1px solid;}
-.capability-art::after {right:9px;bottom:9px;border-right:1px solid;border-bottom:1px solid;}
-.capability-art svg {width:100%;max-width:340px;height:100%;max-height:200px;}
+.capability-art { height: 215px; margin: 12px 12px 0; padding: 8px; border-radius: 6px; background: #d7dfe4; }
+.capability-art img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .capability-copy {padding:24px 22px 25px;display:flex;flex-direction:column;flex:1;}
 .capability-number { font:9px/1.4 var(--mono);letter-spacing:1px;color:var(--cyan);margin-bottom:10px; }
 .capability-copy h3 {font-size:23px;letter-spacing:-.045em;line-height:1.25;margin:0 0 12px;}
@@ -424,6 +421,7 @@ main, .nav-wrap, .section-heading > div, .contact-action > span:first-child { mi
 .evidence-label { font: 11px/1.6 var(--mono); color: var(--cyan); letter-spacing: .05em; }
 .evidence-grid h3 { font-size: 19px; line-height: 1.4; margin: 12px 0 10px; letter-spacing: -.02em; }
 .evidence-grid p { font-size: 14px; line-height: 1.75; color: #b1ccdf; margin: 0; }
+.evidence-grid p + p { margin-top: 10px; }
 .evidence-blocker { border-left: 2px solid #e1b680; padding-left: 20px; }
 .evidence-blocker .evidence-label { color: #f1cb9b; }
 .approach { padding-block: 64px; background-image: none; }
@@ -611,6 +609,64 @@ main, .nav-wrap, .section-heading > div, .contact-action > span:first-child { mi
   color: #c3d5e1;
   font-size: 17px;
   line-height: 1.65;
+}
+
+.hero-prompt {
+  max-width: 500px;
+  margin: 0 0 24px;
+  padding: 4px 14px 12px;
+  border: 1px solid var(--line-strong);
+  border-inline-start: 2px solid #a0e7fa;
+  border-radius: 8px;
+  background: var(--bg-deep);
+}
+
+.hero-prompt-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0 12px;
+  margin-bottom: 4px;
+  min-height: 44px;
+}
+
+.hero-prompt-label {
+  margin: 0;
+  color: var(--muted);
+  font: 11px/1.5 var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.hero-prompt-toggle {
+  min-height: 44px;
+  padding: 0 8px;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  background: transparent;
+  color: #a0e7fa;
+  font: inherit;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.hero-prompt-toggle:hover { border-color: var(--line-strong); }
+.hero-prompt-line, .hero-prompt-examples { margin: 0; color: #e7f4fb; font: 14px/1.6 var(--mono); overflow-wrap: anywhere; }
+.hero-prompt-prefix { color: #a0e7fa; }
+.hero-prompt-line { display: grid; }
+.hero-prompt-line > span { grid-area: 1 / 1; min-width: 0; }
+.hero-prompt-reserve { visibility: hidden; }
+.hero-prompt-caret { position: relative; }
+.hero-prompt-caret::after { content: ''; position: absolute; top: 0; margin-inline-start: 2px; height: 1em; border-inline-start: 1px solid currentColor; }
+.hero-prompt-line.is-paused .hero-prompt-caret { visibility: hidden; }
+.hero-prompt-examples p { margin: 0; }
+.hero-prompt-examples ul { margin: 4px 0 0; padding-inline-start: 19px; }
+.hero-prompt-note { margin: 8px 0 0; color: var(--muted); font-size: 12px; line-height: 1.5; }
+.hero-prompt-note .text-link { display: inline; padding: 0; border: 0; font-size: inherit; text-decoration: underline; text-underline-offset: 3px; }
+
+@media (forced-colors: active) {
+  .hero-prompt-toggle { color: ButtonText; border-color: ButtonText; }
 }
 
 .hero-setup {

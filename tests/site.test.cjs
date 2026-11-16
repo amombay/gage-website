@@ -164,7 +164,9 @@ test('configured authentic gallery assets exist with the stated original PNG dim
     assert.equal(bytes.subarray(1, 4).toString(), 'PNG');
     assert.equal(bytes.readUInt32BE(16), item.width); assert.equal(bytes.readUInt32BE(20), item.height);
     assert.equal(item.reviewed, true); assert.ok(item.alt && item.caption && item.title);
-    if (/(thermal-development-benchmark|ordinate-drawing-example)\.png$/.test(item.src)) assert.match(item.alt, /watermark/i);
+    for (const key of ['video', 'pdf']) {
+      if (item[key]) assert.ok(existsSync(join(__dirname, '..', item[key])));
+    }
   }
 });
 
@@ -186,19 +188,33 @@ test('video failure after metadata never exposes a finished demo', async () => {
   assert.equal(app.ids['demo-card'].hidden, true);
 });
 
- test('reviewed video and factory BOM remain enabled', () => {
+test('public media contains only the reviewed factory gallery', () => {
   const context = { window: {} };
   vm.runInNewContext(readFileSync(join(__dirname, '..', 'config.js'), 'utf8'), context);
   const media = context.window.GAGE_CONFIG.media;
-  assert.equal(media.demo?.reviewed, true);
-  assert.ok(media.gallery.some(item => item.pdf === 'assets/media/gage-factory-assembly-bom.pdf'));
+  assert.equal(media.demo, null);
+  assert.deepEqual(Array.from(media.gallery, item => item.src), [
+    'assets/media/gage-factory-motion-studio-poster.png',
+    'assets/media/gage-roller-conveyor-transfer-poster.png',
+    'assets/media/gage-factory-inspection-line.png',
+    'assets/media/gage-factory-assembly-exploded.png',
+    'assets/media/gage-factory-assembly-bom.png',
+    'assets/media/gage-inspection-cell-drawing.png',
+    'assets/media/gage-gripper-jaw-drawing.png',
+    'assets/media/gage-gripper-jaw-stress.png',
+    'assets/media/gage-roller-cassette.png',
+    'assets/media/gage-pallet-inspection-nest.png',
+    'assets/media/gage-industrial-robot-arm.png'
+  ]);
+  assert.deepEqual(Array.from(media.gallery, item => item.video).filter(Boolean), [
+    'assets/media/gage-factory-cycle-with-conveyors.mp4',
+    'assets/media/gage-roller-conveyor-transfer.mp4'
+  ]);
+  assert.deepEqual(Array.from(new Set(media.gallery.map(item => item.pdf).filter(Boolean))), [
+    'assets/media/gage-factory-assembly-bom.pdf'
+  ]);
   assert.ok(media.gallery.every(item => item.reviewed === true));
-
-  assert.equal(media.demo.title, 'Native CAD model inspection');
-  assert.match(media.demo.caption, /No chat conversion filmed/);
-  assert.equal(media.demo.width, 1280); assert.equal(media.demo.height, 960);
-  assert.ok(media.gallery.some(item => item.src.endsWith('gage-native-plate.png')));
- });
+});
 
 const contactValues = { name: 'Alex Ångström', email: 'alex@example.com', company: 'A&B Works',
   role: 'Mechanical engineer', industry: 'Manufacturing', request_type: 'demo',

@@ -34,6 +34,64 @@
     });
   }
 
+  const heroPrompt = document.getElementById('hero-prompt');
+  if (heroPrompt && typeof window.matchMedia === 'function') {
+    const line = heroPrompt.querySelector('.hero-prompt-line');
+    const prefix = line.querySelector('[data-prompt-prefix]').textContent;
+    const output = line.querySelector('[data-prompt-text]');
+    const toggle = heroPrompt.querySelector('[data-prompt-toggle]');
+    const examples = heroPrompt.querySelector('.hero-prompt-examples');
+    const phrases = Array.from(examples.querySelectorAll('li'), item => item.textContent);
+    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const hold = 3200;
+    let index = 0, length = phrases[0].length, erasing = true, paused = false, timer;
+
+    // Size the line for every complete prompt so wrapping never shifts the controls.
+    phrases.forEach(phrase => {
+      const reserve = document.createElement('span');
+      reserve.className = 'hero-prompt-reserve';
+      reserve.textContent = prefix + ' ' + phrase;
+      line.append(reserve);
+    });
+    output.textContent = phrases[0];
+
+    const schedule = delay => {
+      window.clearTimeout(timer);
+      if (!paused && !motion.matches && !document.hidden) timer = window.setTimeout(tick, delay);
+    };
+    const tick = () => {
+      const phrase = phrases[index];
+      length += erasing ? -1 : 1;
+      output.textContent = phrase.slice(0, length);
+      if (length === 0) {
+        index = (index + 1) % phrases.length;
+        erasing = false;
+        schedule(220);
+      } else if (length === phrase.length) {
+        erasing = true;
+        schedule(hold);
+      } else {
+        schedule(erasing ? 24 : 45);
+      }
+    };
+    const restartTimer = () => schedule(length === phrases[index].length ? hold : 120);
+    const syncMotion = () => {
+      line.hidden = motion.matches;
+      toggle.hidden = motion.matches;
+      examples.classList.toggle('sr-only', !motion.matches);
+      restartTimer();
+    };
+    toggle.addEventListener('click', () => {
+      paused = !paused;
+      toggle.textContent = paused ? 'Resume typing' : 'Pause typing';
+      line.classList.toggle('is-paused', paused);
+      restartTimer();
+    });
+    motion.addEventListener('change', syncMotion);
+    document.addEventListener('visibilitychange', restartTimer);
+    syncMotion();
+  }
+
   // Authentic local media is opt-in. Empty config creates no requests or slots.
   // Captions are supplied by the parent; illustration artwork is never evidence.
   const media = config.media || {};
@@ -155,21 +213,21 @@
 
   const examples = [
     {
-      prompt: '“Create a 100 × 60 mm base plate with four mounting holes.”',
+      prompt: '“Design a conveyor bracket with two mounting slots.”',
       operation: 'Sketch, extrude, and add features',
-      detail: 'Build an editable base plate with a dimensioned hole pattern.',
-      path: 'SKETCH → EXTRUDE → HOLE PATTERN'
+      detail: 'Define the bracket profile, thickness, and mounting slots.',
+      path: 'SKETCH → EXTRUDE → SLOTS'
     },
     {
-      prompt: '“Assemble the bracket, base plate, and fasteners with the correct mates.”',
+      prompt: '“Assemble the conveyor frame and rollers in the transfer station.”',
       operation: 'Insert components and constrain mates',
-      detail: 'Position parts, define assembly relationships, and check the structure.',
+      detail: 'Locate each roller in the frame and check its alignment.',
       path: 'COMPONENTS → MATES → REBUILD'
     },
     {
-      prompt: '“Set up a static study on the bracket under a 500 N downward load.”',
-      operation: 'Explore study setup',
-      detail: 'Define material, loads and fixtures as part of a research-preview workflow.',
+      prompt: '“Set up a static study for a gripper jaw under 100 N.”',
+      operation: 'Set up a static part study',
+      detail: 'Fix the mounting face, assign the material, and distribute the load.',
       path: 'MATERIAL → LOADS → FIXTURES'
     }
   ];

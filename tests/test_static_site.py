@@ -125,9 +125,12 @@ class StaticSiteTests(unittest.TestCase):
             'Code signing and acceptance testing on an independent clean Windows machine are pending',
             'both occurrences',
             'A3',
-            'pending verification in the installed panel',
+            'The release candidate passed the A4 title-block check in SOLIDWORKS',
             'development build',
-            'Nonlinear contact and modal time history still need end-to-end verification',
+            'automated nonlinear local bonded contact on a two-body part across two meshes',
+            'modal time history on a part across four refinements',
+            'reopened with 40 modes and 40 time steps',
+            'Broader nonlinear assembly contact and public simulation result readback remain outside the verified scope',
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, status)
@@ -201,7 +204,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, {'styles.css': 'v=20261113-site-refresh', 'config.js': 'v=20261113-factory-cycle', 'script.js': 'v=20261113-site-refresh'}[url.path])
+                        self.assertEqual(url.query, 'v=20261116-factory-scope')
                         found.add(url.path)
             self.assertEqual(found, expected)
 
