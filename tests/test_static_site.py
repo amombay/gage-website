@@ -93,7 +93,7 @@ class StaticSiteTests(unittest.TestCase):
         buttons = [attrs for tag, attrs in page.elements if tag == 'button' and 'data-example' in attrs]
         self.assertEqual(len(buttons), 3)
         for button in buttons:
-            self.assertEqual(button.get('aria-controls'), 'workflow-example')
+            self.assertEqual(button.get('aria-controls', '').split(), ['workflow-example', 'workflow-image'])
         self.assertEqual(page.ids['workflow-example'][1]['aria-live'], 'polite')
 
     def test_unconfigured_gallery_and_media_navigation_are_hidden(self):
@@ -239,7 +239,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, 'v=20261116-site-refresh')
+                        self.assertEqual(url.query, 'v=20261116-motion')
                         found.add(url.path)
             self.assertEqual(found, expected)
 

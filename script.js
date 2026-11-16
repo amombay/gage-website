@@ -34,9 +34,9 @@
     });
   }
 
+  const reducedMotion = window.matchMedia?.('(prefers-reduced-motion: reduce)');
   const factoryCycle = document.getElementById('factory-cycle');
-  if (factoryCycle && typeof window.matchMedia === 'function') {
-    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (factoryCycle && reducedMotion) {
     if (!reducedMotion.matches) factoryCycle.play().catch(() => {});
     reducedMotion.addEventListener('change', event => {
       if (event.matches) factoryCycle.pause();
@@ -44,14 +44,13 @@
   }
 
   const heroPrompt = document.getElementById('hero-prompt');
-  if (heroPrompt && typeof window.matchMedia === 'function') {
+  if (heroPrompt && reducedMotion) {
     const line = heroPrompt.querySelector('.hero-prompt-line');
     const prefix = line.querySelector('[data-prompt-prefix]').textContent;
     const output = line.querySelector('[data-prompt-text]');
     const toggle = heroPrompt.querySelector('[data-prompt-toggle]');
     const examples = heroPrompt.querySelector('.hero-prompt-examples');
     const phrases = Array.from(examples.querySelectorAll('li'), item => item.textContent);
-    const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const hold = 3200;
     let index = 0, length = phrases[0].length, erasing = true, paused = false, timer;
 
@@ -66,7 +65,7 @@
 
     const schedule = delay => {
       window.clearTimeout(timer);
-      if (!paused && !motion.matches && !document.hidden) timer = window.setTimeout(tick, delay);
+      if (!paused && !reducedMotion.matches && !document.hidden) timer = window.setTimeout(tick, delay);
     };
     const tick = () => {
       const phrase = phrases[index];
@@ -85,9 +84,9 @@
     };
     const restartTimer = () => schedule(length === phrases[index].length ? hold : 120);
     const syncMotion = () => {
-      line.hidden = motion.matches;
-      toggle.hidden = motion.matches;
-      examples.classList.toggle('sr-only', !motion.matches);
+      line.hidden = reducedMotion.matches;
+      toggle.hidden = reducedMotion.matches;
+      examples.classList.toggle('sr-only', !reducedMotion.matches);
       restartTimer();
     };
     toggle.addEventListener('click', () => {
@@ -96,9 +95,24 @@
       line.classList.toggle('is-paused', paused);
       restartTimer();
     });
-    motion.addEventListener('change', syncMotion);
+    reducedMotion.addEventListener('change', syncMotion);
     document.addEventListener('visibilitychange', restartTimer);
     syncMotion();
+  }
+
+  const entranceObserver = typeof window.IntersectionObserver === 'function'
+    ? new window.IntersectionObserver((entries, observer) => {
+        entries.forEach(({ isIntersecting, target }) => {
+          if (!isIntersecting) return;
+          if (!reducedMotion?.matches) target.classList.add('has-entered');
+          observer.unobserve(target);
+        });
+      }, { threshold: .08 })
+    : null;
+
+  if (entranceObserver) {
+    document.querySelectorAll('.section-heading, .capability-card, .workflow-shell, .founder-photo, .contact-copy')
+      .forEach(item => entranceObserver.observe(item));
   }
 
   // Authentic local media is opt-in. Empty config creates no requests or slots.
@@ -168,6 +182,7 @@
         }
         loadedImages += 1;
         syncMedia();
+        entranceObserver?.observe(figure);
       });
       // A missing image remains absent; no broken-image placeholder is shown.
       image.addEventListener('error', () => {});
@@ -222,19 +237,31 @@
 
   const examples = [
     {
-      prompt: '“Design a conveyor bracket with two mounting slots.”',
-      operation: 'Sketch, extrude, and add features',
-      detail: 'Define the bracket profile, thickness, and mounting slots.'
+      prompt: '“Design a pallet inspection fixture with three seating pads.”',
+      operation: 'Model the plate and locating features',
+      detail: 'Set the plate dimensions, then add the seating pads and locating shoulders.',
+      image: 'gage-pallet-inspection-nest.png',
+      alt: 'Blue inspection fixture with three circular seating pads and two locating shoulders',
+      result: 'Pallet inspection fixture',
+      height: 1200
     },
     {
       prompt: '“Assemble the conveyor frame and rollers in the transfer station.”',
       operation: 'Insert components and constrain mates',
-      detail: 'Locate each roller in the frame and check its alignment.'
+      detail: 'Locate each roller in the frame and check its alignment.',
+      image: 'gage-roller-cassette.png',
+      alt: 'Five steel rollers mounted in a blue conveyor frame',
+      result: 'Roller conveyor cassette',
+      height: 1200
     },
     {
       prompt: '“Set up a static study for a gripper jaw under 100 N.”',
       operation: 'Set up a static part study',
-      detail: 'Fix the mounting face, assign the material, and distribute the load.'
+      detail: 'Fix the mounting face, assign the material, and distribute the load.',
+      image: 'gage-gripper-jaw-stress.png',
+      alt: 'SOLIDWORKS stress plot of a gripper jaw under a 100 newton load',
+      result: '100 N gripper jaw study',
+      height: 1000
     }
   ];
 
@@ -242,10 +269,19 @@
   const workflowPrompt = document.getElementById('workflow-prompt');
   const workflowOperation = document.getElementById('workflow-operation');
   const workflowDetail = document.getElementById('workflow-detail');
+  const workflowImage = document.getElementById('workflow-image');
+  const workflowResult = document.getElementById('workflow-result');
+  const workflowScene = document.getElementById('workflow-scene');
+  let workflowAnimation;
+  if (workflowScene) {
+    reducedMotion?.addEventListener('change', event => {
+      if (event.matches) workflowAnimation?.cancel();
+    });
+  }
   workflowButtons.forEach(button => button.addEventListener('click', () => {
     const index = Number(button.dataset.example);
     const example = examples[index];
-    if (!example) return;
+    if (!example || button.getAttribute('aria-pressed') === 'true') return;
     workflowButtons.forEach(item => {
       const selected = item === button;
       item.classList.toggle('is-selected', selected);
@@ -254,6 +290,18 @@
     workflowPrompt.textContent = example.prompt;
     workflowOperation.textContent = example.operation;
     workflowDetail.textContent = example.detail;
+    workflowImage.alt = example.alt;
+    workflowImage.height = example.height;
+    workflowImage.src = 'assets/media/' + example.image;
+    workflowResult.textContent = example.result;
+
+    workflowAnimation?.cancel();
+    if (!reducedMotion?.matches && workflowScene.animate) {
+      workflowAnimation = workflowScene.animate(
+        [{ opacity: .55, transform: 'translateY(8px)' }, { opacity: 1, transform: 'translateY(0)' }],
+        { duration: 330, easing: 'cubic-bezier(.2,.72,.25,1)' }
+      );
+    }
   }));
 
   const form = document.getElementById('contact-form');

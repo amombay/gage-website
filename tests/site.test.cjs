@@ -26,7 +26,7 @@ class Element {
   focus() { this.focused = true; }
 }
 
-function boot(config = {}, response = async () => { throw new Error('unexpected request'); }, formValues = null, heroMotion = null) {
+function boot(config = {}, response = async () => { throw new Error('unexpected request'); }, formValues = null, heroMotion = null, visuals = {}) {
   const ids = Object.fromEntries(['mobile-nav', 'media-gallery', 'gallery-grid', 'demo-card'].map(id => [id, new Element()]));
   if (formValues) {
     for (const id of ['contact-form', 'submit-btn', 'submit-label', 'form-mode', 'form-message', 'website-field', 'request-type']) ids[id] = new Element();
@@ -36,16 +36,19 @@ function boot(config = {}, response = async () => { throw new Error('unexpected 
     ids['website-field'].value = '';
     ids['request-type'].value = formValues.request_type || 'demo';
   }
+  Object.assign(ids, visuals.ids);
   const demoLink = new Element('a');
   const menu = new Element('button'); menu.setAttribute('aria-expanded', 'false');
   const mediaLink = new Element('a'); const created = []; const requests = [];
   const document = new Element('document');
   document.getElementById = id => ids[id] || null;
   document.querySelector = sel => sel === '.menu-toggle' ? menu : null;
-  document.querySelectorAll = sel => sel === '[data-media-link]' ? [mediaLink] : sel === '[data-demo-request]' ? [demoLink] : [];
+  document.querySelectorAll = sel => sel === '[data-media-link]' ? [mediaLink]
+    : sel === '[data-demo-request]' ? [demoLink] : visuals.selectors?.[sel] || [];
   document.createElement = tag => { const el = new Element(tag); created.push(el); return el; };
   const window = new Element('window'); window.innerWidth = 850; window.GAGE_CONFIG = config; window.location = { href: '' };
   window.requestAnimationFrame = callback => callback();
+  window.IntersectionObserver = visuals.observer;
   if (heroMotion) {
     window.matchMedia = query => {
       assert.equal(query, '(prefers-reduced-motion: reduce)');
@@ -79,6 +82,64 @@ test('the hero autoplays with motion enabled and pauses when reduced motion is r
   preference.matches = true;
   boot({}, undefined, null, { preference, video });
   assert.equal(played, 1);
+});
+
+test('workflow selection changes the CAD image and skips motion when requested', async () => {
+  const preference = new Element(); preference.matches = false;
+  const names = ['workflow-scene', 'workflow-prompt', 'workflow-operation', 'workflow-detail', 'workflow-image', 'workflow-result'];
+  const ids = Object.fromEntries(names.map(name => [name, new Element()]));
+  const buttons = [0, 1, 2].map(index => {
+    const button = new Element('button');
+    button.dataset.example = String(index);
+    button.setAttribute('aria-pressed', String(index === 0));
+    return button;
+  });
+  let started = 0, canceled = 0;
+  ids['workflow-scene'].animate = () => { started += 1; return { cancel() { canceled += 1; } }; };
+  boot({}, undefined, null, { preference }, { ids, selectors: { '[data-example]': buttons } });
+  await buttons[1].fire('click');
+  assert.match(ids['workflow-image'].src, /gage-roller-cassette[.]png$/);
+  assert.match(ids['workflow-image'].alt, /roller/i);
+  assert.equal(ids['workflow-operation'].textContent, 'Insert components and constrain mates');
+  assert.equal(buttons[1].getAttribute('aria-pressed'), 'true');
+  assert.equal(started, 1);
+  await buttons[1].fire('click');
+  assert.equal(started, 1);
+  preference.matches = true;
+  await preference.fire('change', { matches: true });
+  assert.equal(canceled, 1);
+  await buttons[2].fire('click');
+  assert.match(ids['workflow-image'].src, /gage-gripper-jaw-stress[.]png$/);
+  assert.equal(started, 1);
+});
+
+test('scroll motion runs once for an entering card and leaves reduced-motion cards static', () => {
+  const preference = new Element(); preference.matches = false;
+  const cards = [new Element(), new Element()];
+  const observed = new Set(), revealed = [];
+  cards.forEach(card => card.classList.add = name => revealed.push([card, name]));
+  let observer;
+  const IntersectionObserver = class {
+    constructor(callback) { this.report = entries => callback(entries, this); observer = this; }
+    observe(node) { observed.add(node); }
+    unobserve(node) { observed.delete(node); }
+  };
+  boot({}, undefined, null, { preference }, {
+    observer: IntersectionObserver,
+    selectors: { '.section-heading, .capability-card, .workflow-shell, .founder-photo, .contact-copy': cards }
+  });
+  assert.equal(observed.size, 2);
+  observer.report([{ isIntersecting: false, target: cards[0] }]);
+  assert.equal(revealed.length, 0);
+
+  observer.report([{ isIntersecting: true, target: cards[0] }]);
+  assert.deepEqual(revealed, [[cards[0], 'has-entered']]);
+  assert.equal(observed.has(cards[0]), false);
+
+  preference.matches = true;
+  observer.report([{ isIntersecting: true, target: cards[1] }]);
+  assert.equal(revealed.length, 1);
+  assert.equal(observed.size, 0);
 });
 
 test('tablet navigation stays open at the actual CSS breakpoint', () => {
