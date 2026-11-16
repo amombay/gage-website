@@ -239,7 +239,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, 'v=20261116-conveyor-transfer')
+                        self.assertEqual(url.query, 'v=20261116-moving-carriers')
                         found.add(url.path)
             self.assertEqual(found, expected)
 
