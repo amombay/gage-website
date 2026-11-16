@@ -88,13 +88,13 @@ class StaticSiteTests(unittest.TestCase):
                     for reference in attrs.get(relationship, '').split():
                         self.assertIn(reference, page.ids)
 
-    def test_workflow_buttons_identify_the_live_preview_they_update(self):
+    def test_workflow_buttons_identify_the_live_example_they_update(self):
         page = self.pages['index.html']
         buttons = [attrs for tag, attrs in page.elements if tag == 'button' and 'data-example' in attrs]
         self.assertEqual(len(buttons), 3)
         for button in buttons:
-            self.assertEqual(button.get('aria-controls'), 'workflow-preview')
-        self.assertEqual(page.ids['workflow-preview'][1]['aria-live'], 'polite')
+            self.assertEqual(button.get('aria-controls'), 'workflow-example')
+        self.assertEqual(page.ids['workflow-example'][1]['aria-live'], 'polite')
 
     def test_unconfigured_gallery_and_media_navigation_are_hidden(self):
         page = self.pages['index.html']
@@ -137,14 +137,25 @@ class StaticSiteTests(unittest.TestCase):
     def test_form_cannot_send_without_its_javascript_handler(self):
         attrs = self.pages['index.html'].ids['submit-btn'][1]
         self.assertIn('disabled', attrs)
-        self.assertEqual(self.pages['index.html'].ids['beta-form'][1]['method'], 'post')
+        self.assertEqual(self.pages['index.html'].ids['contact-form'][1]['method'], 'post')
 
-    def test_copy_preserves_preview_and_usage_boundaries(self):
+    def test_public_site_copy_has_no_preview_or_early_access_wording(self):
+        for name, page in self.pages.items():
+            copy = page.words + [attrs.get(key, '') for _, attrs in page.elements
+                                 for key in ('content', 'alt', 'aria-label', 'title')]
+            with self.subTest(page=name):
+                self.assertNotRegex(' '.join(copy).lower(),
+                                    r'\b(?:preview|beta|early[ -]access|invite[ -]only)\b')
+        for name in ('script.js', 'config.js'):
+            with self.subTest(file=name):
+                self.assertNotRegex((ROOT / name).read_text(encoding='utf-8').lower(),
+                                    r'\b(?:preview|beta|early[_ -]access|invite[ -]only)\b')
+
+    def test_copy_preserves_cad_usage_and_review_requirements(self):
         text = ' '.join(self.pages['index.html'].words).lower()
-        for phrase in ('codex usage', 'open-source', 'unsigned', 'disposable copies', 'experimental', 'simulation', 'crash'):
+        for phrase in ('codex access and usage limits', 'open-source', 'disposable copies',
+                       'simulation', 'crash', 'review each result'):
             self.assertIn(phrase, text)
-        self.assertNotIn('unlimited cad automation for free', text)
-        self.assertNotIn('not a live gage feature yet', text)
 
     def test_release_status_distinguishes_installed_checks_from_pending_work(self):
         copy = (ROOT / 'index.html').read_text(encoding='utf-8')
@@ -159,7 +170,6 @@ class StaticSiteTests(unittest.TestCase):
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, status)
-        self.assertNotIn('outside the supported preview scope', status)
         for _, attrs in self.pages['index.html'].elements:
             path = urlsplit(attrs.get('href', '')).path.lower()
             self.assertFalse(path.endswith(('.exe', '.msi', '.zip')), path)
@@ -229,7 +239,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, 'v=20261116-factory-loop')
+                        self.assertEqual(url.query, 'v=20261116-site-refresh')
                         found.add(url.path)
             self.assertEqual(found, expected)
 

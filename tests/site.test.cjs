@@ -29,12 +29,12 @@ class Element {
 function boot(config = {}, response = async () => { throw new Error('unexpected request'); }, formValues = null, heroMotion = null) {
   const ids = Object.fromEntries(['mobile-nav', 'media-gallery', 'gallery-grid', 'demo-card'].map(id => [id, new Element()]));
   if (formValues) {
-    for (const id of ['beta-form', 'submit-btn', 'submit-label', 'form-mode', 'form-message', 'website-field', 'request-type']) ids[id] = new Element();
-    ids['beta-form'].values = formValues;
-    ids['beta-form'].reportValidity = () => true;
-    ids['beta-form'].reset = () => { ids['beta-form'].wasReset = true; };
+    for (const id of ['contact-form', 'submit-btn', 'submit-label', 'form-mode', 'form-message', 'website-field', 'request-type']) ids[id] = new Element();
+    ids['contact-form'].values = formValues;
+    ids['contact-form'].reportValidity = () => true;
+    ids['contact-form'].reset = () => { ids['contact-form'].wasReset = true; };
     ids['website-field'].value = '';
-    ids['request-type'].value = formValues.request_type || 'early_access';
+    ids['request-type'].value = formValues.request_type || 'demo';
   }
   const demoLink = new Element('a');
   const menu = new Element('button'); menu.setAttribute('aria-expanded', 'false');
@@ -45,6 +45,7 @@ function boot(config = {}, response = async () => { throw new Error('unexpected 
   document.querySelectorAll = sel => sel === '[data-media-link]' ? [mediaLink] : sel === '[data-demo-request]' ? [demoLink] : [];
   document.createElement = tag => { const el = new Element(tag); created.push(el); return el; };
   const window = new Element('window'); window.innerWidth = 850; window.GAGE_CONFIG = config; window.location = { href: '' };
+  window.requestAnimationFrame = callback => callback();
   if (heroMotion) {
     window.matchMedia = query => {
       assert.equal(query, '(prefers-reduced-motion: reduce)');
@@ -241,7 +242,7 @@ test('public media contains only the reviewed factory gallery', () => {
 const contactValues = { name: 'Alex Ångström', email: 'alex@example.com', company: 'A&B Works',
   role: 'Mechanical engineer', industry: 'Manufacturing', request_type: 'demo',
   cad_tool: 'SOLIDWORKS', primary_interest: 'Drawings and exports', use_case: 'A4 + A3 drawings & revisions', consent: 'on' };
-const submit = app => app.ids['beta-form'].fire('submit', { preventDefault() {} });
+const submit = app => app.ids['contact-form'].fire('submit', { preventDefault() {} });
 
 test('demo mail draft preserves optional context, Unicode and intent without sending', async () => {
   const app = boot({}, undefined, contactValues); await submit(app);
@@ -252,12 +253,15 @@ test('demo mail draft preserves optional context, Unicode and intent without sen
     if (value !== 'demo') assert.ok(body.includes(value), value);
   }
   assert.match(body, /arrange a time/i); assert.equal(app.requests.length, 0);
-  assert.notEqual(app.ids['beta-form'].wasReset, true);
+  assert.notEqual(app.ids['contact-form'].wasReset, true);
 });
 
 test('schedule CTA selects a demo request without submitting or promising a booking', () => {
-  const app = boot({}, undefined, { ...contactValues, request_type: 'early_access' });
+  const app = boot({}, undefined, { ...contactValues, request_type: 'question' });
+  app.demoLink.fire('click', { ctrlKey: true });
+  assert.equal(app.ids['request-type'].value, 'question');
   app.demoLink.fire('click'); assert.equal(app.ids['request-type'].value, 'demo');
+  assert.equal(app.ids['request-type'].focused, true);
   assert.match(app.ids['submit-label'].textContent, /demo/i);
   assert.equal(app.requests.length, 0); assert.equal(app.window.location.href, '');
 });
@@ -273,30 +277,29 @@ test('Formspree submission preserves every field and identifies a demo request',
   assert.match(options.body.get('_subject'), /demo request/i);
   assert.match(app.ids['form-message'].textContent, /arrange a time/i);
   assert.match(app.ids['form-message'].textContent, /not.*booking/i);
-  assert.equal(app.ids['beta-form'].wasReset, true);
+  assert.equal(app.ids['contact-form'].wasReset, true);
 });
 
 test('failed form submission retains answers and re-enables the selected request action', async () => {
   const app = boot({ formEndpoint: 'https://formspree.io/f/test123' }, async () => ({ ok: false, json: async () => ({}) }), contactValues);
-  await submit(app); assert.notEqual(app.ids['beta-form'].wasReset, true);
+  await submit(app); assert.notEqual(app.ids['contact-form'].wasReset, true);
   assert.equal(app.ids['submit-btn'].disabled, false);
   assert.match(app.ids['submit-label'].textContent, /demo/i);
   assert.match(app.ids['form-message'].textContent, /try again|email/i);
 });
 
-test('early access and question emails keep their separate request intent', async () => {
-  for (const request_type of ['early_access', 'question']) {
-    const app = boot({}, undefined, { ...contactValues, request_type }); await submit(app);
-    const subject = new URL(app.window.location.href).searchParams.get('subject');
-    assert.match(subject, request_type === 'question' ? /question/i : /early.access/i);
-    assert.doesNotMatch(subject, /demo/i);
-  }
+test('a question opens a separate email draft using the question subject', async () => {
+  const app = boot({}, undefined, { ...contactValues, request_type: 'question' });
+  await submit(app);
+  const subject = new URL(app.window.location.href).searchParams.get('subject');
+  assert.match(subject, /question/i);
+  assert.doesNotMatch(subject, /demo/i);
 });
 
 test('invalid form and honeypot never create a draft or a network submission', async () => {
   for (const invalid of [true, false]) {
     const app = boot({}, undefined, contactValues);
-    app.ids['beta-form'].reportValidity = () => !invalid;
+    app.ids['contact-form'].reportValidity = () => !invalid;
     if (!invalid) app.ids['website-field'].value = 'bot';
     await submit(app); assert.equal(app.window.location.href, ''); assert.equal(app.requests.length, 0);
   }

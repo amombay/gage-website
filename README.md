@@ -1,126 +1,32 @@
-# Gage — Digital Blueprint website
+# Gage website
 
-An open-source SOLIDWORKS agent in development. This website explains the current preview, shows reviewed native captures, introduces the founder, and accepts email-based demo and early-access requests.
+The Gage website presents editable SOLIDWORKS CAD, the factory gallery, and email-based demo requests. The app uses Codex and a compatible local SOLIDWORKS installation. The website has no public app installer.
 
-This package is optimized for **simple GitHub Pages deployment**. Unlike the original v2 ZIP, **`index.html` is at the repository root**. GitHub can now publish directly from your `main` branch even when a hidden workflow folder is missed during browser upload.
+## Publish with GitHub Pages
 
-Gage is an independent MIT open-source project. The unsigned SOLIDWORKS 2026 preview is for invited testing and uses Codex usage. Use disposable design copies and review the results in SOLIDWORKS.
+Use **Settings → Pages → Deploy from a branch** and select **main** and **/(root)**. Keep index.html at the repository root next to privacy.html, styles.css, config.js, script.js, and assets/. A push to main updates the [live Gage site](https://amombay.github.io/gage-website/).
 
-- The installed combined preview passed selected native drawing save and reopen, PDF and DXF export, BOM and shared-child replacement and recovery checks. Selected static and nonlinear part benchmarks passed on the test installation.
-- The wide-BOM drawing passed on A3 in the installed preview. The release candidate passed the A4 title-block check in SOLIDWORKS, including native save and reopen and independent PDF and DXF checks.
-- The installed SOLIDWORKS panel passed automated nonlinear local bonded contact on a two-body part across two meshes, including save and reopen. It also passed modal time history on a part across four refinements; the saved study reopened with 40 modes and 40 time steps.
-- One assembly fixture with an explicit local bond passed solve, save and reopen in a source build. Broader nonlinear assembly contact and public simulation result readback remain outside the verified scope.
-- There is no public installer or production release. Code signing and acceptance testing on an independent clean Windows machine are pending.
+## Contact and demos
 
-Use copies of your designs for preview testing. Source-file preservation is still being validated.
+By default the form opens a draft in the visitor’s email app. The visitor must send the message to submit their request. Company, role, industry, CAD software, and workflow information are optional. Demo times are arranged by email.
 
-## Files
+To accept online submissions, set formEndpoint in config.js to a public Formspree form URL such as https://formspree.io/f/YOUR_FORM_ID. Keep credentials and private tokens out of this public file. The form explains which submission method it uses.
 
-```text
-index.html                   <- Main landing page (AT REPO ROOT)
-privacy.html                 <- Privacy statement
-styles.css                   <- Layout and theme
-script.js                    <- Accessible navigation, concept examples, authentic media, beta form
-config.js                    <- Public contact/form settings and reviewed local media configuration
-assets/                      <- Branding, reviewed factory media, and retained historical captures
-MEDIA-HANDOFF.md              <- Capture specs, provenance, enabling screenshots/demo, and local checks
-tests/                       <- Dependency-free offline behavior and structure checks
-.nojekyll                    <- Serve directly (may be hidden on some PCs)
-.github/workflows/deploy.yml <- OPTIONAL GitHub Actions deployment
-START-HERE.txt               <- Short deployment instructions
-README.md                    <- This guide
-```
+## Gallery and typography
 
-## Recommended publishing method — no workflow required
+The gallery uses reviewed factory CAD captures, motion replays, drawings, a bill of materials, and a 100 N static jaw study. The continuous hero loop combines the robot CAD replay with illustrated conveyor transfers and empty return. The hero loop and the rotating prompts respect reduced-motion settings. See [media provenance](assets/media/provenance.json) for references to the source files.
 
-1. Extract this ZIP to a folder on your computer.
-2. Open your GitHub repository: https://github.com/amombay/gage-website
-3. Upload **the contents** of the extracted folder to your repository's **`main` branch**, overwriting the old files if prompted. Make sure `index.html` is visible on the **top level** of the repository, next to `README.md` and `assets/`. If the original `site/` folder is still present from v2, you may delete it afterward; the new website does not use it.
-4. Go to **Settings → Pages → Build and deployment**.
-5. Set **Source = Deploy from a branch**, **Branch = main**, **Folder = /(root)** and click **Save**. This is the best option if GitHub never showed the custom workflow under Actions.
-6. After GitHub publishes, open **https://amombay.github.io/gage-website/**. Under **Settings → Pages**, GitHub shows the published URL/status. A new commit triggers a new deployment automatically.
+The website self-hosts [Inter 4.1](https://rsms.me/inter/) under the included [SIL Open Font License 1.1](assets/fonts/Inter-OFL.txt).
 
-**Do not choose `/(docs)`**, and do not leave the source as `GitHub Actions` unless you uploaded the optional workflow file. If you see a 404, double-check `index.html` is at repository root and Pages is publishing `main` `/(root)`.
+## Run locally
 
-### Alternative: use the included GitHub Actions workflow
+From the checkout root, run:
 
-This ZIP also includes `.github/workflows/deploy.yml`. If it is in GitHub at exactly that path, you can use **Source = GitHub Actions**. The action deploys the repository root (`path: .`) and will run on pushes to the `main` branch or from the **Actions** tab. If it doesn't appear in GitHub, your uploader omitted the hidden `.github` folder. Either upload that path explicitly via GitHub Desktop / Git, or switch to **Deploy from a branch** as above.
+    python -m http.server 8000
 
-## Beta signup configuration
+Open http://localhost:8000/. Run the website tests from the same directory:
 
-GitHub Pages is static hosting; it **does not store submitted forms** by itself.
+    node --test tests/site.test.cjs
+    python -B -m unittest discover -s tests -p test_static_site.py
 
-- **Default mode, no setup:** the form opens a drafted email with the visitor's answers. **They must explicitly send the email**, and no lead is saved automatically.
-- **Recommended:** create a form at [Formspree](https://formspree.io/), then edit **`config.js`** in your GitHub repository:
-
-```js
-window.GAGE_CONFIG = {
-  formEndpoint: 'https://formspree.io/f/YOUR_FORM_ID',
-  contactEmail: 'andrew_mombay@brown.edu'
-};
-```
-
-Commit the file. Once redeployed, submit a test signup and **verify its receipt** in your Formspree dashboard. Keep all real secrets out of `config.js` (it is public). Review the [privacy page](privacy.html) to ensure it accurately reflects your form vendor and use of data.
-
-## Customize the website
-
-| What | File |
-|---|---|
-| Tagline, capabilities, About, Contact, FAQ | `index.html` |
-| Colors, font/layout and responsive styles | `styles.css` |
-| CAD demo examples and form functionality | `script.js` |
-| Contact email and beta submission endpoint | `config.js` |
-| Privacy policy | `privacy.html` |
-| Blueprint illustration and branding graphics | `assets/` |
-
-The sample email address is `andrew_mombay@brown.edu`. Verify any social profile URLs before launch.
-
-## Preview locally
-
-From the extracted folder:
-
-```bash
-python -m http.server 8000
-```
-
-Then open http://localhost:8000/ . All assets use relative paths so they work in the GitHub Pages `/gage-website/` subdirectory.
-
-## Launch checklist
-
-- [ ] Repository root displays `index.html` directly.
-- [ ] Settings → Pages is set to `main` `/(root)` (recommended).
-- [ ] The published page displays correctly on desktop and mobile.
-- [ ] About, Contact, FAQ and anchor links work.
-- [ ] Formspree is connected and a test submission has arrived, **if** collecting signups online.
-- [ ] Contact and links are accurate, privacy text reviewed.
-- [ ] Trademark and domain checks completed if launching Gage as a commercial brand.
-
-The public gallery contains reviewed factory models, motion replays, drawings, the assembly BOM, and a 100 N linear static gripper jaw study. The hero prompts are illustrative requests. Earlier standalone plate, drawing and thermal captures are retained for provenance and excluded from the public media configuration. See MEDIA-HANDOFF.md for the historical capture record.
-
-
-## Local refresh handoff
-
-The existing navy/cyan blueprint direction is preserved. The refresh improves
-reading size, responsive reflow, tablet navigation, keyboard focus, no-JavaScript
-navigation, and clear Codex/unsigned-preview messaging. Gallery/video behavior
-uses native elements without a framework or embed vendor. See
-[MEDIA-HANDOFF.md](MEDIA-HANDOFF.md) for reserved paths and capture requirements.
-
-No browser/desktop automation, CAD operation, installer, deployment, publication,
-push, or actual form submission was performed in this refresh. Visual viewport,
-zoom, screen-reader and real-video checks remain a parent handoff item.
-
-Offline checks (existing Node.js and Python; no packages to install):
-
-```powershell
-node --test tests/site.test.cjs
-python -m unittest discover -s tests -p "test_*.py" -v
-node --check script.js
-node --check config.js
-```
-
-## October 18 website refresh
-
-The website now includes email-based demo requests, optional company/employer and role fields, and an optional industry dropdown. Demo buttons select the demo request type; visitors must review and send the prepared email. No calendar slot is reserved and no information is sent automatically.
-
-The founder section uses Andrew Mombay's supplied LinkedIn profile photo and profile-verified education and job titles. The site remains an unsigned development preview. Selected unit, drawing, nested-assembly and BOM grouping/mass checks have passed; general production qualification and simulation remain incomplete.
+The [website QA record](QA-RECORD.md) and [media handoff](MEDIA-HANDOFF.md) preserve earlier release and capture evidence.

@@ -21,7 +21,7 @@ IMPORTANT: This method works EVEN IF the hidden .github/ folder was not uploaded
 An optional Actions workflow is also included in .github/workflows/deploy.yml,
 but you DO NOT NEED IT when using 'Deploy from a branch'.
 
-NOTE: The beta form prepares an email until you add a Formspree endpoint in
-config.js. It does not automatically store signups without configuration.
+NOTE: The contact form opens an email draft. Configure a Formspree endpoint in
+config.js if you want to accept online submissions instead.
 
 For full setup, details, and checks see README.md.

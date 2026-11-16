@@ -30,7 +30,7 @@
       if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') closeNav(true);
     });
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 1060) closeNav();
+      if (window.innerWidth > 920) closeNav();
     });
   }
 
@@ -224,20 +224,17 @@
     {
       prompt: '“Design a conveyor bracket with two mounting slots.”',
       operation: 'Sketch, extrude, and add features',
-      detail: 'Define the bracket profile, thickness, and mounting slots.',
-      path: 'SKETCH → EXTRUDE → SLOTS'
+      detail: 'Define the bracket profile, thickness, and mounting slots.'
     },
     {
       prompt: '“Assemble the conveyor frame and rollers in the transfer station.”',
       operation: 'Insert components and constrain mates',
-      detail: 'Locate each roller in the frame and check its alignment.',
-      path: 'COMPONENTS → MATES → REBUILD'
+      detail: 'Locate each roller in the frame and check its alignment.'
     },
     {
       prompt: '“Set up a static study for a gripper jaw under 100 N.”',
       operation: 'Set up a static part study',
-      detail: 'Fix the mounting face, assign the material, and distribute the load.',
-      path: 'MATERIAL → LOADS → FIXTURES'
+      detail: 'Fix the mounting face, assign the material, and distribute the load.'
     }
   ];
 
@@ -245,8 +242,6 @@
   const workflowPrompt = document.getElementById('workflow-prompt');
   const workflowOperation = document.getElementById('workflow-operation');
   const workflowDetail = document.getElementById('workflow-detail');
-  const workflowCode = document.getElementById('workflow-code');
-  const workflowState = document.getElementById('workflow-state');
   workflowButtons.forEach(button => button.addEventListener('click', () => {
     const index = Number(button.dataset.example);
     const example = examples[index];
@@ -259,11 +254,9 @@
     workflowPrompt.textContent = example.prompt;
     workflowOperation.textContent = example.operation;
     workflowDetail.textContent = example.detail;
-    workflowCode.textContent = example.path;
-    workflowState.textContent = `STEP 0${index + 1}/03`;
   }));
 
-  const form = document.getElementById('beta-form');
+  const form = document.getElementById('contact-form');
   const submitBtn = document.getElementById('submit-btn');
   const submitLabel = document.getElementById('submit-label');
   const formMode = document.getElementById('form-mode');
@@ -278,28 +271,26 @@
     submitBtn.disabled = false;
     const requestType = document.getElementById('request-type');
     const requestDetails = () => {
-      const type = requestType?.value || 'early_access';
-      if (type === 'demo') return { label: 'demo request', subject: 'Gage — demo request',
+      if (requestType?.value === 'question') {
+        return { label: 'question', subject: 'Gage — project question',
+          intro: "I have a question about Gage.", received: 'Question received. We’ll reply by email.' };
+      }
+      return { label: 'demo request', subject: 'Gage — demo request',
         intro: "I'd like to arrange a time for a Gage demo.",
         received: 'Demo request received. We’ll email you to arrange a time. This is not a confirmed booking.' };
-      if (type === 'question') return { label: 'question', subject: 'Gage — project question',
-        intro: "I have a question about Gage.", received: 'Question received. We’ll reply by email.' };
-      return { label: 'early-access request', subject: 'Gage — early-access request',
-        intro: "I'd like to express interest in testing Gage.",
-        received: 'Early-access request received. We’ll reply if a testing opportunity opens up. Access is not guaranteed.' };
     };
     const syncRequest = () => {
       submitLabel.textContent = `${endpoint ? 'Send' : 'Prepare'} ${requestDetails().label}`;
       formMode.textContent = endpoint
         ? 'Your details will be sent through Formspree to reply to this request. A demo request is not a confirmed booking.'
-        : 'Opens an email draft for you to review and send. Nothing is sent automatically; a demo request is not a confirmed booking.';
+        : 'Opens an email draft for you to review and send. We’ll confirm a demo time by email.';
     };
     requestType?.addEventListener('change', syncRequest);
-    document.querySelectorAll('[data-demo-request]').forEach(link => link.addEventListener('click', () => {
-      if (!requestType) return;
+    document.querySelectorAll('[data-demo-request]').forEach(link => link.addEventListener('click', event => {
+      if (!requestType || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
       requestType.value = 'demo';
       syncRequest();
-      requestType.focus({ preventScroll: true });
+      window.requestAnimationFrame(() => requestType.focus({ preventScroll: true }));
     }));
     syncRequest();
 
