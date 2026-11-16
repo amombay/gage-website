@@ -157,16 +157,17 @@ class StaticSiteTests(unittest.TestCase):
                        'simulation', 'crash', 'review each result'):
             self.assertIn(phrase, text)
 
-    def test_release_status_distinguishes_installed_checks_from_pending_work(self):
+    def test_faq_explains_workflow_and_installer_availability(self):
         copy = (ROOT / 'index.html').read_text(encoding='utf-8')
         status = copy.split('id="faq"', 1)[1].split('</section>', 1)[0]
+        self.assertNotIn('Which simulation studies have been verified?', status)
         for phrase in (
             'No public installer is available',
             'Code signing and acceptance testing on an independent clean Windows machine are pending',
-            'nonlinear bonded contact on a two-body part',
-            'modal time history',
-            '40 modes and 40 time steps',
-            'Nonlinear assembly contact and in-panel saved-result readback remain unverified',
+            'How does Gage work?',
+            'prepares a CAD plan for you to review',
+            'Once you approve it',
+            'where you can inspect and edit the result',
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, status)
