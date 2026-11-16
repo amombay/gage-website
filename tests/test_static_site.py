@@ -117,6 +117,25 @@ class StaticSiteTests(unittest.TestCase):
         self.assertNotIn('unlimited cad automation for free', text)
         self.assertNotIn('not a live gage feature yet', text)
 
+    def test_release_status_distinguishes_installed_checks_from_pending_work(self):
+        copy = (ROOT / 'index.html').read_text(encoding='utf-8')
+        status = copy.split('id="preview-status"', 1)[1].split('</section>', 1)[0]
+        for phrase in (
+            'No public installer is available',
+            'Code signing and acceptance testing on an independent clean Windows machine are pending',
+            'both occurrences',
+            'A3',
+            'pending verification in the installed panel',
+            'development build',
+            'Nonlinear contact and modal time history still need end-to-end verification',
+        ):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, status)
+        self.assertNotIn('outside the supported preview scope', status)
+        for _, attrs in self.pages['index.html'].elements:
+            path = urlsplit(attrs.get('href', '')).path.lower()
+            self.assertFalse(path.endswith(('.exe', '.msi', '.zip')), path)
+
     def test_authentic_asset_hashes_match_provenance(self):
         directory = ROOT / 'assets' / 'media'
         manifest = json.loads((directory / 'provenance.json').read_text(encoding='utf-8'))
@@ -204,7 +223,7 @@ class StaticSiteTests(unittest.TestCase):
         text = ' '.join(self.pages['privacy.html'].words).lower()
         for term in ['company / employer', 'industry', 'role', 'email draft', 'formspree', 'does not confirm a booking', 'not automatic newsletter']:
             self.assertIn(term, text)
-        self.assertIn('not production-ready', ' '.join(self.pages['index.html'].words).lower())
+        self.assertIn('no public installer or production release', ' '.join(self.pages['index.html'].words).lower())
 
     def test_founder_education_current_roles_and_real_portrait_are_explicit(self):
         page = self.pages['index.html']; text = ' '.join(page.words)

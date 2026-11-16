@@ -4,7 +4,12 @@ An open-source SOLIDWORKS agent in development. This website explains the curren
 
 This package is optimized for **simple GitHub Pages deployment**. Unlike the original v2 ZIP, **`index.html` is at the repository root**. GitHub can now publish directly from your `main` branch even when a hidden workflow folder is missed during browser upload.
 
-> Preview scope: Gage is an MIT open-source, unsigned preview for a Codex-driven local SOLIDWORKS workflow. It consumes Codex usage; normal ChatGPT conversations do not provide unlimited CAD automation. The invited SOLIDWORKS 2026 preview covers tested parts and rigid assemblies. Use disposable design copies. Drawings, BOMs and simulation remain outside supported preview scope. Gage is independent of OpenAI and Dassault Systèmes/SOLIDWORKS.
+Gage is an independent MIT open-source project. The unsigned SOLIDWORKS 2026 preview is for invited testing and uses Codex usage. Use disposable design copies and review the results in SOLIDWORKS.
+
+- The installed combined preview passed selected native drawing save and reopen, PDF and DXF export, BOM and shared-child replacement and recovery checks. Selected static and nonlinear part benchmarks passed on the test installation.
+- The wide-BOM drawing passed on A3 in the installed preview. The A4 correction passed native testing and package verification; installed-panel verification is pending.
+- One assembly fixture with an explicit local bond passed solve, save and reopen in a source build. Nonlinear contact and modal time history remain unqualified.
+- There is no public installer or production release. Code signing and acceptance testing on an independent clean Windows machine are pending.
 
 Use copies of your designs for preview testing. Source-file preservation is still being validated.
 
