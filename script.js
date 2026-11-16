@@ -34,6 +34,15 @@
     });
   }
 
+  const factoryCycle = document.getElementById('factory-cycle');
+  if (factoryCycle && typeof window.matchMedia === 'function') {
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (!reducedMotion.matches) factoryCycle.play().catch(() => {});
+    reducedMotion.addEventListener('change', event => {
+      if (event.matches) factoryCycle.pause();
+    });
+  }
+
   const heroPrompt = document.getElementById('hero-prompt');
   if (heroPrompt && typeof window.matchMedia === 'function') {
     const line = heroPrompt.querySelector('.hero-prompt-line');
@@ -135,7 +144,7 @@
       fullSize.href = item.src; fullSize.target = '_blank'; fullSize.rel = 'noopener noreferrer';
       caption.append(element('h3', '', item.title), element('p', '', item.caption), fullSize);
       if (localAsset(item.video, 'mp4|webm')) {
-        const motion = element('a', 'text-link media-fullsize', 'Watch motion study (new tab)');
+        const motion = element('a', 'text-link media-fullsize', 'Watch motion replay (new tab)');
         motion.href = item.video; motion.target = '_blank'; motion.rel = 'noopener noreferrer';
         caption.append(motion);
       }
@@ -370,29 +379,6 @@
         syncRequest();
       }
     });
-  }
-
-  const factory = document.getElementById('factory');
-  if (factory) {
-    const steps = [...factory.querySelectorAll('[data-factory-step]')];
-    const panels = [...factory.querySelectorAll('[data-factory-panel]')];
-    const zones = [...factory.querySelectorAll('[data-factory-zone]')];
-    const selectStage = stage => {
-      for (const step of steps) {
-        step.setAttribute('aria-pressed', String(step.dataset.factoryStep === stage));
-      }
-      for (const panel of panels) panel.hidden = panel.dataset.factoryPanel !== stage;
-      for (const zone of zones) {
-        zone.classList.toggle('factory-zone-active', zone.dataset.factoryZone === stage);
-      }
-    };
-    for (const step of steps) {
-      step.addEventListener('click', () => selectStage(step.dataset.factoryStep));
-    }
-    if (steps.length && panels.length) {
-      selectStage(steps[0].dataset.factoryStep);
-      factory.classList.add('factory-interactive');
-    }
   }
 
   const currentYear = document.getElementById('current-year');

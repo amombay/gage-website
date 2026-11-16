@@ -1,5 +1,18 @@
 # Local website QA record
 
+## Continuous factory loop — local checks
+
+The landing page removed the preview scope, inspection cell and roadmap
+sections. The FAQ retains the preview limits. The hero and first gallery
+card share a fixed-camera 1600 × 900 loop. The robot footage comes from the
+studio CAD replay, with illustrated conveyor transfers and empty return.
+
+Edge verified autoplay, restart at the loop boundary, manual playback and
+reduced-motion behavior. The page fit widths from 320 to 1440 px, and all
+11 factory gallery cards loaded. The 18 Python and 23 JavaScript tests passed.
+
+The checks below record the previous landing page and standalone videos.
+
 ## Factory gallery and preview scope — local checks
 
 Edge loaded all 11 factory cards and both motion videos' metadata. All gallery

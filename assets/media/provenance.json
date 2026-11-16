@@ -221,5 +221,22 @@
       "robot replay from checked SolidWorks poses",
       "outfeed conveyor kinematic detail"
     ]
+  },
+  "factory_one_shot_loop": {
+    "clip": "gage-factory-one-shot-loop.mp4",
+    "sha256": "027b86a90335b2bb15848c65d4b7095bcd73eab75dbff4a87ffe75ad4fa7f85e",
+    "poster": "gage-factory-one-shot-poster.png",
+    "poster_sha256": "117797104da719fbaf79cc3b168f8147a8e5c1dbdf3c6b5da24a6c08757cb0e3",
+    "frame_count": 491,
+    "encoded_fps": 30,
+    "camera": "fixed wide camera from the studio CAD replay",
+    "source_clip": "gage-factory-pick-inspect-place-studio.mp4",
+    "source_sha256": "f9cb33d292fff23b66dfc7490ca16bbd4d04b11a41c065c9c85be9196b37fa43",
+    "illustrated_motion": [
+      "workpiece travel on infeed and outfeed rollers",
+      "empty gripper return"
+    ],
+    "source_robot_replay": "281 poses checked in SOLIDWORKS for the original pick, inspect and place motion",
+    "kinematic_validation": "The added conveyor transfers and return were composed for presentation."
   }
 }

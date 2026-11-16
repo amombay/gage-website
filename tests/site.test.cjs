@@ -26,7 +26,7 @@ class Element {
   focus() { this.focused = true; }
 }
 
-function boot(config = {}, response = async () => { throw new Error('unexpected request'); }, formValues = null) {
+function boot(config = {}, response = async () => { throw new Error('unexpected request'); }, formValues = null, heroMotion = null) {
   const ids = Object.fromEntries(['mobile-nav', 'media-gallery', 'gallery-grid', 'demo-card'].map(id => [id, new Element()]));
   if (formValues) {
     for (const id of ['beta-form', 'submit-btn', 'submit-label', 'form-mode', 'form-message', 'website-field', 'request-type']) ids[id] = new Element();
@@ -45,6 +45,13 @@ function boot(config = {}, response = async () => { throw new Error('unexpected 
   document.querySelectorAll = sel => sel === '[data-media-link]' ? [mediaLink] : sel === '[data-demo-request]' ? [demoLink] : [];
   document.createElement = tag => { const el = new Element(tag); created.push(el); return el; };
   const window = new Element('window'); window.innerWidth = 850; window.GAGE_CONFIG = config; window.location = { href: '' };
+  if (heroMotion) {
+    window.matchMedia = query => {
+      assert.equal(query, '(prefers-reduced-motion: reduce)');
+      return heroMotion.preference;
+    };
+    ids['factory-cycle'] = heroMotion.video;
+  }
   vm.runInNewContext(readFileSync(join(__dirname, '..', 'script.js'), 'utf8'), {
     window, document, console, URL, Promise,
     FormData: class {
@@ -57,6 +64,21 @@ function boot(config = {}, response = async () => { throw new Error('unexpected 
   });
   return { window, document, menu, ids, mediaLink, demoLink, created, requests };
 }
+
+test('the hero autoplays with motion enabled and pauses when reduced motion is requested', async () => {
+  const preference = new Element(); preference.matches = false;
+  const video = new Element('video');
+  let played = 0; let paused = 0;
+  video.play = () => { played += 1; return Promise.resolve(); };
+  video.pause = () => { paused += 1; };
+  boot({}, undefined, null, { preference, video });
+  assert.equal(played, 1);
+  await preference.fire('change', { matches: true });
+  assert.equal(paused, 1);
+  preference.matches = true;
+  boot({}, undefined, null, { preference, video });
+  assert.equal(played, 1);
+});
 
 test('tablet navigation stays open at the actual CSS breakpoint', () => {
   const app = boot(); app.menu.fire('click'); app.window.fire('resize');
@@ -194,7 +216,7 @@ test('public media contains only the reviewed factory gallery', () => {
   const media = context.window.GAGE_CONFIG.media;
   assert.equal(media.demo, null);
   assert.deepEqual(Array.from(media.gallery, item => item.src), [
-    'assets/media/gage-factory-motion-studio-poster.png',
+    'assets/media/gage-factory-one-shot-poster.png',
     'assets/media/gage-roller-conveyor-transfer-poster.png',
     'assets/media/gage-factory-inspection-line.png',
     'assets/media/gage-factory-assembly-exploded.png',
@@ -207,7 +229,7 @@ test('public media contains only the reviewed factory gallery', () => {
     'assets/media/gage-industrial-robot-arm.png'
   ]);
   assert.deepEqual(Array.from(media.gallery, item => item.video).filter(Boolean), [
-    'assets/media/gage-factory-cycle-with-conveyors.mp4',
+    'assets/media/gage-factory-one-shot-loop.mp4',
     'assets/media/gage-roller-conveyor-transfer.mp4'
   ]);
   assert.deepEqual(Array.from(new Set(media.gallery.map(item => item.pdf).filter(Boolean))), [

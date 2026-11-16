@@ -103,7 +103,36 @@ class StaticSiteTests(unittest.TestCase):
         links = [a for tag, a in page.elements if tag == 'a' and 'data-media-link' in a]
         self.assertGreaterEqual(len(links), 2)
         self.assertTrue(all('hidden' in attrs for attrs in links))
-        self.assertFalse(any(tag == 'video' for tag, _ in page.elements))
+        videos = [attrs.get('id') for tag, attrs in page.elements if tag == 'video']
+        self.assertEqual(videos, ['factory-cycle'])
+
+    def test_factory_hero_has_a_controllable_inline_loop(self):
+        page = self.pages['index.html']
+        tag, video = page.ids['factory-cycle']
+        self.assertEqual(tag, 'video')
+        self.assertEqual(video.get('preload'), 'metadata')
+        for name in ('controls', 'loop', 'muted', 'playsinline'):
+            self.assertIn(name, video)
+        self.assertNotIn('autoplay', video)
+        self.assertTrue((ROOT / video['poster']).is_file())
+        self.assertIn('gage-factory-one-shot-loop.mp4', video.get('src', ''))
+
+    def test_factory_loop_and_poster_match_their_provenance(self):
+        media = ROOT / 'assets' / 'media'
+        manifest = json.loads((media / 'provenance.json').read_text(encoding='utf-8'))
+        loop = manifest['factory_one_shot_loop']
+        self.assertEqual(loop['frame_count'], 491)
+        self.assertEqual(loop['encoded_fps'], 30)
+        for file_key, hash_key in (('clip', 'sha256'), ('poster', 'poster_sha256'),
+                                   ('source_clip', 'source_sha256')):
+            self.assertEqual(hashlib.sha256((media / loop[file_key]).read_bytes()).hexdigest(), loop[hash_key])
+
+    def test_removed_sections_have_no_remaining_anchors(self):
+        page = self.pages['index.html']
+        removed_ids = {'factory', 'preview-status', 'roadmap'}
+        self.assertTrue(removed_ids.isdisjoint(page.ids))
+        self.assertTrue(removed_ids.isdisjoint(
+            attrs.get('href', '').removeprefix('#') for _, attrs in page.elements))
 
     def test_form_cannot_send_without_its_javascript_handler(self):
         attrs = self.pages['index.html'].ids['submit-btn'][1]
@@ -112,25 +141,21 @@ class StaticSiteTests(unittest.TestCase):
 
     def test_copy_preserves_preview_and_usage_boundaries(self):
         text = ' '.join(self.pages['index.html'].words).lower()
-        for phrase in ('codex usage', 'mit open source', 'unsigned', 'nested revisions reopened', 'disposable copies', 'experimental', 'simulation', 'crash'):
+        for phrase in ('codex usage', 'open-source', 'unsigned', 'disposable copies', 'experimental', 'simulation', 'crash'):
             self.assertIn(phrase, text)
         self.assertNotIn('unlimited cad automation for free', text)
         self.assertNotIn('not a live gage feature yet', text)
 
     def test_release_status_distinguishes_installed_checks_from_pending_work(self):
         copy = (ROOT / 'index.html').read_text(encoding='utf-8')
-        status = copy.split('id="preview-status"', 1)[1].split('</section>', 1)[0]
+        status = copy.split('id="faq"', 1)[1].split('</section>', 1)[0]
         for phrase in (
             'No public installer is available',
             'Code signing and acceptance testing on an independent clean Windows machine are pending',
-            'both occurrences',
-            'A3',
-            'The release candidate passed the A4 title-block check in SOLIDWORKS',
-            'development build',
-            'automated nonlinear local bonded contact on a two-body part across two meshes',
-            'modal time history on a part across four refinements',
-            'reopened with 40 modes and 40 time steps',
-            'Broader nonlinear assembly contact and public simulation result readback remain outside the verified scope',
+            'nonlinear bonded contact on a two-body part',
+            'modal time history',
+            '40 modes and 40 time steps',
+            'Nonlinear assembly contact and in-panel saved-result readback remain unverified',
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, status)
@@ -204,7 +229,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, 'v=20261116-factory-scope')
+                        self.assertEqual(url.query, 'v=20261116-factory-loop')
                         found.add(url.path)
             self.assertEqual(found, expected)
 
@@ -226,7 +251,7 @@ class StaticSiteTests(unittest.TestCase):
         text = ' '.join(self.pages['privacy.html'].words).lower()
         for term in ['company / employer', 'industry', 'role', 'email draft', 'formspree', 'does not confirm a booking', 'not automatic newsletter']:
             self.assertIn(term, text)
-        self.assertIn('no public installer or production release', ' '.join(self.pages['index.html'].words).lower())
+        self.assertIn('no public installer is available', ' '.join(self.pages['index.html'].words).lower())
 
     def test_founder_education_current_roles_and_real_portrait_are_explicit(self):
         page = self.pages['index.html']; text = ' '.join(page.words)
