@@ -224,21 +224,21 @@
   },
   "factory_one_shot_loop": {
     "clip": "gage-factory-one-shot-loop.mp4",
-    "sha256": "76f968594b8af3c89fb88cf964c1e97efcd762c01ad3650fe53206c51cb3e4bb",
+    "sha256": "34da974db5231069e4c0194d9d1f7106adad4e2d9ad17e91cc9ba3f0497a6a7e",
     "poster": "gage-factory-one-shot-poster.png",
-    "poster_sha256": "5ae77f8731c7c88e0f209415e8c3e72243515f2a98131fbf62ffb6c485dc898b",
-    "frame_count": 491,
+    "poster_sha256": "7809bc25b41984d09890797cb1d20927b74460e80999ba8ea1f2aa22f321aa2c",
+    "frame_count": 559,
     "encoded_fps": 30,
     "camera": "fixed wide camera from the studio CAD replay",
     "source_clip": "gage-factory-pick-inspect-place-studio.mp4",
     "source_sha256": "f9cb33d292fff23b66dfc7490ca16bbd4d04b11a41c065c9c85be9196b37fa43",
     "illustrated_motion": [
-      "green block and gray carrier travel together on both conveyors",
-      "empty carriers return or stage while the robot inspects the block",
-      "roller rotation synchronized with travel and physical occlusion at the transfer covers",
-      "empty gripper return"
+      "infeed and outfeed carriers travel with the green block and remain parked throughout each handoff",
+      "outfeed transfer begins after the gripper clears the carrier",
+      "roller rotation synchronized with travel and occlusion at the transfer covers",
+      "direct empty-gripper return using transit poses and an elevated wait for the next carrier"
     ],
     "source_robot_replay": "281 poses checked in SOLIDWORKS for the original pick, inspect and place motion",
-    "kinematic_validation": "Carrier and roller motion, transfer covers and the empty gripper return were composed for presentation."
+    "kinematic_validation": "Carrier motion and return timing were composed from the CAD replay for the website."
   }
 }

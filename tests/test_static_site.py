@@ -121,7 +121,7 @@ class StaticSiteTests(unittest.TestCase):
         media = ROOT / 'assets' / 'media'
         manifest = json.loads((media / 'provenance.json').read_text(encoding='utf-8'))
         loop = manifest['factory_one_shot_loop']
-        self.assertEqual(loop['frame_count'], 491)
+        self.assertEqual(loop['frame_count'], 559)
         self.assertEqual(loop['encoded_fps'], 30)
         for file_key, hash_key in (('clip', 'sha256'), ('poster', 'poster_sha256'),
                                    ('source_clip', 'source_sha256')):
@@ -239,7 +239,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, 'v=20261116-moving-carriers')
+                        self.assertEqual(url.query, 'v=20261116-timed-handoffs')
                         found.add(url.path)
             self.assertEqual(found, expected)
 
