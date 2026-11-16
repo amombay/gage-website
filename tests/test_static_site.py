@@ -114,7 +114,7 @@ class StaticSiteTests(unittest.TestCase):
         for name in ('controls', 'loop', 'muted', 'playsinline'):
             self.assertIn(name, video)
         self.assertNotIn('autoplay', video)
-        self.assertTrue((ROOT / video['poster']).is_file())
+        self.assertTrue((ROOT / urlsplit(video['poster']).path).is_file())
         self.assertIn('gage-factory-one-shot-loop.mp4', video.get('src', ''))
 
     def test_factory_loop_and_poster_match_their_provenance(self):
@@ -239,7 +239,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, 'v=20261116-motion')
+                        self.assertEqual(url.query, 'v=20261116-conveyor-transfer')
                         found.add(url.path)
             self.assertEqual(found, expected)
 

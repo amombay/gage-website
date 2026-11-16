@@ -280,15 +280,14 @@ test('public media contains only the reviewed factory gallery', () => {
   assert.deepEqual(Array.from(media.gallery, item => item.src), [
     'assets/media/gage-factory-one-shot-poster.png',
     'assets/media/gage-roller-conveyor-transfer-poster.png',
-    'assets/media/gage-factory-inspection-line.png',
     'assets/media/gage-factory-assembly-exploded.png',
     'assets/media/gage-factory-assembly-bom.png',
     'assets/media/gage-inspection-cell-drawing.png',
     'assets/media/gage-gripper-jaw-drawing.png',
     'assets/media/gage-gripper-jaw-stress.png',
     'assets/media/gage-roller-cassette.png',
-    'assets/media/gage-pallet-inspection-nest.png',
-    'assets/media/gage-industrial-robot-arm.png'
+    'assets/media/gage-pallet-inspection-nest.png'
+
   ]);
   assert.deepEqual(Array.from(media.gallery, item => item.video).filter(Boolean), [
     'assets/media/gage-factory-one-shot-loop.mp4',

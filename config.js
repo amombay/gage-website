@@ -13,17 +13,8 @@ window.GAGE_CONFIG = {
   // Public gallery: reviewed assets from the factory project.
   media: {
     gallery: [
-      {"reviewed": true, "src": "assets/media/gage-factory-one-shot-poster.png", "video": "assets/media/gage-factory-one-shot-loop.mp4", "title": "Factory cycle: convey, pick, inspect and place", "alt": "A green workpiece enters the roller conveyor while the yellow robot approaches pickup.", "caption": "One wide shot shows the workpiece from conveyor infeed through robotic inspection and outfeed. Conveyor transfers and the empty return are illustrated over the CAD replay.", "width": 1600, "height": 900},
+      {"reviewed": true, "src": "assets/media/gage-factory-one-shot-poster.png", "video": "assets/media/gage-factory-one-shot-loop.mp4", "revision": "20261116-conveyor-transfer", "title": "Factory cycle: convey, pick, inspect and place", "alt": "A green workpiece enters the roller conveyor while the yellow robot approaches pickup.", "caption": "Watch the robot inspect the workpiece and hand it off to the outfeed rollers, which carry it into a covered receiver. Conveyor transfers and the empty return are illustrated over the CAD replay.", "width": 1600, "height": 900},
       {"reviewed": true, "src": "assets/media/gage-roller-conveyor-transfer-poster.png", "video": "assets/media/gage-roller-conveyor-transfer.mp4", "title": "Roller conveyor transfer", "alt": "Five polished rollers guide a gray carrier with a green workpiece across a blue conveyor cassette.", "caption": "A close-up of the infeed and outfeed cassettes from the factory cell. Each shot illustrates 270 mm of carrier travel with synchronized roller rotation.", "width": 1600, "height": 900},
-      {
-        reviewed: true,
-        src: 'assets/media/gage-factory-inspection-line.png',
-        title: 'Robotic pallet inspection cell',
-        alt: 'SolidWorks assembly with a yellow robot, parallel gripper, twin roller stations, inspection fixture, and partial guarding.',
-        caption: 'A fixed-pose factory layout with two roller stations, a pallet fixture, and a new robot and gripper. Station placement persisted on reopen, with zero solid interferences in the saved pose.',
-        width: 1920,
-        height: 1440
-      },
       {"reviewed": true, "src": "assets/media/gage-factory-assembly-exploded.png", "pdf": "assets/media/gage-factory-assembly-bom.pdf", "title": "Factory assembly exploded view", "alt": "Three exploded illustrations showing the robot and gripper, both conveyor stations, and the guarding, inspection fixture, and controls with numbered callouts.", "caption": "44 part callouts match the 38 verified BOM items. The three panels use geometry and placements from the saved SolidWorks assembly, with offsets to show individual parts.", "width": 2600, "height": 3060},
       {"reviewed": true, "src": "assets/media/gage-factory-assembly-bom.png", "pdf": "assets/media/gage-factory-assembly-bom.pdf", "title": "Factory assembly bill of materials", "alt": "Two-column parts-only bill of materials for the robotic pallet inspection cell, with part names, configurations, and quantities.", "caption": "38 BOM rows account for 44 part instances. Quantities match both the SolidWorks component tree and the flat occurrence list.", "width": 2400, "height": 1697},
       {"reviewed": true, "src": "assets/media/gage-inspection-cell-drawing.png", "title": "Inspection cell layout drawing", "alt": "A3 drawing with front, top, and isometric views of the factory inspection cell.", "caption": "SolidWorks A3 layout drawing at 1:50. The saved drawing passed its reopen check.", "width": 1786, "height": 1263},
@@ -47,15 +38,6 @@ window.GAGE_CONFIG = {
         width: 1600,
         height: 1200
       },
-      {
-        reviewed: true,
-        src: 'assets/media/gage-industrial-robot-arm.png',
-        title: 'Industrial robotic arm',
-        alt: 'Isometric SolidWorks view of a blue and graphite robot arm with stepped joint covers and a silver two-finger gripper.',
-        caption: 'Five-part robot arm in a fixed display pose, with shaped links, stepped joint covers and a tapered gripper. Captured in SolidWorks.',
-        width: 1600,
-        height: 1200
-      }
     ],
     demo: null
   }

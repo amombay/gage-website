@@ -147,19 +147,22 @@
     const visibleCards = [];
     media.gallery.forEach((item, index) => {
       if (!described(item) || !text(item.alt) || !localAsset(item.src, 'png|jpe?g|webp')) return;
+      const revision = typeof item.revision === 'string' && /^[a-z0-9-]+$/.test(item.revision)
+        ? '?v=' + item.revision : '';
+      const imageUrl = item.src + revision;
       const image = element('img');
       image.alt = item.alt; image.width = item.width; image.height = item.height; image.decoding = 'async';
       const figure = element('figure', 'media-card');
       const link = element('a', 'media-image-link');
-      link.href = item.src; link.target = '_blank'; link.rel = 'noopener noreferrer';
+      link.href = imageUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
       link.setAttribute('aria-label', `Open original image: ${item.title} (new tab)`);
       const caption = element('figcaption', 'media-caption');
       const fullSize = element('a', 'text-link media-fullsize', 'View full-size capture (new tab)');
-      fullSize.href = item.src; fullSize.target = '_blank'; fullSize.rel = 'noopener noreferrer';
+      fullSize.href = imageUrl; fullSize.target = '_blank'; fullSize.rel = 'noopener noreferrer';
       caption.append(element('h3', '', item.title), element('p', '', item.caption), fullSize);
       if (localAsset(item.video, 'mp4|webm')) {
         const motion = element('a', 'text-link media-fullsize', 'Watch motion replay (new tab)');
-        motion.href = item.video; motion.target = '_blank'; motion.rel = 'noopener noreferrer';
+        motion.href = item.video + revision; motion.target = '_blank'; motion.rel = 'noopener noreferrer';
         caption.append(motion);
       }
       if (localAsset(item.pdf, 'pdf')) {
@@ -186,7 +189,7 @@
       });
       // A missing image remains absent; no broken-image placeholder is shown.
       image.addEventListener('error', () => {});
-      image.src = item.src;
+      image.src = imageUrl;
     });
   }
 
