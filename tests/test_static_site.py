@@ -235,6 +235,9 @@ class StaticSiteTests(unittest.TestCase):
         self.assertEqual(declarations['background'], '#04101f')
 
     def test_local_assets_use_current_release_urls(self):
+        versions = {'styles.css': 'v=20261117-founder',
+                    'config.js': 'v=20261116-webmail-only',
+                    'script.js': 'v=20261116-webmail-only'}
         for name, expected in (('index.html', {'styles.css', 'config.js', 'script.js'}),
                                ('privacy.html', {'styles.css'})):
             found = set()
@@ -243,7 +246,7 @@ class StaticSiteTests(unittest.TestCase):
                 if raw:
                     url = urlsplit(raw)
                     if url.path in expected:
-                        self.assertEqual(url.query, 'v=20261116-webmail-only')
+                        self.assertEqual(url.query, versions[url.path])
                         found.add(url.path)
             self.assertEqual(found, expected)
 
@@ -270,13 +273,13 @@ class StaticSiteTests(unittest.TestCase):
     def test_founder_education_current_roles_and_real_portrait_are_explicit(self):
         page = self.pages['index.html']; text = ' '.join(page.words)
         for fact in ['Mechanical Engineering (B.Sc.)', 'Business Economics (B.A.)', 'Brown University',
-                     'Associate of Arts and Sciences', 'Carroll Community College',
-                     'Industrial Digital Strategist Intern', 'Siemens Digital Industries Software', 'Co-Founder & CEO', 'Vastro']:
+                     'Industrial Digital Strategist Intern', 'Siemens Digital Industries Software', 'Co-Founder & CEO', 'Vastro',
+                     'I love turning ideas into things you can build']:
             self.assertIn(fact, text)
-        images = [a for t, a in page.elements if t == 'img' and a.get('class') == 'founder-photo']
+        images = [a for t, a in page.elements if t == 'img' and 'Andrew Mombay' in a.get('alt', '')]
         self.assertEqual(len(images), 1)
-        self.assertEqual(images[0]['src'], 'assets/andrew-mombay.jpg')
-        self.assertEqual((images[0]['width'], images[0]['height']), ('800', '800'))
+        self.assertEqual(images[0]['src'], 'assets/andrew-mombay-atrium.webp')
+        self.assertEqual((images[0]['width'], images[0]['height']), ('1086', '1448'))
         self.assertEqual(images[0]['loading'], 'lazy')
         self.assertIn('do not imply endorsement', text)
 if __name__ == '__main__':
