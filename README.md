@@ -4,7 +4,7 @@ The Gage website presents editable SOLIDWORKS CAD, the factory gallery, and emai
 
 ## Publish with GitHub Pages
 
-Use **Settings → Pages → Deploy from a branch** and select **main** and **/(root)**. Keep index.html at the repository root next to privacy.html, styles.css, config.js, script.js, and assets/. A push to main updates the [live Gage site](https://amombay.github.io/gage-website/).
+Use **Settings → Pages → Deploy from a branch** and select **main** and **/(root)**. Keep index.html at the repository root next to privacy.html, styles.css, config.js, script.js, and assets/. A push to main updates the [live Gage site](https://gagecad.com/).
 
 ## Contact and demos
 
