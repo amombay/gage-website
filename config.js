@@ -4,7 +4,7 @@
  * and paste its publicly shareable HTTPS endpoint below.
  * Example: formEndpoint: 'https://formspree.io/f/abcdefgh'
  *
- * Leave blank for a mailto fallback: users must review and SEND their email.
+ * Leave blank for webmail drafts that users review and send.
  * Do not add API secrets or private tokens to this static public file.
  */
 window.GAGE_CONFIG = {

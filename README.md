@@ -8,7 +8,7 @@ Use **Settings → Pages → Deploy from a branch** and select **main** and **/(
 
 ## Contact and demos
 
-By default the form opens a draft in the visitor’s email app. The visitor must send the message to submit their request. Company, role, industry, CAD software, and workflow information are optional. Demo times are arranged by email.
+By default the form opens a draft in Gmail or Outlook on the web. The visitor must send the message to submit their request. Company, role, industry, CAD software, and workflow information are optional. Demo times are arranged by email.
 
 To accept online submissions, set formEndpoint in config.js to a public Formspree form URL such as https://formspree.io/f/YOUR_FORM_ID. Keep credentials and private tokens out of this public file. The form explains which submission method it uses.
 

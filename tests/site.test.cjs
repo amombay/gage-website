@@ -46,7 +46,9 @@ function boot(config = {}, response = async () => { throw new Error('unexpected 
   document.querySelectorAll = sel => sel === '[data-media-link]' ? [mediaLink]
     : sel === '[data-demo-request]' ? [demoLink] : visuals.selectors?.[sel] || [];
   document.createElement = tag => { const el = new Element(tag); created.push(el); return el; };
+  const opened = [];
   const window = new Element('window'); window.innerWidth = 850; window.GAGE_CONFIG = config; window.location = { href: '' };
+  window.open = (...args) => { opened.push(args); };
   window.requestAnimationFrame = callback => callback();
   window.IntersectionObserver = visuals.observer;
   if (heroMotion) {
@@ -66,7 +68,7 @@ function boot(config = {}, response = async () => { throw new Error('unexpected 
     },
     fetch: async (...args) => { requests.push(args); return response(...args); }
   });
-  return { window, document, menu, ids, mediaLink, demoLink, created, requests };
+  return { window, document, menu, ids, mediaLink, demoLink, created, requests, opened };
 }
 
 test('the hero autoplays with motion enabled and pauses when reduced motion is requested', async () => {
@@ -306,14 +308,33 @@ const submit = app => app.ids['contact-form'].fire('submit', { preventDefault() 
 
 test('demo mail draft preserves optional context, Unicode and intent without sending', async () => {
   const app = boot({}, undefined, contactValues); await submit(app);
-  const draft = new URL(app.window.location.href);
-  assert.equal(draft.protocol, 'mailto:'); assert.match(draft.searchParams.get('subject'), /demo request/i);
+  const draft = new URL(app.opened[0][0]);
+  assert.equal(draft.origin, 'https://mail.google.com');
+  assert.equal(draft.searchParams.get('view'), 'cm');
+  assert.equal(draft.searchParams.get('to'), 'andrew_mombay@brown.edu');
+  assert.match(draft.searchParams.get('su'), /demo request/i);
+  assert.deepEqual(app.opened[0].slice(1), ['_blank', 'noopener,noreferrer']);
   const body = draft.searchParams.get('body');
   for (const value of Object.values(contactValues).filter(v => v !== 'on')) {
     if (value !== 'demo') assert.ok(body.includes(value), value);
   }
   assert.match(body, /arrange a time/i); assert.equal(app.requests.length, 0);
   assert.notEqual(app.ids['contact-form'].wasReset, true);
+});
+
+test('Outlook selection uses the matching webmail with a prefilled draft', async () => {
+  for (const [value, origin] of [['outlook', 'https://outlook.live.com'], ['outlook-work', 'https://outlook.office.com']]) {
+    const provider = new Element('select'); provider.value = value;
+    const app = boot({}, undefined, contactValues, null, { ids: { 'webmail-provider': provider } });
+    await submit(app);
+    const draft = new URL(app.opened[0][0]);
+    assert.equal(draft.origin, origin);
+    assert.equal(draft.pathname, '/mail/deeplink/compose');
+    assert.equal(draft.searchParams.get('to'), 'andrew_mombay@brown.edu');
+    assert.match(draft.searchParams.get('subject'), /demo request/i);
+    assert.ok(draft.searchParams.get('body').includes(contactValues.use_case));
+    assert.equal(app.requests.length, 0);
+  }
 });
 
 test('demo draft remains readable and selectable without a clipboard or mail app', async () => {
@@ -325,10 +346,10 @@ test('demo draft remains readable and selectable without a clipboard or mail app
 
   await submit(app);
   assert.equal(panel.hidden, false);
-  assert.equal(text.focused, true);
   assert.match(text.value, /^To: andrew_mombay@brown[.]edu/);
   assert.ok(text.value.includes(contactValues.use_case));
   await copy.fire('click');
+  assert.equal(text.focused, true);
   assert.equal(selected, true);
   assert.match(app.ids['form-message'].textContent, /draft is selected/i);
   assert.equal(app.requests.length, 0);
@@ -341,7 +362,7 @@ test('schedule CTA selects a demo request without submitting or promising a book
   app.demoLink.fire('click'); assert.equal(app.ids['request-type'].value, 'demo');
   assert.equal(app.ids['request-type'].focused, true);
   assert.match(app.ids['submit-label'].textContent, /demo/i);
-  assert.equal(app.requests.length, 0); assert.equal(app.window.location.href, '');
+  assert.equal(app.requests.length, 0); assert.equal(app.opened.length, 0);
 });
 
 test('Formspree submission preserves every field and identifies a demo request', async () => {
@@ -369,7 +390,7 @@ test('failed form submission retains answers and re-enables the selected request
 test('a question opens a separate email draft using the question subject', async () => {
   const app = boot({}, undefined, { ...contactValues, request_type: 'question' });
   await submit(app);
-  const subject = new URL(app.window.location.href).searchParams.get('subject');
+  const subject = new URL(app.opened[0][0]).searchParams.get('su');
   assert.match(subject, /question/i);
   assert.doesNotMatch(subject, /demo/i);
 });
@@ -379,7 +400,7 @@ test('invalid form and honeypot never create a draft or a network submission', a
     const app = boot({}, undefined, contactValues);
     app.ids['contact-form'].reportValidity = () => !invalid;
     if (!invalid) app.ids['website-field'].value = 'bot';
-    await submit(app); assert.equal(app.window.location.href, ''); assert.equal(app.requests.length, 0);
+    await submit(app); assert.equal(app.opened.length, 0); assert.equal(app.requests.length, 0);
   }
 });
 
@@ -387,7 +408,7 @@ test('invalid form and honeypot never create a draft or a network submission', a
 test('omitted optional profile fields remain optional in the email draft', async () => {
   const app = boot({}, undefined, { name: 'Alex', email: 'alex@example.com', request_type: 'demo', consent: 'on' });
   await submit(app);
-  const body = new URL(app.window.location.href).searchParams.get('body');
+  const body = new URL(app.opened[0][0]).searchParams.get('body');
   for (const label of ['Company / employer', 'Role', 'Industry']) assert.ok(body.includes(`${label}: Not specified`));
 });
 
@@ -395,5 +416,5 @@ test('request choice changes the action label and never submits on change', () =
   const app = boot({}, undefined, contactValues);
   app.ids['request-type'].value = 'question'; app.ids['request-type'].fire('change');
   assert.match(app.ids['submit-label'].textContent, /question/i);
-  assert.equal(app.requests.length, 0); assert.equal(app.window.location.href, '');
+  assert.equal(app.requests.length, 0); assert.equal(app.opened.length, 0);
 });

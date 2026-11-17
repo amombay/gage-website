@@ -14,9 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=20261116-contact-draft" />
-  <script src="config.js?v=20261116-contact-draft" defer></script>
-  <script src="script.js?v=20261116-contact-draft" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261116-webmail-draft" />
+  <script src="config.js?v=20261116-webmail-draft" defer></script>
+  <script src="script.js?v=20261116-webmail-draft" defer></script>
   <title>Gage — AI CAD for SOLIDWORKS</title>
 </head>
 <body>
@@ -200,13 +200,22 @@
             </details>
             <div class="field"><label for="use-case">Your task or preferred demo times <span class="optional">optional</span></label><textarea id="use-case" name="use_case" rows="3" maxlength="1000" placeholder="What would you like to see? For a demo, include your time zone and a few suitable times."></textarea></div>
             <div class="honeypot" aria-hidden="true"><label for="website-field">Leave this field blank</label><input id="website-field" name="_gotcha" type="text" tabindex="-1" autocomplete="off" /></div>
+            <div id="webmail-choice" class="field" hidden>
+              <label for="webmail-provider">Open draft in</label>
+              <select id="webmail-provider">
+                <option value="gmail">Gmail</option>
+                <option value="outlook">Outlook (personal)</option>
+                <option value="outlook-work">Outlook (work or school)</option>
+              </select>
+            </div>
             <label class="consent"><input type="checkbox" id="consent" name="consent" required /><span>I agree to be contacted about this request. <a href="privacy.html">Privacy policy</a>. <span class="required-star">*</span></span></label>
             <div id="form-message" class="form-message" role="status" aria-live="polite" hidden></div>
             <button class="btn btn-primary form-submit" id="submit-btn" type="submit" disabled><span id="submit-label">Prepare demo request</span><span class="btn-arrow" aria-hidden="true">↗</span></button>
-            <p class="form-fineprint" id="form-mode">Opens an email draft for you to review and send. We’ll confirm a demo time by email.</p>
+            <p class="form-fineprint" id="form-mode">Opens a draft in your selected email service. Review and send it there.</p>
             <div id="email-draft" class="field" hidden>
               <label for="email-draft-text">Email draft</label>
               <textarea id="email-draft-text" rows="7" readonly></textarea>
+              <a class="btn btn-ghost" id="open-email-draft" target="_blank" rel="noopener noreferrer">Open draft in webmail</a>
               <button class="btn btn-ghost" id="copy-email-draft" type="button">Copy email draft</button>
             </div>
             <noscript><p class="form-fineprint">The form needs JavaScript. You can <a href="mailto:andrew_mombay@brown.edu?subject=Gage%20demo%20request">request a demo by email</a> directly.</p></noscript>

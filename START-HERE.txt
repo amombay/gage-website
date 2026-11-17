@@ -21,7 +21,7 @@ IMPORTANT: This method works EVEN IF the hidden .github/ folder was not uploaded
 An optional Actions workflow is also included in .github/workflows/deploy.yml,
 but you DO NOT NEED IT when using 'Deploy from a branch'.
 
-NOTE: The contact form opens an email draft. Configure a Formspree endpoint in
+NOTE: The contact form opens a draft in Gmail or Outlook. Configure a Formspree endpoint in
 config.js if you want to accept online submissions instead.
 
 For full setup, details, and checks see README.md.

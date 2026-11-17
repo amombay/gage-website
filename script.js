@@ -315,6 +315,9 @@
   const emailDraft = document.getElementById('email-draft');
   const emailDraftText = document.getElementById('email-draft-text');
   const copyEmailDraft = document.getElementById('copy-email-draft');
+  const openEmailDraft = document.getElementById('open-email-draft');
+  const webmailChoice = document.getElementById('webmail-choice');
+  const webmailProvider = document.getElementById('webmail-provider');
   const showMessage = (value, error = false) => {
     message.hidden = false;
     message.textContent = value;
@@ -323,6 +326,7 @@
 
   if (form && submitBtn && submitLabel && message) {
     submitBtn.disabled = false;
+    if (webmailChoice) webmailChoice.hidden = Boolean(endpoint);
     const requestType = document.getElementById('request-type');
     const requestDetails = () => {
       if (requestType?.value === 'question') {
@@ -337,7 +341,7 @@
       submitLabel.textContent = `${endpoint ? 'Send' : 'Prepare'} ${requestDetails().label}`;
       formMode.textContent = endpoint
         ? 'Your details will be sent through Formspree to reply to this request. A demo request is not a confirmed booking.'
-        : 'Opens an email draft for you to review and send. We’ll confirm a demo time by email.';
+        : 'Opens a draft in your selected email service. Review and send it there.';
     };
     requestType?.addEventListener('change', syncRequest);
     document.querySelectorAll('[data-demo-request]').forEach(link => link.addEventListener('click', event => {
@@ -402,14 +406,27 @@
           '',
           'Thank you!'
         ].join('\n');
-        const mailto = `mailto:${emailAddress}?subject=${encodeURIComponent(request.subject)}&body=${encodeURIComponent(body)}`;
+        const outlookWork = webmailProvider?.value === 'outlook-work';
+        const outlook = outlookWork || webmailProvider?.value === 'outlook';
+        const serviceName = outlook ? 'Outlook' : 'Gmail';
+        const outlookHost = outlookWork ? 'outlook.office.com' : 'outlook.live.com';
+        const compose = outlook ? 'https://' + outlookHost + '/mail/deeplink/compose'
+          : 'https://mail.google.com/mail/';
+        const fields = outlook
+          ? { to: emailAddress, subject: request.subject, body }
+          : { view: 'cm', fs: '1', to: emailAddress, su: request.subject, body };
+        const query = Object.entries(fields).map(([key, value]) => key + '=' + encodeURIComponent(value)).join('&');
+        const draftUrl = compose + '?' + query;
         if (emailDraft && emailDraftText) {
           emailDraftText.value = ['To: ' + emailAddress, 'Subject: ' + request.subject, '', body].join('\n');
           emailDraft.hidden = false;
-          emailDraftText.focus();
         }
-        showMessage('Email draft ready. Review and send it in your email app, or copy it below to use webmail.');
-        window.location.href = mailto;
+        if (openEmailDraft) {
+          openEmailDraft.href = draftUrl;
+          openEmailDraft.textContent = 'Open in ' + serviceName;
+        }
+        showMessage('Draft ready for ' + serviceName + '. Use the link below if the new tab did not open.');
+        window.open(draftUrl, '_blank', 'noopener,noreferrer');
         return;
       }
 
