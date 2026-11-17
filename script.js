@@ -45,8 +45,10 @@
 
   const capabilityPrompts = document.querySelector('.capability-prompts');
   if (capabilityPrompts && reducedMotion) {
-    const line = capabilityPrompts.querySelector('.capability-prompt-line');
-    const output = line.querySelector('[data-prompt-text]');
+    const heading = capabilityPrompts.querySelector('.capability-prompt-heading');
+    const prefix = heading.querySelector('[data-prompt-prefix]').textContent;
+    const response = heading.querySelector('.capability-prompt-response');
+    const output = response.querySelector('[data-prompt-text]');
     const examples = capabilityPrompts.querySelector('.capability-prompt-examples');
     const phrases = Array.from(examples.querySelectorAll('li'), item => item.textContent);
     const hold = 3200;
@@ -55,11 +57,17 @@
     let index = 0, length = phrases[0].length, erasing = true, timer;
 
     // Reserve space for wrapped prompts so the cards below stay in place.
-    phrases.forEach(phrase => {
+    const reserves = phrases.map(phrase => {
       const reserve = document.createElement('span');
       reserve.className = 'capability-prompt-reserve';
-      reserve.textContent = phrase;
-      line.append(reserve);
+      reserve.setAttribute('aria-hidden', 'true');
+      reserve.textContent = prefix + ' ';
+      const reserveResponse = document.createElement('span');
+      reserveResponse.className = 'capability-prompt-response';
+      reserveResponse.textContent = phrase;
+      reserve.append(reserveResponse);
+      heading.append(reserve);
+      return reserve;
     });
     output.textContent = phrases[0];
 
@@ -84,7 +92,8 @@
     };
     const restartTimer = () => schedule(length === phrases[index].length ? hold : 120);
     const syncMotion = () => {
-      line.hidden = reducedMotion.matches;
+      response.hidden = reducedMotion.matches;
+      reserves.forEach(reserve => { reserve.hidden = reducedMotion.matches; });
       examples.classList.toggle('sr-only', !reducedMotion.matches);
       restartTimer();
     };

@@ -234,9 +234,9 @@ class StaticSiteTests(unittest.TestCase):
         self.assertEqual(declarations['background'], '#04101f')
 
     def test_local_assets_use_current_release_urls(self):
-        versions = {'styles.css': 'v=20261117-capability-prompts',
+        versions = {'styles.css': 'v=20261117-inline-prompts',
                     'config.js': 'v=20261116-webmail-only',
-                    'script.js': 'v=20261117-capability-prompts'}
+                    'script.js': 'v=20261117-inline-prompts'}
         for name, expected in (('index.html', {'styles.css', 'config.js', 'script.js'}),
                                ('privacy.html', {'styles.css'})):
             found = set()
@@ -257,7 +257,9 @@ class StaticSiteTests(unittest.TestCase):
         capabilities = remaining.split('</section>', 1)[0]
         self.assertNotIn('id="hero-prompt"', hero)
         self.assertIn('id="hero-prompt"', capabilities)
-        self.assertIn('>Hey Gage, can we…</h2>', capabilities)
+        heading = capabilities.split('id="capabilities-title">', 1)[1].split('</h2>', 1)[0]
+        self.assertIn('data-prompt-prefix>Hey Gage, can we…</span>', heading)
+        self.assertIn('<span data-prompt-text></span>', heading)
         self.assertIn('build a gummy bear conveyor?', capabilities)
         self.assertIn('class="capability-grid"', capabilities)
         self.assertNotIn('data-prompt-toggle', homepage)
