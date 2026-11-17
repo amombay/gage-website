@@ -141,36 +141,6 @@ h3 { font-size: 21px; font-weight: 650; letter-spacing: -.025em; }
 .hero h1 em { display: block; color: var(--mint); font-style: normal; }
 .hero-lede { max-width: 44ch; font-size: clamp(16px, 1.4vw, 19px); }
 .hero-buttons { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 26px; }
-.hero-prompt {
-  position: relative;
-  max-width: 470px;
-  margin-top: 26px;
-  padding: 2px 12px 11px;
-  border: 1px solid #405358;
-  border-radius: 10px;
-  background: #151f24;
-}
-.hero-prompt-header { display: flex; align-items: center; justify-content: space-between; gap: 4px 10px; }
-.hero-prompt-label { font-size: 12px; font-weight: 600; }
-.hero-prompt-toggle {
-  min-height: 44px;
-  padding-inline: 6px;
-  border: 0;
-  border-radius: 5px;
-  background: transparent;
-  color: var(--mint);
-  font-size: 12px;
-}
-.hero-prompt-toggle:hover { text-decoration: underline; }
-.hero-prompt-line, .hero-prompt-examples { color: #e8f4f1; font: 13px/1.55 var(--mono); overflow-wrap: anywhere; }
-.hero-prompt-line { display: grid; }
-.hero-prompt-line > span { grid-area: 1 / 1; }
-.hero-prompt-prefix { color: var(--mint); }
-.hero-prompt-reserve, .hero-prompt-line.is-paused .hero-prompt-caret { visibility: hidden; }
-.hero-prompt-caret { border-inline-start: 1px solid var(--mint); margin-inline-start: 2px; }
-.hero-prompt-examples ul { margin: 3px 0 0; padding-inline-start: 18px; }
-.hero-prompt-header:has(.hero-prompt-toggle[hidden]) { min-height: 34px; }
-
 .hero-visual {
   min-width: 0;
   overflow: hidden;
@@ -201,6 +171,18 @@ h3 { font-size: 21px; font-weight: 650; letter-spacing: -.025em; }
   margin-bottom: 26px;
 }
 .section-heading > p { max-width: 44ch; }
+.capability-prompts { min-width: 0; }
+.capability-prompt-line, .capability-prompt-examples {
+  margin: 10px 0 0;
+  color: var(--accent);
+  font: clamp(15px, 1.7vw, 20px)/1.5 var(--mono);
+  overflow-wrap: anywhere;
+}
+.capability-prompt-line { display: grid; }
+.capability-prompt-line > span { grid-area: 1 / 1; }
+.capability-prompt-reserve { visibility: hidden; }
+.capability-prompt-caret { border-inline-start: 1px solid currentColor; margin-inline-start: 2px; }
+.capability-prompt-examples { padding-inline-start: 20px; }
 .capability-grid, .media-grid { display: grid; gap: 18px; }
 .capability-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .capability-card, .media-card {
@@ -458,6 +440,6 @@ h3 { font-size: 21px; font-weight: 650; letter-spacing: -.025em; }
 }
 
 @media (forced-colors: active) {
-  .menu-toggle, .btn, .hero-prompt-toggle, .workflow-option { border: 1px solid ButtonText; }
+  .menu-toggle, .btn, .workflow-option { border: 1px solid ButtonText; }
   .workflow-option.is-selected { outline: 2px solid Highlight; outline-offset: -3px; }
 }

@@ -14,9 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=20261117-founder" />
+  <link rel="stylesheet" href="styles.css?v=20261117-capability-prompts" />
   <script src="config.js?v=20261116-webmail-only" defer></script>
-  <script src="script.js?v=20261116-webmail-only" defer></script>
+  <script src="script.js?v=20261117-capability-prompts" defer></script>
   <title>Gage — AI CAD for SOLIDWORKS</title>
 </head>
 <body>
@@ -58,28 +58,6 @@
             <a class="btn btn-primary" href="#contact" data-demo-request>Request a demo <span aria-hidden="true">↗</span></a>
             <a class="btn btn-ghost" href="#media-gallery" data-media-link hidden>View CAD gallery <span aria-hidden="true">↓</span></a>
           </div>
-          <div class="hero-prompt" id="hero-prompt">
-            <div class="hero-prompt-header">
-              <p class="hero-prompt-label">Example prompts</p>
-              <button class="hero-prompt-toggle" type="button" data-prompt-toggle hidden>Pause typing</button>
-            </div>
-            <p class="hero-prompt-line" aria-hidden="true" hidden>
-              <span><span class="hero-prompt-prefix" data-prompt-prefix>Hey Gage, can we</span> <span data-prompt-text></span><span class="hero-prompt-caret"></span></span>
-            </p>
-            <div class="hero-prompt-examples">
-              <p class="hero-prompt-prefix">Hey Gage, can we…</p>
-              <ul>
-                <li>design a conveyor bracket?</li>
-                <li>build a gummy bear conveyor?</li>
-                <li>make a Rubik’s Cube?</li>
-                <li>make a rocket-shaped pen holder?</li>
-                <li>design a robot claw for snacks?</li>
-                <li>simulate a gripper jaw under 100 N?</li>
-                <li>model a tiny drawbridge?</li>
-                <li>make a gear-driven desk fidget?</li>
-              </ul>
-            </div>
-          </div>
         </div>
         <figure class="hero-visual">
           <video class="hero-video" id="factory-cycle" src="assets/media/gage-factory-one-shot-loop.mp4?v=20261116-timed-handoffs" poster="assets/media/gage-factory-one-shot-poster.png?v=20261116-timed-handoffs" width="1600" height="900" controls loop muted playsinline preload="metadata" aria-label="Factory cycle: conveyor infeed, robotic inspection and outfeed"><a href="assets/media/gage-factory-one-shot-loop.mp4?v=20261116-timed-handoffs">Watch the factory cycle</a></video>
@@ -91,7 +69,22 @@
     <section class="section" id="capabilities" aria-labelledby="capabilities-title">
       <div class="container">
         <div class="section-heading">
-          <h2 id="capabilities-title">What you can build</h2>
+          <div class="capability-prompts" id="hero-prompt">
+            <h2 id="capabilities-title">Hey Gage, can we…</h2>
+            <p class="capability-prompt-line" aria-hidden="true" hidden>
+              <span><span data-prompt-text></span><span class="capability-prompt-caret"></span></span>
+            </p>
+            <ul class="capability-prompt-examples">
+              <li>design a conveyor bracket?</li>
+              <li>build a gummy bear conveyor?</li>
+              <li>make a Rubik’s Cube?</li>
+              <li>make a rocket-shaped pen holder?</li>
+              <li>design a robot claw for snacks?</li>
+              <li>simulate a gripper jaw under 100 N?</li>
+              <li>model a tiny drawbridge?</li>
+              <li>make a gear-driven desk fidget?</li>
+            </ul>
+          </div>
           <p>From the first model to the drawings and analysis that go with it.</p>
         </div>
         <div class="capability-grid">

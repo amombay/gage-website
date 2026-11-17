@@ -234,9 +234,9 @@ class StaticSiteTests(unittest.TestCase):
         self.assertEqual(declarations['background'], '#04101f')
 
     def test_local_assets_use_current_release_urls(self):
-        versions = {'styles.css': 'v=20261117-founder',
+        versions = {'styles.css': 'v=20261117-capability-prompts',
                     'config.js': 'v=20261116-webmail-only',
-                    'script.js': 'v=20261116-webmail-only'}
+                    'script.js': 'v=20261117-capability-prompts'}
         for name, expected in (('index.html', {'styles.css', 'config.js', 'script.js'}),
                                ('privacy.html', {'styles.css'})):
             found = set()
@@ -250,6 +250,17 @@ class StaticSiteTests(unittest.TestCase):
             self.assertEqual(found, expected)
 
 
+
+    def test_rotating_prompts_head_the_capabilities_section(self):
+        homepage = (ROOT / 'index.html').read_text(encoding='utf-8')
+        hero, remaining = homepage.split('<section class="section" id="capabilities"', 1)
+        capabilities = remaining.split('</section>', 1)[0]
+        self.assertNotIn('id="hero-prompt"', hero)
+        self.assertIn('id="hero-prompt"', capabilities)
+        self.assertIn('>Hey Gage, can we…</h2>', capabilities)
+        self.assertIn('build a gummy bear conveyor?', capabilities)
+        self.assertIn('class="capability-grid"', capabilities)
+        self.assertNotIn('data-prompt-toggle', homepage)
 
     def test_demo_and_optional_profile_fields_are_labelled_and_not_required(self):
         page = self.pages['index.html']

@@ -43,29 +43,29 @@
     });
   }
 
-  const heroPrompt = document.getElementById('hero-prompt');
-  if (heroPrompt && reducedMotion) {
-    const line = heroPrompt.querySelector('.hero-prompt-line');
-    const prefix = line.querySelector('[data-prompt-prefix]').textContent;
+  const capabilityPrompts = document.querySelector('.capability-prompts');
+  if (capabilityPrompts && reducedMotion) {
+    const line = capabilityPrompts.querySelector('.capability-prompt-line');
     const output = line.querySelector('[data-prompt-text]');
-    const toggle = heroPrompt.querySelector('[data-prompt-toggle]');
-    const examples = heroPrompt.querySelector('.hero-prompt-examples');
+    const examples = capabilityPrompts.querySelector('.capability-prompt-examples');
     const phrases = Array.from(examples.querySelectorAll('li'), item => item.textContent);
     const hold = 3200;
-    let index = 0, length = phrases[0].length, erasing = true, paused = false, timer;
+    const observeVisibility = typeof window.IntersectionObserver === 'function';
+    let inView = !observeVisibility;
+    let index = 0, length = phrases[0].length, erasing = true, timer;
 
-    // Size the line for every complete prompt so wrapping never shifts the controls.
+    // Reserve space for wrapped prompts so the cards below stay in place.
     phrases.forEach(phrase => {
       const reserve = document.createElement('span');
-      reserve.className = 'hero-prompt-reserve';
-      reserve.textContent = prefix + ' ' + phrase;
+      reserve.className = 'capability-prompt-reserve';
+      reserve.textContent = phrase;
       line.append(reserve);
     });
     output.textContent = phrases[0];
 
     const schedule = delay => {
       window.clearTimeout(timer);
-      if (!paused && !reducedMotion.matches && !document.hidden) timer = window.setTimeout(tick, delay);
+      if (inView && !reducedMotion.matches && !document.hidden) timer = window.setTimeout(tick, delay);
     };
     const tick = () => {
       const phrase = phrases[index];
@@ -85,16 +85,15 @@
     const restartTimer = () => schedule(length === phrases[index].length ? hold : 120);
     const syncMotion = () => {
       line.hidden = reducedMotion.matches;
-      toggle.hidden = reducedMotion.matches;
       examples.classList.toggle('sr-only', !reducedMotion.matches);
       restartTimer();
     };
-    toggle.addEventListener('click', () => {
-      paused = !paused;
-      toggle.textContent = paused ? 'Resume typing' : 'Pause typing';
-      line.classList.toggle('is-paused', paused);
-      restartTimer();
-    });
+    if (observeVisibility) {
+      new window.IntersectionObserver(([entry]) => {
+        inView = entry.isIntersecting;
+        restartTimer();
+      }).observe(capabilityPrompts);
+    }
     reducedMotion.addEventListener('change', syncMotion);
     document.addEventListener('visibilitychange', restartTimer);
     syncMotion();
