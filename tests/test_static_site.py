@@ -153,8 +153,8 @@ class StaticSiteTests(unittest.TestCase):
 
     def test_copy_preserves_cad_usage_and_review_requirements(self):
         text = ' '.join(self.pages['index.html'].words).lower()
-        for phrase in ('codex access and usage limits', 'open-source', 'disposable copies',
-                       'simulation', 'crash', 'review each result'):
+        for phrase in ('codex allowance', 'openai project api key', 'open-source',
+                       'disposable copies', 'simulation', 'crash', 'review each result'):
             self.assertIn(phrase, text)
 
     def test_faq_explains_workflow_and_installer_availability(self):
@@ -168,6 +168,9 @@ class StaticSiteTests(unittest.TestCase):
             'prepares a CAD plan for you to review',
             'Once you approve it',
             'where you can inspect and edit the result',
+            'Connect OpenAI account…',
+            'Use OpenAI API key…',
+            'bill planning to your OpenAI API project',
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, status)
