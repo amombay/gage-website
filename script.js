@@ -312,6 +312,9 @@
   const submitLabel = document.getElementById('submit-label');
   const formMode = document.getElementById('form-mode');
   const message = document.getElementById('form-message');
+  const emailDraft = document.getElementById('email-draft');
+  const emailDraftText = document.getElementById('email-draft-text');
+  const copyEmailDraft = document.getElementById('copy-email-draft');
   const showMessage = (value, error = false) => {
     message.hidden = false;
     message.textContent = value;
@@ -345,9 +348,21 @@
     }));
     syncRequest();
 
+    copyEmailDraft?.addEventListener('click', async () => {
+      try {
+        await window.navigator.clipboard.writeText(emailDraftText.value);
+        showMessage('Email draft copied. Paste it into your email app or webmail to send.');
+      } catch {
+        emailDraftText.focus();
+        emailDraftText.select();
+        showMessage('The draft is selected. Copy it and paste it into your email app or webmail.');
+      }
+    });
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       message.hidden = true;
+      if (emailDraft) emailDraft.hidden = true;
       if (!form.reportValidity()) {
         showMessage('Please complete the required fields and enter a valid email address.', true);
         return;
@@ -388,7 +403,12 @@
           'Thank you!'
         ].join('\n');
         const mailto = `mailto:${emailAddress}?subject=${encodeURIComponent(request.subject)}&body=${encodeURIComponent(body)}`;
-        showMessage('Your email app should open with a prepared request. Please send that email to complete your submission. If nothing opens, email us directly.');
+        if (emailDraft && emailDraftText) {
+          emailDraftText.value = ['To: ' + emailAddress, 'Subject: ' + request.subject, '', body].join('\n');
+          emailDraft.hidden = false;
+          emailDraftText.focus();
+        }
+        showMessage('Email draft ready. Review and send it in your email app, or copy it below to use webmail.');
         window.location.href = mailto;
         return;
       }

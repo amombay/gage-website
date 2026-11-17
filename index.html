@@ -14,9 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=20261116-timed-handoffs" />
-  <script src="config.js?v=20261116-timed-handoffs" defer></script>
-  <script src="script.js?v=20261116-timed-handoffs" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261116-contact-draft" />
+  <script src="config.js?v=20261116-contact-draft" defer></script>
+  <script src="script.js?v=20261116-contact-draft" defer></script>
   <title>Gage — AI CAD for SOLIDWORKS</title>
 </head>
 <body>
@@ -185,6 +185,7 @@
           <h2 id="contact-title">See Gage in SOLIDWORKS</h2>
           <p>Bring a part, assembly, or workflow you want to see. Include your time zone and a few times that work for you. Keep confidential design details out of your request.</p>
           <a class="text-link" href="mailto:andrew_mombay@brown.edu?subject=Gage%20demo%20request">Email Andrew directly <span aria-hidden="true">↗</span></a>
+          <div class="contact-address">andrew_mombay@brown.edu</div>
         </div>
         <div class="contact-panel">
           <h3>Request a demo</h3>
@@ -202,6 +203,11 @@
             <div id="form-message" class="form-message" role="status" aria-live="polite" hidden></div>
             <button class="btn btn-primary form-submit" id="submit-btn" type="submit" disabled><span id="submit-label">Prepare demo request</span><span class="btn-arrow" aria-hidden="true">↗</span></button>
             <p class="form-fineprint" id="form-mode">Opens an email draft for you to review and send. We’ll confirm a demo time by email.</p>
+            <div id="email-draft" class="field" hidden>
+              <label for="email-draft-text">Email draft</label>
+              <textarea id="email-draft-text" rows="7" readonly></textarea>
+              <button class="btn btn-ghost" id="copy-email-draft" type="button">Copy email draft</button>
+            </div>
             <noscript><p class="form-fineprint">The form needs JavaScript. You can <a href="mailto:andrew_mombay@brown.edu?subject=Gage%20demo%20request">request a demo by email</a> directly.</p></noscript>
           </form>
         </div>

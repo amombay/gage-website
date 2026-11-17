@@ -316,6 +316,24 @@ test('demo mail draft preserves optional context, Unicode and intent without sen
   assert.notEqual(app.ids['contact-form'].wasReset, true);
 });
 
+test('demo draft remains readable and selectable without a clipboard or mail app', async () => {
+  const panel = new Element(), text = new Element(), copy = new Element('button');
+  let selected = false;
+  text.select = () => { selected = true; };
+  const ids = { 'email-draft': panel, 'email-draft-text': text, 'copy-email-draft': copy };
+  const app = boot({}, undefined, contactValues, null, { ids });
+
+  await submit(app);
+  assert.equal(panel.hidden, false);
+  assert.equal(text.focused, true);
+  assert.match(text.value, /^To: andrew_mombay@brown[.]edu/);
+  assert.ok(text.value.includes(contactValues.use_case));
+  await copy.fire('click');
+  assert.equal(selected, true);
+  assert.match(app.ids['form-message'].textContent, /draft is selected/i);
+  assert.equal(app.requests.length, 0);
+});
+
 test('schedule CTA selects a demo request without submitting or promising a booking', () => {
   const app = boot({}, undefined, { ...contactValues, request_type: 'question' });
   app.demoLink.fire('click', { ctrlKey: true });
