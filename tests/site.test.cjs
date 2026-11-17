@@ -337,22 +337,18 @@ test('Outlook selection uses the matching webmail with a prefilled draft', async
   }
 });
 
-test('demo draft remains readable and selectable without a clipboard or mail app', async () => {
-  const panel = new Element(), text = new Element(), copy = new Element('button');
-  let selected = false;
-  text.select = () => { selected = true; };
-  const ids = { 'email-draft': panel, 'email-draft-text': text, 'copy-email-draft': copy };
-  const app = boot({}, undefined, contactValues, null, { ids });
-
+test('demo submission exposes the webmail retry link and hides it on invalid resubmission', async () => {
+  const retry = new Element('a');
+  const app = boot({}, undefined, contactValues, null, { ids: { 'open-email-draft': retry } });
+  assert.equal(retry.hidden, true);
   await submit(app);
-  assert.equal(panel.hidden, false);
-  assert.match(text.value, /^To: andrew_mombay@brown[.]edu/);
-  assert.ok(text.value.includes(contactValues.use_case));
-  await copy.fire('click');
-  assert.equal(text.focused, true);
-  assert.equal(selected, true);
-  assert.match(app.ids['form-message'].textContent, /draft is selected/i);
-  assert.equal(app.requests.length, 0);
+  assert.equal(retry.hidden, false);
+  assert.equal(retry.href, app.opened[0][0]);
+  assert.equal(retry.textContent, 'Open in Gmail');
+  app.ids['contact-form'].reportValidity = () => false;
+  await submit(app);
+  assert.equal(retry.hidden, true);
+  assert.equal(app.opened.length, 1);
 });
 
 test('schedule CTA selects a demo request without submitting or promising a booking', () => {

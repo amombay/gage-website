@@ -323,8 +323,7 @@ h3 { font-size: 21px; font-weight: 650; letter-spacing: -.025em; }
 .contact-copy p { margin: 16px 0 18px; max-width: 40ch; }
 .contact-copy h2 { text-wrap: wrap; }
 .contact-address { margin-top: 5px; color: var(--muted); overflow-wrap: anywhere; }
-#email-draft { margin-top: 14px; }
-#open-email-draft, #copy-email-draft { margin-top: 8px; }
+#open-email-draft { margin-top: 10px; }
 .contact-panel { padding: clamp(20px, 3.4vw, 37px); border: 1px solid #425659; border-radius: var(--radius); background: #111e23; }
 .contact-panel h3 { margin-bottom: 17px; }
 .field-row { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }

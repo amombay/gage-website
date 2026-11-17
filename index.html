@@ -14,9 +14,9 @@
   <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
   <link rel="icon" href="assets/favicon-32.png" sizes="32x32" type="image/png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-  <link rel="stylesheet" href="styles.css?v=20261116-webmail-draft" />
-  <script src="config.js?v=20261116-webmail-draft" defer></script>
-  <script src="script.js?v=20261116-webmail-draft" defer></script>
+  <link rel="stylesheet" href="styles.css?v=20261116-webmail-only" />
+  <script src="config.js?v=20261116-webmail-only" defer></script>
+  <script src="script.js?v=20261116-webmail-only" defer></script>
   <title>Gage — AI CAD for SOLIDWORKS</title>
 </head>
 <body>
@@ -212,12 +212,7 @@
             <div id="form-message" class="form-message" role="status" aria-live="polite" hidden></div>
             <button class="btn btn-primary form-submit" id="submit-btn" type="submit" disabled><span id="submit-label">Prepare demo request</span><span class="btn-arrow" aria-hidden="true">↗</span></button>
             <p class="form-fineprint" id="form-mode">Opens a draft in your selected email service. Review and send it there.</p>
-            <div id="email-draft" class="field" hidden>
-              <label for="email-draft-text">Email draft</label>
-              <textarea id="email-draft-text" rows="7" readonly></textarea>
-              <a class="btn btn-ghost" id="open-email-draft" target="_blank" rel="noopener noreferrer">Open draft in webmail</a>
-              <button class="btn btn-ghost" id="copy-email-draft" type="button">Copy email draft</button>
-            </div>
+            <a class="btn btn-ghost" id="open-email-draft" target="_blank" rel="noopener noreferrer" hidden>Open draft in webmail</a>
             <noscript><p class="form-fineprint">The form needs JavaScript. You can <a href="mailto:andrew_mombay@brown.edu?subject=Gage%20demo%20request">request a demo by email</a> directly.</p></noscript>
           </form>
         </div>

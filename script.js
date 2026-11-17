@@ -312,9 +312,6 @@
   const submitLabel = document.getElementById('submit-label');
   const formMode = document.getElementById('form-mode');
   const message = document.getElementById('form-message');
-  const emailDraft = document.getElementById('email-draft');
-  const emailDraftText = document.getElementById('email-draft-text');
-  const copyEmailDraft = document.getElementById('copy-email-draft');
   const openEmailDraft = document.getElementById('open-email-draft');
   const webmailChoice = document.getElementById('webmail-choice');
   const webmailProvider = document.getElementById('webmail-provider');
@@ -352,21 +349,10 @@
     }));
     syncRequest();
 
-    copyEmailDraft?.addEventListener('click', async () => {
-      try {
-        await window.navigator.clipboard.writeText(emailDraftText.value);
-        showMessage('Email draft copied. Paste it into your email app or webmail to send.');
-      } catch {
-        emailDraftText.focus();
-        emailDraftText.select();
-        showMessage('The draft is selected. Copy it and paste it into your email app or webmail.');
-      }
-    });
-
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
       message.hidden = true;
-      if (emailDraft) emailDraft.hidden = true;
+      if (openEmailDraft) openEmailDraft.hidden = true;
       if (!form.reportValidity()) {
         showMessage('Please complete the required fields and enter a valid email address.', true);
         return;
@@ -417,13 +403,10 @@
           : { view: 'cm', fs: '1', to: emailAddress, su: request.subject, body };
         const query = Object.entries(fields).map(([key, value]) => key + '=' + encodeURIComponent(value)).join('&');
         const draftUrl = compose + '?' + query;
-        if (emailDraft && emailDraftText) {
-          emailDraftText.value = ['To: ' + emailAddress, 'Subject: ' + request.subject, '', body].join('\n');
-          emailDraft.hidden = false;
-        }
         if (openEmailDraft) {
           openEmailDraft.href = draftUrl;
           openEmailDraft.textContent = 'Open in ' + serviceName;
+          openEmailDraft.hidden = false;
         }
         showMessage('Draft ready for ' + serviceName + '. Use the link below if the new tab did not open.');
         window.open(draftUrl, '_blank', 'noopener,noreferrer');
