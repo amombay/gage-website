@@ -157,13 +157,12 @@ class StaticSiteTests(unittest.TestCase):
                        'disposable copies', 'simulation', 'crash', 'review each result'):
             self.assertIn(phrase, text)
 
-    def test_faq_explains_workflow_and_installer_availability(self):
+    def test_faq_explains_workflow_and_links_to_demo(self):
         copy = (ROOT / 'index.html').read_text(encoding='utf-8')
         status = copy.split('id="faq"', 1)[1].split('</section>', 1)[0]
         self.assertNotIn('Which simulation studies have been verified?', status)
         for phrase in (
-            'No public installer is available',
-            'Code signing and acceptance testing on an independent clean Windows machine are pending',
+            '<a href="#contact" data-demo-request>Request a demo</a> to see Gage in SOLIDWORKS.',
             'How does Gage work?',
             'prepares a CAD plan for you to review',
             'Once you approve it',
@@ -268,7 +267,6 @@ class StaticSiteTests(unittest.TestCase):
         text = ' '.join(self.pages['privacy.html'].words).lower()
         for term in ['company / employer', 'industry', 'role', 'email draft', 'formspree', 'does not confirm a booking', 'not automatic newsletter']:
             self.assertIn(term, text)
-        self.assertIn('no public installer is available', ' '.join(self.pages['index.html'].words).lower())
 
     def test_founder_education_current_roles_and_real_portrait_are_explicit(self):
         page = self.pages['index.html']; text = ' '.join(page.words)
