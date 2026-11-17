@@ -154,7 +154,7 @@ class StaticSiteTests(unittest.TestCase):
     def test_copy_preserves_cad_usage_and_review_requirements(self):
         text = ' '.join(self.pages['index.html'].words).lower()
         for phrase in ('codex allowance', 'openai project api key', 'open-source',
-                       'disposable copies', 'simulation', 'crash', 'review each result'):
+                       'disposable copies', 'simulation', 'crash', 'check dimensions, mates'):
             self.assertIn(phrase, text)
 
     def test_faq_explains_workflow_and_links_to_demo(self):
