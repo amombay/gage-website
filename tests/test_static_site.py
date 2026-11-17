@@ -234,7 +234,7 @@ class StaticSiteTests(unittest.TestCase):
         self.assertEqual(declarations['background'], '#04101f')
 
     def test_local_assets_use_current_release_urls(self):
-        versions = {'styles.css': 'v=20261117-inline-prompts',
+        versions = {'styles.css': 'v=20261117-matched-prompts',
                     'config.js': 'v=20261116-webmail-only',
                     'script.js': 'v=20261117-inline-prompts'}
         for name, expected in (('index.html', {'styles.css', 'config.js', 'script.js'}),

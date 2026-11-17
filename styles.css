@@ -171,23 +171,25 @@ h3 { font-size: 21px; font-weight: 650; letter-spacing: -.025em; }
   margin-bottom: 26px;
 }
 .section-heading > p { max-width: 44ch; }
-.capability-prompts { width: 100%; min-width: 0; }
+.capability-prompts { width: 100%; min-width: 0; container-type: inline-size; }
 .capability-prompt-heading {
   display: grid;
-  font-size: clamp(23px, 4.3vw, 54px);
+  font-size: clamp(20px, 3vw, 44px);
+  font-size: clamp(20px, 3.4cqi, 44px);
   overflow-wrap: anywhere;
   text-wrap: wrap;
 }
 .capability-prompt-heading > span { grid-area: 1 / 1; min-width: 0; }
 .capability-prompt-response, .capability-prompt-examples {
   color: var(--accent);
-  font: clamp(15px, 2.15vw, 28px)/1.45 var(--mono);
+  font-family: var(--mono);
   letter-spacing: -.03em;
   overflow-wrap: anywhere;
 }
+.capability-prompt-response { font-weight: 400; }
 .capability-prompt-reserve { visibility: hidden; }
 .capability-prompt-caret { border-inline-start: 1px solid currentColor; margin-inline-start: 2px; }
-.capability-prompt-examples { margin: 10px 0 0; padding-inline-start: 20px; }
+.capability-prompt-examples { font-size: clamp(15px, 2.15vw, 28px); line-height: 1.45; margin: 10px 0 0; padding-inline-start: 20px; }
 .capability-grid, .media-grid { display: grid; gap: 18px; }
 .capability-grid { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .capability-card, .media-card {
