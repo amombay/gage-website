@@ -260,7 +260,7 @@ class StaticSiteTests(unittest.TestCase):
         heading = capabilities.split('id="capabilities-title">', 1)[1].split('</h2>', 1)[0]
         self.assertIn('data-prompt-prefix>Hey Gage, can we…</span>', heading)
         self.assertIn('<span data-prompt-text></span>', heading)
-        self.assertIn('build a gummy bear conveyor?', capabilities)
+        self.assertIn('assemble a parallel-jaw gripper?', capabilities)
         self.assertIn('class="capability-grid"', capabilities)
         self.assertNotIn('data-prompt-toggle', homepage)
 
