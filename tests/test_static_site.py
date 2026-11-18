@@ -151,18 +151,34 @@ class StaticSiteTests(unittest.TestCase):
                 self.assertNotRegex((ROOT / name).read_text(encoding='utf-8').lower(),
                                     r'\b(?:preview|beta|early[_ -]access|invite[ -]only)\b')
 
+    def test_windows_download_discloses_unsigned_status_and_has_an_exact_release_asset(self):
+        page = self.pages['index.html']
+        tag, link = page.ids['download-zip']
+        url = urlsplit(link['href'])
+        self.assertEqual(tag, 'a')
+        self.assertEqual((url.scheme, url.hostname), ('https', 'github.com'))
+        self.assertRegex(url.path, r'^/amombay/gage-website/releases/download/gage-v[^/]+/Gage-[^/]+-Windows-x64\.zip$')
+        self.assertIn('download-status', link['aria-describedby'].split())
+        installers = [attrs.get('id') for _, attrs in page.elements
+                      if urlsplit(attrs.get('href', '')).path.lower().endswith(('.exe', '.msi', '.zip'))]
+        self.assertEqual(installers, ['download-zip'])
+        copy = (ROOT / 'index.html').read_text(encoding='utf-8').split('id="download"', 1)[1].split('</section>', 1)[0]
+        self.assertIn('Unsigned build', copy)
+        self.assertIn('Install-Gage.cmd', copy)
+        self.assertRegex(copy, r'<code>[a-f0-9]{64}</code>')
+
     def test_copy_preserves_cad_usage_and_review_requirements(self):
         text = ' '.join(self.pages['index.html'].words).lower()
         for phrase in ('codex allowance', 'openai project api key', 'open-source',
                        'disposable copies', 'simulation', 'crash', 'check dimensions, mates'):
             self.assertIn(phrase, text)
 
-    def test_faq_explains_workflow_and_links_to_demo(self):
+    def test_faq_explains_workflow_and_links_to_download(self):
         copy = (ROOT / 'index.html').read_text(encoding='utf-8')
         status = copy.split('id="faq"', 1)[1].split('</section>', 1)[0]
         self.assertNotIn('Which simulation studies have been verified?', status)
         for phrase in (
-            '<a href="#contact" data-demo-request>Request a demo</a> to see Gage in SOLIDWORKS.',
+            '<a href="#download">Download Gage for Windows</a>',
             'How does Gage work?',
             'prepares a CAD plan for you to review',
             'Once you approve it',
@@ -173,9 +189,6 @@ class StaticSiteTests(unittest.TestCase):
         ):
             with self.subTest(phrase=phrase):
                 self.assertIn(phrase, status)
-        for _, attrs in self.pages['index.html'].elements:
-            path = urlsplit(attrs.get('href', '')).path.lower()
-            self.assertFalse(path.endswith(('.exe', '.msi', '.zip')), path)
 
     def test_authentic_asset_hashes_match_provenance(self):
         directory = ROOT / 'assets' / 'media'
@@ -234,7 +247,7 @@ class StaticSiteTests(unittest.TestCase):
         self.assertEqual(declarations['background'], '#04101f')
 
     def test_local_assets_use_current_release_urls(self):
-        versions = {'styles.css': 'v=20261117-matched-prompts',
+        versions = {'styles.css': 'v=20261117-download',
                     'config.js': 'v=20261116-webmail-only',
                     'script.js': 'v=20261117-inline-prompts'}
         for name, expected in (('index.html', {'styles.css', 'config.js', 'script.js'}),

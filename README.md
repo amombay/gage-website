@@ -1,6 +1,6 @@
 # Gage website
 
-The Gage website presents editable SOLIDWORKS CAD, the factory gallery, and email-based demo requests. Gage runs with a compatible local SOLIDWORKS installation and supports either Codex usage or an OpenAI project API key for planning. The website has no public app installer.
+The Gage website presents editable SOLIDWORKS CAD, the factory gallery, and email-based demo requests. Gage runs with a compatible local SOLIDWORKS installation and supports either Codex usage or an OpenAI project API key for planning. The Download section links to the Gage Windows ZIP and installation instructions.
 
 ## Publish with GitHub Pages
 
