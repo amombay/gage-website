@@ -167,6 +167,18 @@ class StaticSiteTests(unittest.TestCase):
         self.assertIn('Install-Gage.cmd', copy)
         self.assertRegex(copy, r'<code>[a-f0-9]{64}</code>')
 
+    def test_download_walks_through_installer_confirmation_and_first_launch(self):
+        html = (ROOT / 'index.html').read_text(encoding='utf-8')
+        section = html.split('id="download"', 1)[1].split('</section>', 1)[0]
+        install, heading, launch = section.partition('<h3>First launch</h3>')
+        self.assertTrue(heading, 'Show first-launch instructions beside the download')
+        steps = re.findall(r'<li>(.*?)</li>', install, re.S)
+        instructions = ' '.join(re.sub(r'<[^>]+>', '', step) for step in steps)
+        self.assertRegex(instructions, r'Extract.*close SOLIDWORKS.*Install-Gage\.cmd.*Run as administrator.*\bINSTALL\b')
+        for phrase in ('task pane', 'Settings', 'Codex', 'OpenAI project API key'):
+            with self.subTest(phrase=phrase):
+                self.assertIn(phrase, launch)
+
     def test_copy_preserves_cad_usage_and_review_requirements(self):
         text = ' '.join(self.pages['index.html'].words).lower()
         for phrase in ('codex allowance', 'openai project api key', 'open-source',
